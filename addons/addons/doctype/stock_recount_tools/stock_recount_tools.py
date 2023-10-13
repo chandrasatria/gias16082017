@@ -806,7 +806,8 @@ def patch_ste_dong(name, item_code, rate, qty):
 				print('yok')
 				row.pusat_valuation_rate = flt(rate,9)
 				row.basic_rate = flt(row.pusat_valuation_rate,9)
-				row.valuation_rate = flt(flt(row.basic_rate,9) + (flt(row.additional_cost) / flt(row.transfer_qty)))
+				row.valuation_rate = flt(flt(row.basic_rate,9) + (flt(row.additional_cost) / flt(row.transfer_qty)),9)
+				frappe.throw(str(row.valuation_rate))
 
 				row.allow_zero_valuation_rate = 0
 				row.db_update()
