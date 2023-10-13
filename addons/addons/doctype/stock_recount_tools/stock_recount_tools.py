@@ -774,10 +774,13 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty):
 		WHERE voucher_no = "{}" and item_code = "{}" 
 		and actual_qty = {} """.format(name, item_code, frappe.utils.flt(qty*-1)))
 	if len(list_ste) > 0:
-		if flt(rate) != flt(list_ste[0][0]):
-			print(flt(list_ste[0][0]))
+		print("rate={},list_ste={}".format(rate,list_ste[0][0]))
+
+		frappe.throw("stop")
+		if flt(rate,9) != flt(list_ste[0][0],9):
+			print(flt(list_ste[0][0],9))
 			if flt(list_ste[0][0]) > 0:
-				rate_baru = flt(list_ste[0][0])
+				rate_baru = flt(list_ste[0][0],9)
 				ste_doc = frappe.get_doc("Stock Entry",name)
 				list_company_gias = ste_doc.transfer_ke_cabang_mana
 				site = check_list_company_gias(list_company_gias)
@@ -799,7 +802,7 @@ def patch_ste_dong(name, item_code, rate, qty):
 
 			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty):
 				print('yok')
-				row.pusat_valuation_rate = flt(rate)
+				row.pusat_valuation_rate = flt(rate,9)
 				row.basic_rate = flt(row.pusat_valuation_rate)
 				row.valuation_rate = flt(flt(row.basic_rate) + (flt(row.additional_cost) / flt(row.transfer_qty)))
 
