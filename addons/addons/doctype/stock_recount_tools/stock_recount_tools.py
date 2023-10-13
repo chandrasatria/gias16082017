@@ -779,8 +779,6 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty):
 		get_sted = frappe.get_doc("Stock Entry Detail", list_ste[0][0])
 
 		print("rate={},list_ste={}".format(rate,get_sted.basic_rate))
-
-		frappe.throw("stop")
 		if flt(rate,5) != flt(get_sted.basic_rate,5):
 			print(flt(get_sted.basic_rate,5))
 			if flt(get_sted.basic_rate) > 0:
