@@ -1,0 +1,202 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-11-16 15:04:54.177504",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "status",
+  "difference_account",
+  "total_difference_account",
+  "recount_per_section_section",
+  "from_date",
+  "to_date",
+  "column_break_5",
+  "start_recount_pr_and_mtransfer",
+  "column_break_7",
+  "start_recount_stei_and_sync",
+  "column_break_10",
+  "start_compare_po_and_pr_for_journal",
+  "recount_per_document_section",
+  "ste_or_pr",
+  "stock_entry",
+  "purchase_receipt",
+  "recount_start",
+  "section_break_9",
+  "history",
+  "section_break_5",
+  "stock_entry_issue_history",
+  "section_break_7",
+  "material_transfer_history",
+  "section_break_21",
+  "journal_scope"
+ ],
+ "fields": [
+  {
+   "fieldname": "recount_start",
+   "fieldtype": "Button",
+   "label": "Recount Start",
+   "options": "recount_start"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Idle\nOn Progress",
+   "read_only": 1
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "history",
+   "fieldtype": "Table",
+   "label": "Purchase Receipt HIstory",
+   "options": "Stock Recount History"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "difference_account",
+   "fieldtype": "Link",
+   "label": "Account For Per PO Difference",
+   "options": "Account"
+  },
+  {
+   "fieldname": "journal_scope",
+   "fieldtype": "Table",
+   "label": "Journal Scope",
+   "options": "Stock Recount Journal"
+  },
+  {
+   "fieldname": "recount_per_section_section",
+   "fieldtype": "Section Break",
+   "label": "Recount per Section"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_recount_pr_and_mtransfer",
+   "fieldtype": "Button",
+   "label": "Start Recount PR and MTransfer",
+   "options": "start_pr_mtr",
+   "read_only_depends_on": "eval:doc.status == \"On Progress\""
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_recount_stei_and_sync",
+   "fieldtype": "Button",
+   "label": "Start Recount STEI and Sync",
+   "options": "start_stei",
+   "read_only_depends_on": "eval:doc.status == \"On Progress\""
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "recount_per_document_section",
+   "fieldtype": "Section Break",
+   "label": "Recount per Document"
+  },
+  {
+   "fieldname": "material_transfer_history",
+   "fieldtype": "Table",
+   "label": "Material Transfer History",
+   "options": "Material Transfer History"
+  },
+  {
+   "fieldname": "ste_or_pr",
+   "fieldtype": "Select",
+   "label": "STE or PR",
+   "options": "STE\nPR"
+  },
+  {
+   "depends_on": "eval:doc.ste_or_pr == \"STE\"",
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "Stock Entry",
+   "options": "Stock Entry"
+  },
+  {
+   "depends_on": "eval:doc.ste_or_pr == \"PR\"",
+   "fieldname": "purchase_receipt",
+   "fieldtype": "Link",
+   "label": "Purchase Receipt",
+   "options": "Purchase Receipt"
+  },
+  {
+   "fieldname": "stock_entry_issue_history",
+   "fieldtype": "Table",
+   "label": "Stock Entry Issue History",
+   "options": "Stock Entry Issue History"
+  },
+  {
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_compare_po_and_pr_for_journal",
+   "fieldtype": "Button",
+   "label": "Start Compare PRI and PI for Journal",
+   "options": "start_journal",
+   "read_only_depends_on": "eval:doc.status == \"On Progress\""
+  },
+  {
+   "fieldname": "total_difference_account",
+   "fieldtype": "Link",
+   "label": "Account For Total Difference",
+   "options": "Account"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-05-10 15:51:51.220949",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Stock Recount Tools",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

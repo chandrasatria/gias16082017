@@ -1,0 +1,129 @@
+{
+ "actions": [],
+ "autoname": "format:STELOG-{sumber_branch}-{DD}-{MM}-{YYYY}-{#####}",
+ "creation": "2021-12-14 16:30:32.928763",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "sumber_branch",
+  "nama_dokumen",
+  "transfer_ke",
+  "buat_ste_di",
+  "tipe_ste",
+  "cabang",
+  "data",
+  "stat",
+  "amended_from",
+  "apakan_ste",
+  "ste_yang_diupdate"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "default": "0",
+   "fieldname": "sumber_branch",
+   "fieldtype": "Link",
+   "label": "Sumber Branch",
+   "options": "List Company GIAS"
+  },
+  {
+   "fieldname": "nama_dokumen",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Dokumen"
+  },
+  {
+   "fieldname": "transfer_ke",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Transfer Ke",
+   "options": "Cabang\nPusat"
+  },
+  {
+   "fieldname": "buat_ste_di",
+   "fieldtype": "Select",
+   "label": "Buat STE di",
+   "options": "Cabang\nPusat"
+  },
+  {
+   "fieldname": "tipe_ste",
+   "fieldtype": "Select",
+   "label": "Tipe STE",
+   "options": "Material Issue\nMaterial Receipt"
+  },
+  {
+   "fieldname": "cabang",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Cabang",
+   "options": "List Company GIAS"
+  },
+  {
+   "fieldname": "data",
+   "fieldtype": "Code",
+   "label": "Data",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "stat",
+   "fieldtype": "Select",
+   "label": "Stat",
+   "options": "Terbuat di Pusat\nTerbuat di Pusat - Resolve\nTerbuat di Pusat - DONE\nTerbuat di Cabang\nTerbuat di Cabang - Resolve\nTerbuat di Cabang - DONE"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "STE Log",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "apakan_ste",
+   "fieldtype": "Select",
+   "label": "Apakan STE",
+   "options": "Buat STE\nUpdate STE"
+  },
+  {
+   "fieldname": "ste_yang_diupdate",
+   "fieldtype": "Data",
+   "label": "STE Yang Diupdate"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-01-21 17:13:04.719627",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "STE Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

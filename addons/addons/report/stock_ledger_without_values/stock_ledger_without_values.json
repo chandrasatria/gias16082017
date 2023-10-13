@@ -1,0 +1,22 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2022-06-02 14:44:08.119556",
+ "disable_prepared_report": 0,
+ "disabled": 1,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2023-02-06 10:38:00.597511",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Stock Ledger Without Values",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Stock Ledger Entry",
+ "report_name": "Stock Ledger Without Values",
+ "report_type": "Script Report",
+ "roles": []
+}

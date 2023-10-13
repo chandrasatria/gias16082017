@@ -1,0 +1,23 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2021-12-26 23:58:18.592303",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{}",
+ "modified": "2021-12-26 23:58:33.429651",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Stock Ledger with Out Qty",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Stock Entry",
+ "report_name": "Stock Ledger with Out Qty",
+ "report_type": "Script Report",
+ "roles": []
+}

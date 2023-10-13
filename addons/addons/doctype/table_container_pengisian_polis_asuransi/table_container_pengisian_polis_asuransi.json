@@ -1,0 +1,30 @@
+{
+ "actions": [],
+ "creation": "2021-07-29 18:45:07.962609",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "no_count"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_count",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No. Count"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-07-29 19:01:34.395819",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Table Container Pengisian Polis Asuransi",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

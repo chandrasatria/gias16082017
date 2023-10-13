@@ -1,0 +1,323 @@
+{
+ "actions": [],
+ "autoname": "KUESIONER-.#####",
+ "creation": "2021-08-12 19:46:56.196383",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "color",
+  "read_only_2",
+  "section_break_1",
+  "pilihan_1",
+  "cb_1",
+  "poin_1",
+  "section_break_2",
+  "pilihan_2",
+  "column_break_9",
+  "poin_2",
+  "section_break_11",
+  "pilihan_3",
+  "column_break_13",
+  "poin_3",
+  "section_break_15",
+  "pilihan_4",
+  "column_break_17",
+  "poin_4",
+  "section_break_19",
+  "pilihan_5",
+  "column_break_21",
+  "poin_5",
+  "section_break_23",
+  "pilihan_6",
+  "column_break_25",
+  "poin_6",
+  "section_break_27",
+  "pilihan_7",
+  "column_break_29",
+  "poin_7",
+  "section_break_31",
+  "pilihan_8",
+  "column_break_33",
+  "poin_8",
+  "section_break_35",
+  "pilihan_9",
+  "column_break_37",
+  "poin_9",
+  "section_break_39",
+  "pilihan_10",
+  "column_break_41",
+  "poin_10",
+  "section_break_43",
+  "total_poin",
+  "column_break_45",
+  "adjustment"
+ ],
+ "fields": [
+  {
+   "fieldname": "color",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Toko"
+  },
+  {
+   "fieldname": "read_only_2",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Nama Salesman",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "pilihan_1",
+   "fieldtype": "Select",
+   "label": "Berapa tahun usia dari customer/ toko ini ? ( dari saat berdiri, hingga saat ini)",
+   "options": "\n< 5 Tahun\n5 - 10 Tahun\n> 10 Tahun",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pilihan_2",
+   "fieldtype": "Select",
+   "label": "Ada berapa jenis produk yang di beli customer/toko ini ?",
+   "options": "\n1 - 5 Jenis\n6 - 10 Jenis\n> 10 Jenis",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "poin_1",
+   "fieldtype": "Int",
+   "label": "Poin 1",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "poin_2",
+   "fieldtype": "Int",
+   "label": "Poin 2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pilihan_3",
+   "fieldtype": "Select",
+   "label": "Berapakah usia dari pemilik / owner toko ini ?",
+   "options": "\n< 25 tahun\n26 - 39 tahun\n> 40 tahun",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "poin_3",
+   "fieldtype": "Int",
+   "label": "Poin 3",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pilihan_4",
+   "fieldtype": "Select",
+   "label": "Apakah Toko / Customer ini memiliki properti gudang ?",
+   "options": "\nTidak\nYa",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "poin_4",
+   "fieldtype": "Int",
+   "label": "Poin 4",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pilihan_5",
+   "fieldtype": "Select",
+   "label": "Bagaimana status kepemilikan properti (kantor & gudang) yang saat ini berjalan untuk usaha ?",
+   "options": "\nSewa\nMilik Pribadi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "poin_5",
+   "fieldtype": "Int",
+   "label": "Poin 5",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_23",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pilihan_6",
+   "fieldtype": "Select",
+   "label": "Apakah customer/ toko ini, memiliki Bank Garansi ?",
+   "options": "\nTidak Ada\nAda",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_25",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "poin_6",
+   "fieldtype": "Int",
+   "label": "Poin 6",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_27",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pilihan_7",
+   "fieldtype": "Select",
+   "label": "Apakah toko/ customer ini memiliki kendaraan(armada) dengan status pribadi , jika ada berapa unit ?",
+   "options": "\nTidak Ada\n1 - 2 unit\n3 - 5 unit\n> 5 unit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_29",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "poin_7",
+   "fieldtype": "Int",
+   "label": "Poin 7",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_31",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pilihan_8",
+   "fieldtype": "Select",
+   "label": "Apakah toko/customer ini memiliki toko cabang lain,  jika ada berapa cabang ?8",
+   "options": "\nTidak ada\n2 cabang\n> 3 cabang",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_33",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "poin_8",
+   "fieldtype": "Int",
+   "label": "Poin 8",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.selection == \"By Customer\"",
+   "fieldname": "section_break_35",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pilihan_9",
+   "fieldtype": "Select",
+   "label": "Ada berapa banyak jumlah pekerja dari toko /customer ini ?",
+   "options": "\n1 - 10 orang\n11 - 15 orang\n16 orang",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_37",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "poin_9",
+   "fieldtype": "Int",
+   "label": "Poin 9",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_39",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "pilihan_10",
+   "fieldtype": "Select",
+   "label": "Selain dengan kita, apa berapa banyak supplier yang menyuplai barang di customer/toko ini ?",
+   "options": "\n< 5 Supplier\n6 -9 Supplier\n> 10 Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_41",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "poin_10",
+   "fieldtype": "Int",
+   "label": "Poin 10",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_43",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_poin",
+   "fieldtype": "Int",
+   "label": "Total Poin",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_45",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "adjustment",
+   "fieldtype": "Select",
+   "label": "Adjustment",
+   "options": "\nLow Risk\nMedium Risk\nHigh Risk",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  }
+ ],
+ "in_create": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-11-19 10:34:36.601057",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "List Kuesioner Limit Customer",
+ "owner": "Administrator",
+ "permissions": [],
+ "read_only": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

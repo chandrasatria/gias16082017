@@ -1,0 +1,233 @@
+{
+ "actions": [],
+ "creation": "2023-03-25 11:33:56.266556",
+ "doctype": "DocType",
+ "document_type": "Other",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "barcode",
+  "item_code",
+  "item_name",
+  "warehouse",
+  "column_break_6",
+  "qty",
+  "valuation_rate",
+  "amount",
+  "allow_zero_valuation_rate",
+  "qty_ste_issue_draft",
+  "qty_dn_issue_draft",
+  "qty_stock_booking",
+  "section_break_3",
+  "current_qty_manual",
+  "current_qty",
+  "quantity_after_manual",
+  "quantity_difference",
+  "current_serial_no",
+  "column_break_9",
+  "current_valuation_rate",
+  "current_amount",
+  "column_break_16",
+  "amount_difference",
+  "serial_no_and_batch_section",
+  "serial_no",
+  "column_break_11",
+  "batch_no"
+ ],
+ "fields": [
+  {
+   "fieldname": "barcode",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Barcode",
+   "print_hide": 1
+  },
+  {
+   "columns": 3,
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Item Name",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "columns": 3,
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Warehouse",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity Difference",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "valuation_rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Valuation Rate",
+   "options": "Company:company:default_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Amount",
+   "options": "Company:company:default_currency",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "allow_zero_valuation_rate",
+   "fieldname": "allow_zero_valuation_rate",
+   "fieldtype": "Check",
+   "label": "Allow Zero Valuation Rate",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "qty_ste_issue_draft",
+   "fieldtype": "Float",
+   "label": "Qty STE Issue Draft",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qty_dn_issue_draft",
+   "fieldtype": "Float",
+   "label": "Qty DN Issue Draft",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qty_stock_booking",
+   "fieldtype": "Float",
+   "label": "Qty Stock Booking",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break",
+   "label": "Before reconciliation"
+  },
+  {
+   "default": "0",
+   "fieldname": "current_qty_manual",
+   "fieldtype": "Float",
+   "label": "Current Qty"
+  },
+  {
+   "default": "0",
+   "fieldname": "current_qty",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Ori Cur Qty"
+  },
+  {
+   "default": "0",
+   "fieldname": "quantity_after_manual",
+   "fieldtype": "Read Only",
+   "label": "Quantity After"
+  },
+  {
+   "fieldname": "quantity_difference",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Ori Qty After"
+  },
+  {
+   "fieldname": "current_serial_no",
+   "fieldtype": "Small Text",
+   "label": "Current Serial No",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "current_valuation_rate",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Current Valuation Rate",
+   "options": "Company:company:default_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "current_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Current Amount",
+   "options": "Company:company:default_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_16",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount_difference",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Amount Difference",
+   "options": "Company:company:default_currency",
+   "read_only": 1
+  },
+  {
+   "fieldname": "serial_no_and_batch_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Serial No and Batch"
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Small Text",
+   "label": "Serial No"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "label": "Batch No",
+   "options": "Batch"
+  }
+ ],
+ "istable": 1,
+ "links": [],
+ "modified": "2023-05-20 00:06:33.050241",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Stock Opname Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

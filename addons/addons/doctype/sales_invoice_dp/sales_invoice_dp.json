@@ -1,0 +1,39 @@
+{
+ "actions": [],
+ "creation": "2022-01-12 13:24:33.213749",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "invoice_dp",
+  "nilai_invoice_dp"
+ ],
+ "fields": [
+  {
+   "fieldname": "invoice_dp",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "No Invoice DP",
+   "options": "Sales Invoice",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "invoice_dp.grand_total",
+   "fieldname": "nilai_invoice_dp",
+   "fieldtype": "Currency",
+   "label": "Nilai DP",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-21 11:19:26.895669",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Sales Invoice DP",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

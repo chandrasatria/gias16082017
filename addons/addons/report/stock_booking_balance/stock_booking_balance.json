@@ -1,0 +1,22 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2022-02-17 15:46:29.853594",
+ "disable_prepared_report": 0,
+ "disabled": 1,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2023-02-06 10:38:00.509069",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Stock Booking Balance",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Stock Ledger Entry",
+ "report_name": "Stock Booking Balance",
+ "report_type": "Script Report",
+ "roles": []
+}

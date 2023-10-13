@@ -1,0 +1,188 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2021-07-29 18:45:24.453850",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "company",
+  "no_pod",
+  "no_memo_ekspedisi",
+  "no_count",
+  "amended_from",
+  "under_open_contract_no",
+  "cover_note_no",
+  "lc_no",
+  "nama_tertanggung",
+  "alamat_tertanggung",
+  "jumlah_pertanggungan",
+  "column_break_11",
+  "nama_barang_yang_dipertanggungkan",
+  "kondisi__klausula",
+  "nama_kapal",
+  "tanggal_keberangkatan",
+  "rute_from",
+  "rute_to",
+  "transhipment",
+  "nama_bank",
+  "policy__receipt_no",
+  "cabang"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Form Pengisian Polis Asuransi",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "under_open_contract_no",
+   "fieldtype": "Data",
+   "label": "Under Open Contract No."
+  },
+  {
+   "fieldname": "cover_note_no",
+   "fieldtype": "Data",
+   "label": "Cover Note No."
+  },
+  {
+   "fieldname": "lc_no",
+   "fieldtype": "Data",
+   "label": "L/C No."
+  },
+  {
+   "fieldname": "nama_tertanggung",
+   "fieldtype": "Link",
+   "label": "Nama Tertanggung",
+   "options": "List Company GIAS"
+  },
+  {
+   "fieldname": "alamat_tertanggung",
+   "fieldtype": "Long Text",
+   "label": "Alamat Tertanggung"
+  },
+  {
+   "fieldname": "jumlah_pertanggungan",
+   "fieldtype": "Currency",
+   "label": "Jumlah Pertanggungan"
+  },
+  {
+   "fieldname": "nama_barang_yang_dipertanggungkan",
+   "fieldtype": "Table",
+   "label": "Nama Barang yang Dipertanggungkan",
+   "options": "Tabel Item Form Pengisian Polis Asuransi"
+  },
+  {
+   "fieldname": "kondisi__klausula",
+   "fieldtype": "Long Text",
+   "label": "Kondisi / Klausula"
+  },
+  {
+   "fieldname": "nama_kapal",
+   "fieldtype": "Data",
+   "label": "Nama Kapal"
+  },
+  {
+   "fieldname": "tanggal_keberangkatan",
+   "fieldtype": "Date",
+   "label": "Tanggal Keberangkatan"
+  },
+  {
+   "fieldname": "transhipment",
+   "fieldtype": "Data",
+   "label": "Transhipment"
+  },
+  {
+   "fieldname": "nama_bank",
+   "fieldtype": "Data",
+   "label": "Nama Bank"
+  },
+  {
+   "fieldname": "policy__receipt_no",
+   "fieldtype": "Data",
+   "label": "Policy / Receipt No."
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "no_pod",
+   "fieldtype": "Link",
+   "label": "No POD",
+   "options": "Purchase Order"
+  },
+  {
+   "fieldname": "cabang",
+   "fieldtype": "Link",
+   "label": "Cabang",
+   "options": "List Company GIAS"
+  },
+  {
+   "fieldname": "no_count",
+   "fieldtype": "Table",
+   "label": "No. Count",
+   "options": "Table Container Pengisian Polis Asuransi"
+  },
+  {
+   "fieldname": "rute_from",
+   "fieldtype": "Data",
+   "label": "Route Awal"
+  },
+  {
+   "fieldname": "rute_to",
+   "fieldtype": "Table",
+   "label": "Route Akhir",
+   "options": "Tabel Rute To Memo Permintaan Ekspedisi Eksternal"
+  },
+  {
+   "fieldname": "no_memo_ekspedisi",
+   "fieldtype": "Link",
+   "label": "No ME",
+   "options": "Memo Ekspedisi"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2021-09-28 15:52:47.972099",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Form Pengisian Polis Asuransi",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "creation": "2021-10-08 10:37:02.296983",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tax_server",
+  "sync_to_tax",
+  "sync_status",
+  "last_status"
+ ],
+ "fields": [
+  {
+   "default": "dev-tax-erp2.gias.co.id",
+   "fieldname": "tax_server",
+   "fieldtype": "Data",
+   "label": "Tax Server"
+  },
+  {
+   "fieldname": "sync_to_tax",
+   "fieldtype": "Button",
+   "label": "Sync to Tax",
+   "options": "en_sync_to_tax_server"
+  },
+  {
+   "default": "Idle",
+   "fieldname": "sync_status",
+   "fieldtype": "Data",
+   "label": "Sync Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_status",
+   "fieldtype": "Data",
+   "label": "Last Status",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-12-21 23:11:52.725008",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Sync to Tax Server",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

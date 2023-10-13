@@ -1,0 +1,249 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2021-09-07 21:41:08.348935",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "tax_or_non_tax",
+  "company",
+  "amended_from",
+  "requestor",
+  "requestor_name",
+  "type",
+  "supplier",
+  "supplier_name",
+  "currency",
+  "currency_exchange",
+  "rekening_asal",
+  "memo",
+  "column_break_9",
+  "posting_date",
+  "date_required",
+  "payment_via",
+  "accounts",
+  "destination_account",
+  "project",
+  "section_break_15",
+  "list_invoice",
+  "section_break_19",
+  "tax_and_charges_template",
+  "list_tax_and_charges",
+  "grand_total",
+  "completed"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CR-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Cash Request",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "requestor",
+   "fieldtype": "Link",
+   "label": "Requestor",
+   "no_copy": 1,
+   "options": "User"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Purchase Invoice"
+  },
+  {
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "default": "IDR",
+   "description": "Fetch From Supplier Default Currency in Currency and Price List",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "currency_exchange",
+   "fieldtype": "Float",
+   "label": "Currency Exchange"
+  },
+  {
+   "fieldname": "rekening_asal",
+   "fieldtype": "Data",
+   "label": "Rekening Asal"
+  },
+  {
+   "fieldname": "memo",
+   "fieldtype": "Text Editor",
+   "label": "Memo"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "date_required",
+   "fieldtype": "Date",
+   "label": "Date Required"
+  },
+  {
+   "fieldname": "payment_via",
+   "fieldtype": "Link",
+   "label": "Payment Via",
+   "options": "CBR Mode of Payment"
+  },
+  {
+   "default": "Transfer / Tarik Setor\nNAMA :\nBANK :\nNOMOR ACC :",
+   "fetch_from": "supplier.destination_account",
+   "fieldname": "destination_account",
+   "fieldtype": "Long Text",
+   "label": "Destination Account"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "list_invoice",
+   "fieldtype": "Table",
+   "label": "List Invoice",
+   "options": "Cash Request Table",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "no_copy": 1,
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_19",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "list_tax_and_charges",
+   "fieldtype": "Table",
+   "label": "List Tax and Charges",
+   "options": "Cash Request Taxes and Charges"
+  },
+  {
+   "fetch_from": "requestor.full_name",
+   "fieldname": "requestor_name",
+   "fieldtype": "Data",
+   "label": "Requestor Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tax_and_charges_template",
+   "fieldtype": "Link",
+   "label": "Tax and Charges Template",
+   "options": "Purchase Taxes and Charges Template"
+  },
+  {
+   "default": "0",
+   "fieldname": "completed",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Completed",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "default": "Tax",
+   "fieldname": "tax_or_non_tax",
+   "fieldtype": "Select",
+   "label": "Tax or Non Tax",
+   "options": "Tax\nNon Tax",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "payment_via.account",
+   "fieldname": "accounts",
+   "fieldtype": "Data",
+   "label": "Cash or Bank Account",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total",
+   "options": "currency",
+   "precision": "5",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "sumber_cash_request"
+  }
+ ],
+ "modified": "2023-08-08 10:56:00.924972",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Cash Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "supplier,requestor_name",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "requestor_name",
+ "track_changes": 1
+}

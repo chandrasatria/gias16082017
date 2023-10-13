@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "creation": "2021-08-17 07:16:44.975163",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "kode_material",
+  "column_break_2",
+  "nama_barang",
+  "section_break_4",
+  "keterangan",
+  "section_break_6",
+  "qty_rq",
+  "stuffing",
+  "qty_uom",
+  "column_break_9",
+  "berat",
+  "berat_uom",
+  "tipe",
+  "nama_dokumen"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "kode_material",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Kode Material",
+   "options": "Item"
+  },
+  {
+   "columns": 2,
+   "fieldname": "nama_barang",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Barang"
+  },
+  {
+   "fieldname": "keterangan",
+   "fieldtype": "Text",
+   "label": "Keterangan"
+  },
+  {
+   "columns": 1,
+   "fieldname": "qty_rq",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "columns": 2,
+   "fieldname": "stuffing",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Stuffing"
+  },
+  {
+   "fetch_from": "kode_material.stock_uom",
+   "fieldname": "qty_uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Qty UOM",
+   "options": "UOM",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "kode_material.weight_per_unit",
+   "fieldname": "berat",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Berat",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "kode_material.weight_uom",
+   "fieldname": "berat_uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Berat UOM",
+   "options": "UOM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tipe",
+   "fieldtype": "Data",
+   "label": "Tipe",
+   "read_only": 1
+  },
+  {
+   "fieldname": "nama_dokumen",
+   "fieldtype": "Data",
+   "label": "Nama Dokumen",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-07-19 16:05:34.064164",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Memo Pengiriman Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

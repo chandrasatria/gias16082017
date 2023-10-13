@@ -1,0 +1,281 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2021-07-28 21:12:59.756176",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "pusat_or_cabang",
+  "company",
+  "nama_pengaju",
+  "no_rq",
+  "type_request",
+  "nama_ekspedisi",
+  "nopol_kendaraan",
+  "no_kontainer",
+  "no_segel",
+  "column_break_9",
+  "tanggal_tiba",
+  "tanggal_bongkar",
+  "no_surat_jalan",
+  "nama_supplier",
+  "no_purchase_receipt",
+  "get_item_prec",
+  "no_stock_entry",
+  "get_item",
+  "no_odo",
+  "section_break_16",
+  "item",
+  "section_break_18",
+  "kurang_barang",
+  "barang_rusak",
+  "kualitas_produk_tidak_sesuai",
+  "kelengkapan_data_section",
+  "foto",
+  "video",
+  "attachment",
+  "permintaan_section",
+  "ganti_barang",
+  "potong_harga",
+  "hanya_informasi",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "reqd": 1
+  },
+  {
+   "default": "Cabang",
+   "fieldname": "pusat_or_cabang",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Pusat or Cabang",
+   "options": "Cabang",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "nama_pengaju",
+   "fieldtype": "Link",
+   "label": "Nama Pengaju",
+   "options": "List Company GIAS",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Berita Acara Komplain",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "no_rq",
+   "fieldtype": "Data",
+   "label": "No RQ"
+  },
+  {
+   "fetch_from": "no_rq.type_request",
+   "fieldname": "type_request",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Type Request",
+   "read_only": 1
+  },
+  {
+   "fieldname": "nama_ekspedisi",
+   "fieldtype": "Link",
+   "label": "Nama Ekspedisi",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "nopol_kendaraan",
+   "fieldtype": "Data",
+   "label": "Nopol Kendaraan"
+  },
+  {
+   "fieldname": "no_kontainer",
+   "fieldtype": "Data",
+   "label": "No Kontainer"
+  },
+  {
+   "fieldname": "no_segel",
+   "fieldtype": "Data",
+   "label": "No Segel",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_9",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tanggal_tiba",
+   "fieldtype": "Date",
+   "label": "Tanggal Tiba",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tanggal_bongkar",
+   "fieldtype": "Date",
+   "label": "Tanggal Bongkar",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nama_supplier",
+   "fieldtype": "Data",
+   "label": "Nama Supplier",
+   "read_only": 1
+  },
+  {
+   "fieldname": "no_purchase_receipt",
+   "fieldtype": "Link",
+   "label": "No Purchase Receipt",
+   "options": "Purchase Receipt"
+  },
+  {
+   "depends_on": "eval:doc.type_request == \"Group\"",
+   "fieldname": "no_odo",
+   "fieldtype": "Table",
+   "label": "No ODO",
+   "options": "Berita Acara Komplain ODO"
+  },
+  {
+   "fieldname": "section_break_16",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Table",
+   "label": "Item",
+   "options": "Tabel Berita Acara Komplain"
+  },
+  {
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break",
+   "label": "Tipe Komplain"
+  },
+  {
+   "default": "0",
+   "fieldname": "kurang_barang",
+   "fieldtype": "Check",
+   "label": "Kurang Barang"
+  },
+  {
+   "default": "0",
+   "fieldname": "barang_rusak",
+   "fieldtype": "Check",
+   "label": "Barang Rusak"
+  },
+  {
+   "default": "0",
+   "fieldname": "kualitas_produk_tidak_sesuai",
+   "fieldtype": "Check",
+   "label": "Kualitas Produk Tidak Sesuai"
+  },
+  {
+   "fieldname": "kelengkapan_data_section",
+   "fieldtype": "Section Break",
+   "label": "Kelengkapan Data"
+  },
+  {
+   "default": "0",
+   "fieldname": "foto",
+   "fieldtype": "Check",
+   "label": "Foto"
+  },
+  {
+   "default": "0",
+   "fieldname": "video",
+   "fieldtype": "Check",
+   "label": "Video"
+  },
+  {
+   "description": "*required for submit",
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "Attachment"
+  },
+  {
+   "fieldname": "permintaan_section",
+   "fieldtype": "Section Break",
+   "label": "Permintaan"
+  },
+  {
+   "default": "0",
+   "fieldname": "ganti_barang",
+   "fieldtype": "Check",
+   "label": "Ganti Barang"
+  },
+  {
+   "default": "0",
+   "fieldname": "potong_harga",
+   "fieldtype": "Check",
+   "label": "Potong Harga"
+  },
+  {
+   "default": "0",
+   "fieldname": "hanya_informasi",
+   "fieldtype": "Check",
+   "label": "Hanya Informasi"
+  },
+  {
+   "fieldname": "get_item_prec",
+   "fieldtype": "Button",
+   "label": "Get Item Prec"
+  },
+  {
+   "fieldname": "no_stock_entry",
+   "fieldtype": "Link",
+   "label": "No Stock Entry",
+   "options": "Stock Entry"
+  },
+  {
+   "fieldname": "get_item",
+   "fieldtype": "Button",
+   "label": "Get Item"
+  },
+  {
+   "fieldname": "no_surat_jalan",
+   "fieldtype": "Data",
+   "label": "No Surat Jalan"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-10-05 23:57:21.193304",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Berita Acara Komplain",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

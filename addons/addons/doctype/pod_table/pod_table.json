@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "creation": "2021-08-12 20:44:49.015433",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tanggal_penjemputan",
+  "penjemputan",
+  "tujuan",
+  "jenis_kendaraan",
+  "jumlah_kendaraan",
+  "harga"
+ ],
+ "fields": [
+  {
+   "fieldname": "tanggal_penjemputan",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Penjemputan"
+  },
+  {
+   "fieldname": "penjemputan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Penjemputan"
+  },
+  {
+   "fieldname": "tujuan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tujuan"
+  },
+  {
+   "fieldname": "jenis_kendaraan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Jenis Kendaraan"
+  },
+  {
+   "fieldname": "jumlah_kendaraan",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Jumlah Kendaraan"
+  },
+  {
+   "fieldname": "harga",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Harga"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-08-19 18:07:29.363644",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "POD Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

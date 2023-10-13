@@ -1,0 +1,37 @@
+{
+ "actions": [],
+ "creation": "2021-07-29 19:40:17.450758",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "pic",
+  "no_pic"
+ ],
+ "fields": [
+  {
+   "fieldname": "pic",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "PIC"
+  },
+  {
+   "fieldname": "no_pic",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No. PIC"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-07-29 19:40:17.450758",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Tabel PIC Memo Siap Ekspedisi",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

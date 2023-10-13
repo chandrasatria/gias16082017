@@ -1,0 +1,37 @@
+{
+ "actions": [],
+ "creation": "2021-07-29 19:46:11.153696",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "harga__dpp_",
+  "ppn"
+ ],
+ "fields": [
+  {
+   "fieldname": "harga__dpp_",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Harga ( DPP )"
+  },
+  {
+   "fieldname": "ppn",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "PPN"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-07-29 19:46:11.153696",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Tabel Harga Memo Siap Ekspedisi",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

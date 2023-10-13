@@ -1,0 +1,39 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-12-07 18:07:08.189796",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "material_transfer",
+  "posting_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "material_transfer",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Material Transfer",
+   "read_only": 1
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-12-07 18:07:08.189796",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Material Transfer History",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

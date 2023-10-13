@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "ALO-.#####",
+ "creation": "2023-03-25 11:33:42.567870",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "item_group",
+  "cabang",
+  "get_mr",
+  "column_break_3",
+  "posting_date",
+  "from_date",
+  "to_date",
+  "section_break_6",
+  "supplier_delivery_note",
+  "material_request_not_ready",
+  "section_break_9",
+  "total_qty_alokasi",
+  "memo",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "ALO-.#####"
+  },
+  {
+   "fieldname": "get_mr",
+   "fieldtype": "Button",
+   "label": "Get MR"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "material_request_not_ready",
+   "fieldtype": "Table",
+   "label": "Material Request Not Ready",
+   "options": "Alokasi Product Specialist Table"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_qty_alokasi",
+   "fieldtype": "Float",
+   "label": "Total Qty Alokasi",
+   "read_only": 1
+  },
+  {
+   "fieldname": "memo",
+   "fieldtype": "Text",
+   "label": "Memo",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Alokasi Product Specialist",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Alokasi Product Specialist",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Group",
+   "options": "Item Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cabang",
+   "fieldtype": "Table MultiSelect",
+   "label": "Cabang",
+   "options": "APS List Company GIAS"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier_delivery_note",
+   "fieldtype": "Data",
+   "label": "Supplier Delivery Note"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-09-01 10:45:28.236408",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Alokasi Product Specialist",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

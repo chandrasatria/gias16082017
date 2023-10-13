@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:type_pembelian",
+ "creation": "2021-11-03 16:27:18.293236",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "type_pembelian",
+  "ps_approver"
+ ],
+ "fields": [
+  {
+   "fieldname": "type_pembelian",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tipe Inventori Pembelian",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "ps_approver",
+   "fieldtype": "Link",
+   "label": "PS Approver",
+   "options": "PS Approver MR"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-06-25 15:24:19.905272",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Tipe Pembelian",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "GIAS Head Admin",
+   "select": 1,
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "PO Admin Inventory Cabang",
+   "select": 1,
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "GIAS Admin PO",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

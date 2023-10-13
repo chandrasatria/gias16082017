@@ -1,0 +1,78 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "ALO-HO-.#####",
+ "creation": "2022-12-22 16:26:49.253578",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "material_request",
+  "list_company_gias",
+  "sumber_warehouse",
+  "get_item",
+  "section_break_5",
+  "mr_by_ps_table"
+ ],
+ "fields": [
+  {
+   "fieldname": "material_request",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Material Request",
+   "options": "Material Request"
+  },
+  {
+   "fieldname": "list_company_gias",
+   "fieldtype": "Link",
+   "label": "List Company GIAS",
+   "options": "List Company GIAS"
+  },
+  {
+   "fieldname": "sumber_warehouse",
+   "fieldtype": "Link",
+   "label": "Sumber Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "get_item",
+   "fieldtype": "Button",
+   "label": "Get Item"
+  },
+  {
+   "fieldname": "section_break_5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "mr_by_ps_table",
+   "fieldtype": "Table",
+   "label": "MR by PS Table",
+   "options": "MR by PS Table"
+  }
+ ],
+ "in_create": 1,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-12-23 10:07:24.961520",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Alokasi MR by PS",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "read_only": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

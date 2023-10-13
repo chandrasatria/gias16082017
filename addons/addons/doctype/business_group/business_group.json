@@ -1,0 +1,66 @@
+{
+ "actions": [],
+ "autoname": "field:business_group",
+ "creation": "2021-08-03 20:08:26.354680",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "business_group",
+  "credit_limit",
+  "term_of_payment",
+  "disabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "business_group",
+   "fieldtype": "Data",
+   "label": "Business Group",
+   "unique": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "credit_limit",
+   "fieldtype": "Currency",
+   "label": "Credit Limit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "term_of_payment",
+   "fieldtype": "Link",
+   "label": "Term of Payment",
+   "options": "Payment Terms Template",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-09-04 23:35:40.110841",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Business Group",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

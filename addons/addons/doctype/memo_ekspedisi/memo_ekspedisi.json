@@ -1,0 +1,355 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2021-08-27 20:51:48.113381",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "amended_from",
+  "company",
+  "cabang",
+  "naming_series",
+  "stock_entry",
+  "no_mrrq",
+  "column_break_5",
+  "purchase_order",
+  "section_break_7",
+  "items",
+  "tonase__kg_",
+  "tonase_stuffing_kg",
+  "section_break_9",
+  "perencanaan_section",
+  "tanggal_muat",
+  "estimasi_tanggal_tiba",
+  "ukuran_bak__kontainer",
+  "column_break_13",
+  "tanggungan__pusat__cabang__supplier_",
+  "memo_permintaan_ekspedisi_eksternal_company_gias",
+  "memo_permintaan_ekspedisi_eksternal_supplier",
+  "no_odo",
+  "section_break_20",
+  "isi_kontainer",
+  "section_break_25",
+  "penentuan_biaya_ekspedisi_section",
+  "purchase_order_delivery_pod",
+  "nama_ekspedisi_eksternal",
+  "nama_kapal",
+  "nopol_kendaraan__kontainer",
+  "rute_from",
+  "rute_to",
+  "pic",
+  "column_break_28",
+  "tanggal_closing",
+  "etd",
+  "eta",
+  "ext_dooring",
+  "ppn__non_ppn",
+  "harga",
+  "total_harga_dpp",
+  "section_break_32",
+  "detail_tujuan_pengiriman_section",
+  "tujuan",
+  "list_company_gias",
+  "alamat",
+  "tanggal_pengiriman",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "no_mrrq",
+   "fieldtype": "Table",
+   "label": "Material Request (RQ)",
+   "options": "Material Request Table"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Memo Ekspedisi",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rute_from",
+   "fieldtype": "Data",
+   "label": "Rute From"
+  },
+  {
+   "fieldname": "rute_to",
+   "fieldtype": "Table",
+   "label": "Rute To",
+   "options": "Tabel Rute To Memo Permintaan Ekspedisi Eksternal"
+  },
+  {
+   "fieldname": "tanggungan__pusat__cabang__supplier_",
+   "fieldtype": "Select",
+   "label": "Tanggungan ( Pusat / Cabang / Supplier )",
+   "options": "\nCompany GIAS\nSupplier"
+  },
+  {
+   "depends_on": "eval:doc.tanggungan__pusat__cabang__supplier_ == \"Company GIAS\"",
+   "fieldname": "memo_permintaan_ekspedisi_eksternal_company_gias",
+   "fieldtype": "Table",
+   "label": "Company",
+   "options": "Memo Permintaan Ekspedisi Eksternal Company GIAS"
+  },
+  {
+   "depends_on": "eval:doc.tanggungan__pusat__cabang__supplier_ == \"Supplier\"",
+   "fieldname": "memo_permintaan_ekspedisi_eksternal_supplier",
+   "fieldtype": "Table",
+   "label": "Supplier",
+   "options": "Memo Permintaan Ekspedisi Eksternal Supplier"
+  },
+  {
+   "fieldname": "tanggal_muat",
+   "fieldtype": "Date",
+   "label": "Tanggal Muat"
+  },
+  {
+   "fieldname": "estimasi_tanggal_tiba",
+   "fieldtype": "Date",
+   "label": "Estimasi Tanggal Tiba"
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "isi_kontainer",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Isi Kontainer",
+   "options": "Tabel Isi Kontainer Memo Permintaan Ekspedisi Eksternal"
+  },
+  {
+   "fieldname": "tonase__kg_",
+   "fieldtype": "Float",
+   "label": "Tonase ( KG )",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ukuran_bak__kontainer",
+   "fieldtype": "Select",
+   "label": "Ukuran Bak / Kontainer",
+   "options": "\n20 FEET\n20 FEET HC\n40 FEET\n40 FEET HC\nBAK TERBUKA"
+  },
+  {
+   "fieldname": "no_odo",
+   "fieldtype": "Table",
+   "label": "No. ODO",
+   "options": "Tabel No ODO Memo Permintaan Ekspedisi Eksternal"
+  },
+  {
+   "fieldname": "section_break_20",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "nama_ekspedisi_eksternal",
+   "fieldtype": "Data",
+   "label": "Nama Ekspedisi Eksternal"
+  },
+  {
+   "fieldname": "nopol_kendaraan__kontainer",
+   "fieldtype": "Data",
+   "label": "Nopol Kendaraan / Kontainer"
+  },
+  {
+   "fieldname": "pic",
+   "fieldtype": "Table",
+   "label": "PIC",
+   "options": "Tabel PIC Memo Siap Ekspedisi"
+  },
+  {
+   "fieldname": "nama_kapal",
+   "fieldtype": "Data",
+   "label": "Nama Kapal"
+  },
+  {
+   "fieldname": "tanggal_closing",
+   "fieldtype": "Date",
+   "label": "Tanggal Closing"
+  },
+  {
+   "fieldname": "etd",
+   "fieldtype": "Date",
+   "label": "ETD"
+  },
+  {
+   "fieldname": "eta",
+   "fieldtype": "Date",
+   "label": "ETA"
+  },
+  {
+   "fieldname": "ext_dooring",
+   "fieldtype": "Date",
+   "label": "Ext. Dooring"
+  },
+  {
+   "fieldname": "ppn__non_ppn",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "PPN / Non PPN",
+   "options": "\nPPN\nNon PPN"
+  },
+  {
+   "fieldname": "harga",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Harga",
+   "options": "Tabel Harga Memo Siap Ekspedisi"
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "perencanaan_section",
+   "fieldtype": "Section Break",
+   "label": "Perencanaan Pengiriman"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items (Isi Kontainer)",
+   "options": "Memo Pengiriman Table"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "purchase_order",
+   "fieldtype": "Link",
+   "label": "Purchase Order",
+   "options": "Purchase Order"
+  },
+  {
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "Stock Entry",
+   "options": "Stock Entry"
+  },
+  {
+   "fieldname": "section_break_32",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tujuan",
+   "fieldtype": "Select",
+   "label": "Tujuan",
+   "options": "\nGIAS\nLainnya"
+  },
+  {
+   "fieldname": "alamat",
+   "fieldtype": "Text",
+   "label": "Alamat"
+  },
+  {
+   "fieldname": "tanggal_pengiriman",
+   "fieldtype": "Date",
+   "label": "Tanggal Pengiriman"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Long Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series"
+  },
+  {
+   "fieldname": "total_harga_dpp",
+   "fieldtype": "Currency",
+   "label": "Total Harga (DPP)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "purchase_order_delivery_pod",
+   "fieldtype": "Link",
+   "label": "Purchase Order Delivery (POD)",
+   "options": "Purchase Order"
+  },
+  {
+   "fieldname": "penentuan_biaya_ekspedisi_section",
+   "fieldtype": "Section Break",
+   "label": "Penentuan Biaya Ekspedisi"
+  },
+  {
+   "fieldname": "detail_tujuan_pengiriman_section",
+   "fieldtype": "Section Break",
+   "label": "Detail Tujuan Pengiriman"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_25",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.tujuan == \"GIAS\"",
+   "fieldname": "list_company_gias",
+   "fieldtype": "Link",
+   "label": "List Company GIAS",
+   "options": "List Company GIAS"
+  },
+  {
+   "description": "untuk naming series",
+   "fieldname": "cabang",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Cabang",
+   "options": "List Company GIAS",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "tonase_stuffing_kg",
+   "fieldtype": "Float",
+   "label": "Tonase Stuffing (KG)",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-10-31 18:05:11.628260",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Memo Ekspedisi",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

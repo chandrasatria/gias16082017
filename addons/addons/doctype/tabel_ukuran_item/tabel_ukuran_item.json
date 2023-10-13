@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "creation": "2021-07-30 19:46:58.831674",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "panjang",
+  "lebar",
+  "tinggi",
+  "uom"
+ ],
+ "fields": [
+  {
+   "fieldname": "panjang",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Panjang"
+  },
+  {
+   "fieldname": "lebar",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Lebar"
+  },
+  {
+   "fieldname": "tinggi",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Tinggi"
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "UOM",
+   "options": "UOM"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-07-30 19:50:33.142598",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "Tabel Ukuran Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

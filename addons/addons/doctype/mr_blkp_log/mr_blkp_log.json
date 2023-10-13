@@ -1,0 +1,108 @@
+{
+ "actions": [],
+ "autoname": "format:MRLOG-HO-{#########}",
+ "creation": "2023-02-07 19:29:20.497772",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "nama_dokumen",
+  "tipe_dokumen",
+  "mr_log_yang_dicancel",
+  "buat_je_di",
+  "cabang",
+  "data",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "nama_dokumen",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Dokumen"
+  },
+  {
+   "fieldname": "tipe_dokumen",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tipe Dokumen",
+   "options": "Submit\nCancel"
+  },
+  {
+   "fieldname": "mr_log_yang_dicancel",
+   "fieldtype": "Data",
+   "label": "MR Log yang Dicancel"
+  },
+  {
+   "fieldname": "buat_je_di",
+   "fieldtype": "Select",
+   "label": "Buat MR di",
+   "options": "Cabang\nPusat"
+  },
+  {
+   "fieldname": "cabang",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Cabang",
+   "options": "List Company GIAS"
+  },
+  {
+   "fieldname": "data",
+   "fieldtype": "Code",
+   "label": "Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "MR BLKP Log",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "MR BLKP Log",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-02-07 19:54:43.221708",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "MR BLKP Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

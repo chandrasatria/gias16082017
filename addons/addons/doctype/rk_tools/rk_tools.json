@@ -1,0 +1,196 @@
+{
+ "actions": [],
+ "autoname": "RK-.######",
+ "creation": "2021-12-20 13:56:04.452121",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "posting_date",
+  "tax_or_non_tax",
+  "rk_type",
+  "cost_distribution_section",
+  "account_from",
+  "account_to",
+  "branch",
+  "distribution_detail",
+  "amended_from",
+  "gl_move_section",
+  "branch1",
+  "column_break_13",
+  "from_date",
+  "to_date",
+  "account",
+  "get_movable_gl",
+  "section_break_18",
+  "gl_movement"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "rk_type",
+   "fieldtype": "Select",
+   "label": "RK Type",
+   "options": "Cost Distribution\nGL Move"
+  },
+  {
+   "depends_on": "eval:doc.rk_type == \"Cost Distribution\"",
+   "fieldname": "account_from",
+   "fieldtype": "Link",
+   "label": "Account From",
+   "mandatory_depends_on": "eval:doc.rk_type == \"Cost Distribution\"",
+   "options": "Account"
+  },
+  {
+   "depends_on": "eval:doc.rk_type == \"Cost Distribution\"",
+   "fieldname": "account_to",
+   "fieldtype": "Link",
+   "label": "Account To",
+   "mandatory_depends_on": "eval:doc.rk_type == \"Cost Distribution\"",
+   "options": "Account"
+  },
+  {
+   "default": "Jakarta",
+   "depends_on": "eval:doc.rk_type == \"Cost Distribution\"",
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "mandatory_depends_on": "eval:doc.rk_type == \"Cost Distribution\"",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "RK Tools",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.rk_type == \"Cost Distribution\"",
+   "fieldname": "cost_distribution_section",
+   "fieldtype": "Section Break",
+   "label": "Cost Distribution"
+  },
+  {
+   "default": "Tax",
+   "fieldname": "tax_or_non_tax",
+   "fieldtype": "Select",
+   "label": "Tax or Non Tax",
+   "options": "Non Tax\nTax"
+  },
+  {
+   "fieldname": "distribution_detail",
+   "fieldtype": "Table",
+   "label": "Distribution Detail",
+   "options": "RK Tools Distribution Detail"
+  },
+  {
+   "depends_on": "eval:doc.rk_type == \"GL Move\"",
+   "fieldname": "gl_move_section",
+   "fieldtype": "Section Break",
+   "label": "GL Move"
+  },
+  {
+   "fieldname": "get_movable_gl",
+   "fieldtype": "Button",
+   "label": "Get Movable GL"
+  },
+  {
+   "depends_on": "eval:doc.rk_type == \"GL Move\"",
+   "fieldname": "gl_movement",
+   "fieldtype": "Table",
+   "label": "GL Movement",
+   "options": "RK Tools GL Move"
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "From Date",
+   "mandatory_depends_on": "eval:doc.rk_type == \"GL Move\""
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "To Date",
+   "mandatory_depends_on": "eval:doc.rk_type == \"GL Move\"",
+   "reqd": 1
+  },
+  {
+   "fieldname": "account",
+   "fieldtype": "Table MultiSelect",
+   "label": "Account",
+   "mandatory_depends_on": "eval:doc.rk_type == \"GL Move\"",
+   "options": "RK Tools Account"
+  },
+  {
+   "fieldname": "branch1",
+   "fieldtype": "Table MultiSelect",
+   "label": "Branch",
+   "options": "RK Tools Branch"
+  },
+  {
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-12-13 17:56:14.951447",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "RK Tools",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "SPV Acc Cabang",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

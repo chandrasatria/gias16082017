@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:nama_company",
+ "creation": "2021-07-24 19:53:01.933295",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "nama_company",
+  "warehouse_penerimaan_dari_pusat",
+  "warehouse_transit",
+  "singkatan_cabang",
+  "alamat_dan_kontak",
+  "accounting_dimension",
+  "cabang_non_gias",
+  "is_depo"
+ ],
+ "fields": [
+  {
+   "fieldname": "nama_company",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Company",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "alamat_dan_kontak",
+   "fieldtype": "Long Text",
+   "label": "Alamat dan Kontak"
+  },
+  {
+   "fieldname": "singkatan_cabang",
+   "fieldtype": "Data",
+   "label": "Singkatan Cabang"
+  },
+  {
+   "fieldname": "accounting_dimension",
+   "fieldtype": "Link",
+   "label": "Accounting Dimension",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "warehouse_penerimaan_dari_pusat",
+   "fieldtype": "Link",
+   "label": "Warehouse Penerimaan",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "warehouse_transit",
+   "fieldtype": "Link",
+   "label": "Warehouse Transit",
+   "options": "Warehouse"
+  },
+  {
+   "default": "0",
+   "fieldname": "cabang_non_gias",
+   "fieldtype": "Check",
+   "label": "Cabang Non GIAS"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_depo",
+   "fieldtype": "Check",
+   "label": "Is Depo"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-02-03 10:50:09.978306",
+ "modified_by": "Administrator",
+ "module": "Addons",
+ "name": "List Company GIAS",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

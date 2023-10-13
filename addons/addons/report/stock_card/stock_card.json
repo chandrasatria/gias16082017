@@ -1,0 +1,90 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2022-01-07 09:27:48.163033",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{}",
+ "modified": "2023-07-07 11:30:49.878570",
+ "modified_by": "christofer.januar@gias.co.id",
+ "module": "Addons",
+ "name": "Stock Card",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Stock Entry",
+ "report_name": "Stock Card",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Manufacturing Manager"
+  },
+  {
+   "role": "Manufacturing User"
+  },
+  {
+   "role": "Stock Manager"
+  },
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "GIAS Customer Service Ekspedisi Staff"
+  },
+  {
+   "role": "GIAS Customer Service Staff ( Sales )"
+  },
+  {
+   "role": "Data Analyst"
+  },
+  {
+   "role": "SPV Acc Cabang"
+  },
+  {
+   "role": "General Affairs Manager"
+  },
+  {
+   "role": "Asset Management Staff"
+  },
+  {
+   "role": "IT Hardware Infrastructure Manager"
+  },
+  {
+   "role": "IT Support Supervisor"
+  },
+  {
+   "role": "IT Support Staff"
+  },
+  {
+   "role": "Procurement Manager"
+  },
+  {
+   "role": "Inventory Staff"
+  },
+  {
+   "role": "Customer Service Manager"
+  },
+  {
+   "role": "Customer Service Staff"
+  },
+  {
+   "role": "Customer Service Ekspedisi Staff"
+  },
+  {
+   "role": "Warehouse & Distribution Manager"
+  },
+  {
+   "role": "Warehouse Admin"
+  },
+  {
+   "role": "Audit & System Manager"
+  },
+  {
+   "role": "Internal Audit Staff"
+  }
+ ]
+}
