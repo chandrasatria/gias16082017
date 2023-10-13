@@ -807,12 +807,16 @@ def patch_ste_dong(name, item_code, rate, qty):
 				row.pusat_valuation_rate = flt(rate,9)
 				row.basic_rate = flt(row.pusat_valuation_rate,9)
 				row.valuation_rate = flt(flt(row.basic_rate,9) + (flt(row.additional_cost) / flt(row.transfer_qty)),9)
-				
+
+				print(str(row.basic_rate))
+				print(str(row.valuation_rate))
 
 				row.allow_zero_valuation_rate = 0
 				row.db_update()
+				
 		ste_doc.calculate_rate_and_amount()
 		custom_distribute_additional_costs(ste_doc)
+
 		for row in ste_doc.items:
 			row.additional_cost_transfer = row.additional_cost
 			row.valuation_rate_transfer = row.valuation_rate
@@ -1155,8 +1159,8 @@ def debug_start_stock_recount_stei_by_name(nama_db):
 		start_stock_recount_stei_by_name(row[0])
 		# frappe.db.commit()
 	
-	command = """ cd /home/frappe/frappe-bench/ && bench --site {} execute addons.patch_ste.repost_stock """.format(check_list_company_gias(cabang_mana))
-	os.system(command)
+	# command = """ cd /home/frappe/frappe-bench/ && bench --site {} execute addons.patch_ste.repost_stock """.format(check_list_company_gias(cabang_mana))
+	# os.system(command)
 
 @frappe.whitelist()
 def debug_start_stock_recount_stei_by_name_2():
