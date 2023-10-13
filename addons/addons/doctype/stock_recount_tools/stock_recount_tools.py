@@ -774,10 +774,10 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty):
 		WHERE voucher_no = "{}" and item_code = "{}" 
 		and actual_qty = {} """.format(name, item_code, frappe.utils.flt(qty*-1)))
 	if len(list_ste) > 0:
-		if flt(rate,5) != flt(list_ste[0][0],5):
-			print(flt(list_ste[0][0],5))
+		if flt(rate) != flt(list_ste[0][0]):
+			print(flt(list_ste[0][0]))
 			if flt(list_ste[0][0]) > 0:
-				rate_baru = flt(list_ste[0][0],5)
+				rate_baru = flt(list_ste[0][0])
 				ste_doc = frappe.get_doc("Stock Entry",name)
 				list_company_gias = ste_doc.transfer_ke_cabang_mana
 				site = check_list_company_gias(list_company_gias)
@@ -799,7 +799,7 @@ def patch_ste_dong(name, item_code, rate, qty):
 
 			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty):
 				print('yok')
-				row.pusat_valuation_rate = flt(rate,5)
+				row.pusat_valuation_rate = flt(rate)
 				row.basic_rate = flt(row.pusat_valuation_rate)
 				row.valuation_rate = flt(flt(row.basic_rate) + (flt(row.additional_cost) / flt(row.transfer_qty)))
 
@@ -1130,8 +1130,9 @@ def debug_start_stock_recount_stei_by_name(nama_db):
 		JOIN `tabStock Entry` ste2 ON ste2.sync_name = ste1.name
 		JOIN `tabStock Entry Detail` sted2 ON sted2.item_code = sted1.`item_code` AND sted2.qty = sted1.qty AND sted2.parent = ste2.name
 
-		WHERE ROUND(sted1.`basic_rate`,5) != ROUND(sted2.`basic_rate`,5)
+		WHERE sted1.`basic_rate` != sted2.`basic_rate`
 		AND sted1.`docstatus` =1 AND sted2.`docstatus` = 1
+		AND sted2.parent = "STEI-HO-22-12-00415"
 
 		GROUP BY sted2.parent
 		HAVING ste1.`stock_entry_type` = "Material Receipt"
