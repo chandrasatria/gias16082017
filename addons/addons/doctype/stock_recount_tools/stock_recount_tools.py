@@ -813,13 +813,25 @@ def patch_ste_dong(name, item_code, rate, qty):
 
 				row.allow_zero_valuation_rate = 0
 				row.db_update()
-				
+
 		ste_doc.calculate_rate_and_amount()
 		custom_distribute_additional_costs(ste_doc)
 
 		for row in ste_doc.items:
 			row.additional_cost_transfer = row.additional_cost
 			row.valuation_rate_transfer = row.valuation_rate
+
+			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty):
+				print('yok')
+				row.pusat_valuation_rate = flt(rate,9)
+				row.basic_rate = flt(row.pusat_valuation_rate,9)
+				row.valuation_rate = flt(flt(row.basic_rate,9) + (flt(row.additional_cost) / flt(row.transfer_qty)),9)
+
+				print(str(row.basic_rate))
+				print(str(row.valuation_rate))
+
+				row.allow_zero_valuation_rate = 0
+				row.db_update()
 			
 		for row in ste_doc.items:
 			row.db_update()
