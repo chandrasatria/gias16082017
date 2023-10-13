@@ -836,7 +836,6 @@ def patch_ste_dong(name, item_code, rate, qty):
 		for row in ste_doc.items:
 			row.db_update()
 
-		print(ste_doc.name)
 		ste_doc.db_update()
 		frappe.db.commit()
 
@@ -1171,8 +1170,8 @@ def debug_start_stock_recount_stei_by_name(nama_db):
 		start_stock_recount_stei_by_name(row[0])
 		# frappe.db.commit()
 	
-	# command = """ cd /home/frappe/frappe-bench/ && bench --site {} execute addons.patch_ste.repost_stock """.format(check_list_company_gias(cabang_mana))
-	# os.system(command)
+	command = """ cd /home/frappe/frappe-bench/ && bench --site {} execute addons.patch_ste.repost_stock """.format(check_list_company_gias(cabang_mana))
+	os.system(command)
 
 @frappe.whitelist()
 def debug_start_stock_recount_stei_by_name_2():
