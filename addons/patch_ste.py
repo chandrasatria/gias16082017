@@ -10,6 +10,11 @@ from erpnext.selling.doctype.customer.customer import get_credit_limit, get_cust
 from erpnext.controllers.accounts_controller import get_taxes_and_charges
 from frappe.model.naming import make_autoname, revert_series_if_last
 
+@frappe.whitelist()
+def benerin_item():
+    item_doc = frappe.get_doc("Item","C-GRAN-P-000044")
+    item_doc.disabled = 0
+    item_doc.db_update()
 
 @frappe.whitelist()
 def mana_ste():
