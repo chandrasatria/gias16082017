@@ -1151,8 +1151,7 @@ def debug_start_stock_recount_stei_by_name(nama_db):
 		JOIN `tabStock Entry` ste2 ON ste2.sync_name = ste1.name
 		JOIN `tabStock Entry Detail` sted2 ON sted2.item_code = sted1.`item_code` AND sted2.qty = sted1.qty AND sted2.parent = ste2.name
 
-		WHERE sted1.`basic_rate` != sted2.`basic_rate`
-		AND sted1.`docstatus` =1 AND sted2.`docstatus` = 1
+		WHERE sted1.`docstatus` =1 AND sted2.`docstatus` = 1
 		AND sted2.parent = "STEI-HO-22-12-00415"
 
 		GROUP BY sted2.parent
