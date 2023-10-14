@@ -291,6 +291,11 @@ def repair_gl_entry_untuk_ste_debug_3():
     debug_start_stock_recount_stei_by_name("db_bali")
 
 @frappe.whitelist()
+def enqueue_repair_gl_entry_untuk_ste_debug_3():
+    enqueued_method = "addons.patch_ste.repair_gl_entry_untuk_ste_debug_3"
+    frappe.enqueue(method=enqueued_method,timeout=18000, queue='long')
+    
+@frappe.whitelist()
 def repair_gl_entry_untuk_ste_debug_4():
     print("test")
     
