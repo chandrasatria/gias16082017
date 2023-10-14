@@ -819,7 +819,7 @@ def patch_ste_dong(name, item_code, rate, qty):
 		ste_doc.update_valuation_rate()
 		ste_doc.set_total_incoming_outgoing_value()
 		ste_doc.set_total_amount()
-		
+
 		custom_distribute_additional_costs(ste_doc)
 
 		for row in ste_doc.items:
@@ -1158,7 +1158,6 @@ def debug_start_stock_recount_stei_by_name(nama_db):
 
 		WHERE sted1.`basic_rate` != sted2.`basic_rate`
 		AND sted1.`docstatus` =1 AND sted2.`docstatus` = 1
-		and sted2.parent = "STEI-HO-22-12-00136"
 
 		GROUP BY sted2.parent
 		HAVING ste1.`stock_entry_type` = "Material Receipt"
