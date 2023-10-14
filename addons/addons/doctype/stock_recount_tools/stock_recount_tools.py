@@ -814,7 +814,7 @@ def patch_ste_dong(name, item_code, rate, qty):
 				row.allow_zero_valuation_rate = 0
 				row.db_update()
 
-		ste_doc.calculate_rate_and_amount()
+		# ste_doc.calculate_rate_and_amount()
 		custom_distribute_additional_costs(ste_doc)
 
 		for row in ste_doc.items:
