@@ -37,12 +37,12 @@ def mana_ste():
         frappe.db.commit()
 
 @frappe.whitelist()
-def patch_sle_debug():
+def patch_sle():
     frappe.db.sql(""" UPDATE `tabStock Ledger Entry` set incoming_rate = 0 WHERE incoming_rate > 0 and voucher_type = "Delivery Note" and actual_qty < 0 """)
 
 
 @frappe.whitelist()
-def patch_sle(self,method):
+def patch_sle_debug(self,method):
     frappe.db.sql(""" UPDATE `tabStock Ledger Entry` set incoming_rate = 0 WHERE incoming_rate > 0 and voucher_type = "Delivery Note" and actual_qty < 0 """)
 
 
