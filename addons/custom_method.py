@@ -25,7 +25,7 @@ import time
 
 from os import listdir
 from os.path import isfile, join
-from datetime import datetime
+from datetime import datetime,timedelta
 
 from erpnext.accounts.doctype.sales_invoice.sales_invoice import (
 	check_if_return_invoice_linked_with_payment_entry,
@@ -915,7 +915,7 @@ def coba_benerin_material_request():
 	if str(url) == "erp-pusat.gias.co.id":
 		return
 	else:
-		now = datetime.now()
+		now = datetime.now()+timedelta(hours=3)
 		print(now)
 		return
 	
@@ -943,7 +943,7 @@ def coba_benerin_material_request():
 		ORDER BY eul.`creation`
 	""")
 	for row in list_pull_node:
-		now = datetime.now()
+		now = datetime.now()+timedelta(hours=3)
 		doc = frappe.get_doc("Event Update Log", row[0])
 		doc.creation = now
 		doc.db_update()
