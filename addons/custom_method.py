@@ -913,7 +913,7 @@ def coba_benerin_material_request():
 	# datetime object containing current date and time
 	
 	list_pull_node = frappe.db.sql("""
-		SELECT *
+		SELECT name
 		FROM `tabEvent Update Log` eul
 		JOIN `tabMaterial Request` tmr
 		ON tmr.name = eul.`docname`
@@ -935,8 +935,14 @@ def coba_benerin_material_request():
 	""")
 	for row in list_pull_node:
 		now = datetime.now()
+		doc = frappe.get_doc("Event Update Log", row[0])
+		doc.creation = now
+		doc.db_update()
 		time.sleep(1)
 		print(now)
+	frappe.db.commit()
+
+	lakukan_pull_node()
 
 			
 @frappe.whitelist()
