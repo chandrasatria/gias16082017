@@ -213,7 +213,7 @@ def check_draft_mr(self,method):
 		ws_field = "workflow_states"
 
 	for row in self.items:
-		if row.get(field_name):
+		if row.get(field_name) and self.is_new():
 			if retur == 0:
 				sisa = frappe.db.sql(""" 
 					SELECT IFNULL(doc_sumber.`qty`-IFNULL(SUM(IFNULL(doc_patokan.qty,0)),0),0), doc_patokan.item_code,GROUP_CONCAT(doc_patokan.parent), IFNULL(SUM(IFNULL(doc_patokan.qty,0)),0)
@@ -221,16 +221,14 @@ def check_draft_mr(self,method):
 					JOIN `tab{} Item` doc_sumber ON doc_sumber.name = doc_patokan.{}
 					JOIN `tab{}` doc_parent ON doc_parent.name = doc_patokan.parent
 					WHERE doc_patokan.{} = "{}"
-					AND doc_patokan.`docstatus` < 2 and (doc_parent.{} != "Rejected" or doc_parent.{} IS NULL
-					AND doc_patokan.name != "{}" ) """.format(doctype,pas_doctype,field_name,doctype,field_name,row.get(field_name),ws_field,ws_field,self.name),debug=1)
+					AND doc_patokan.`docstatus` < 2 and (doc_parent.{} != "Rejected" or doc_parent.{} IS NULL) """.format(doctype,pas_doctype,field_name,doctype,field_name,row.get(field_name),ws_field,ws_field))
 
 				if len(sisa) > 0:
 					terpakai = frappe.utils.flt(sisa[0][0])
 					document = sisa[0][2]
 					doc_lain = sisa[0][3]
 					if row.qty > terpakai and document:
-						frappe.throw(""" Item {} in row {} has been used in next document {} {} with qty {}. Please check again. 
-							""".format(row.item_code,row.idx, self.doctype, document, doc_lain))
+						frappe.throw(""" Item {} in row {} has been used in next document {} {} with qty {}. Please check again. """.format(row.item_code,row.idx, self.doctype, document, doc_lain))
 			elif retur == 1:
 				sisa = frappe.db.sql(""" 
 					SELECT IFNULL(doc_sumber.`qty`+ SUM(doc_patokan.qty),0), doc_patokan.item_code,GROUP_CONCAT(doc_patokan.parent), SUM(doc_patokan.qty)
@@ -238,10 +236,7 @@ def check_draft_mr(self,method):
 					JOIN `tab{} Item` doc_sumber ON doc_sumber.name = doc_patokan.{}
 					JOIN `tab{}` doc_parent ON doc_parent.name = doc_patokan.parent
 					WHERE doc_patokan.{} = "{}"
-					AND doc_patokan.`docstatus` < 2 and (doc_parent.{} != "Rejected" or doc_parent.{} IS NULL) 
-					AND doc_patokan.name != "{}"
-
-					""".format(doctype,pas_doctype,field_name,doctype,field_name,row.get(field_name),ws_field,ws_field,self.name))
+					AND doc_patokan.`docstatus` < 2 and (doc_parent.{} != "Rejected" or doc_parent.{} IS NULL) """.format(doctype,pas_doctype,field_name,doctype,field_name,row.get(field_name),ws_field,ws_field))
 
 				if len(sisa) > 0:
 					terpakai = frappe.utils.flt(sisa[0][0])
