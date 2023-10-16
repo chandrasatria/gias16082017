@@ -25,6 +25,7 @@ import time
 
 from os import listdir
 from os.path import isfile, join
+from datetime import datetime
 
 from erpnext.accounts.doctype.sales_invoice.sales_invoice import (
 	check_if_return_invoice_linked_with_payment_entry,
@@ -917,7 +918,7 @@ def coba_benerin_material_request():
 		now = datetime.now()
 		print(now)
 		return
-	from datetime import datetime
+	
 	# datetime object containing current date and time
 	
 	list_pull_node = frappe.db.sql("""
