@@ -909,6 +909,10 @@ def lakukan_pull_node():
 
 @frappe.whitelist()
 def coba_benerin_material_request():
+	url = get_url()
+	print(str(url))
+	if str(url) == "erp-pusat.gias.co.id":
+		return
 	from datetime import datetime
 	# datetime object containing current date and time
 	
