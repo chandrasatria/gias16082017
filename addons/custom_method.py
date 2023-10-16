@@ -911,8 +911,32 @@ def lakukan_pull_node():
 def coba_benerin_material_request():
 	from datetime import datetime
 	# datetime object containing current date and time
-	now = datetime.now()
-	print("now =", now)
+	
+	list_pull_node = frappe.db.sql("""
+		SELECT *
+		FROM `tabEvent Update Log` eul
+		JOIN `tabMaterial Request` tmr
+		ON tmr.name = eul.`docname`
+		WHERE tmr.name NOT IN
+		(
+		SELECT NAME FROM `db_pusat`.`tabMaterial Request`
+		)
+		AND tmr.`docstatus` = 0
+		AND tmr.`workflow_state`
+		IN
+		(
+		 "Waiting PA GM Sales","Waiting Product Specialist","Waiting Deputy GM Branch","Waiting Personal Assistant","Waiting Proc Non Inv Staff","Waiting Proc Inv Staff","Waiting Cust. Service Delivery Staff","Waiting Warehouse Staff","Waiting Finance JKT Comision","Waiting GA Admin","Waiting GA Staff"
+		)
+		AND tmr.`material_request`
+		IN
+		("Purchase","Material Transfer")
+		AND doc.blkp_is_not_null == 0
+		ORDER BY eul.`creation`
+	""")
+	for row in list_pull_node:
+		now = datetime.now()
+		print(now)
+
 			
 @frappe.whitelist()
 def lakukan_pull_node_pusat():
