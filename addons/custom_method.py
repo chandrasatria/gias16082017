@@ -906,6 +906,13 @@ def lakukan_pull_node():
 			os.system(command)
 			print(row[0])
 			frappe.db.commit()
+
+@frappe.whitelist()
+def coba_benerin_material_request():
+	from datetime import datetime
+	# datetime object containing current date and time
+	now = datetime.now()
+	print("now =", now)
 			
 @frappe.whitelist()
 def lakukan_pull_node_pusat():
