@@ -913,6 +913,10 @@ def coba_benerin_material_request():
 	print(str(url))
 	if str(url) == "erp-pusat.gias.co.id":
 		return
+	else:
+		now = datetime.now()
+		print(now)
+		return
 	from datetime import datetime
 	# datetime object containing current date and time
 	
