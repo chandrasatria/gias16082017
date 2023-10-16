@@ -947,7 +947,8 @@ def coba_benerin_material_request():
 		print(now)
 	frappe.db.commit()
 
-	lakukan_pull_node()
+	command = """ cd /home/frappe/frappe-bench/ && bench --site erp-pusat.gias.co.id execute addons.custom_method.lakukan_pull_node_debug """
+	os.system(command)
 
 			
 @frappe.whitelist()
