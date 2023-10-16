@@ -218,6 +218,7 @@ doc_events = {
 	# 	"validate": ["addons.custom_standard.custom_warehouse.check_dua_cabang","addons.custom_standard.custom_warehouse.check_transit_pusat"]
 	# },
 	"Journal Entry": {
+		"onload": "addons.custom_standard.custom_journal_entry.bersihin_from_return_dn",
 		"validate": ["addons.custom_standard.custom_journal_entry.cek_jedp","addons.custom_standard.custom_journal_entry.overwrite_validate","addons.custom_standard.custom_journal_entry.check_tax_naming"],
 		"autoname": "addons.custom_method.custom_autoname_document_je",
 		"before_cancel": ["addons.custom_standard.custom_journal_entry.before_cancel_remove_dn","addons.custom_standard.custom_journal_entry.before_cancel_check_rk_tools"],

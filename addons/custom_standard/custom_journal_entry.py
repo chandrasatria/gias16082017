@@ -23,6 +23,14 @@ from erpnext.accounts.utils import (
 from addons.custom_method import check_list_company_gias
 
 @frappe.whitelist()
+def bersihin_from_return_dn(self,method):
+	if self.docstatus == 0 and not self.is_new() and self.from_return_dn:
+		dn_doc = frappe.get_doc("Delivery Note",self.from_return_dn)
+		if dn_doc.docstatus == 2:
+			self.from_return_dn = ""
+			self.db_update()
+
+@frappe.whitelist()
 def cek_jedp(self,method):
 	for row in self.accounts:
 		if row.reference_type == "Journal Entry" and "JEDP" in row.reference_name:
