@@ -935,6 +935,7 @@ def coba_benerin_material_request():
 	""")
 	for row in list_pull_node:
 		now = datetime.now()
+		time.sleep(1)
 		print(now)
 
 			
