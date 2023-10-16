@@ -947,7 +947,7 @@ def coba_benerin_material_request():
 		print(now)
 	frappe.db.commit()
 
-	command = """ cd /home/frappe/frappe-bench/ && bench --site erp-pusat.gias.co.id execute addons.custom_method.lakukan_pull_node_debug """
+	command = """ cd /home/frappe/frappe-bench/ && bench --site erp-pusat.gias.co.id execute addons.custom_method.lakukan_pull_node """
 	os.system(command)
 
 			
