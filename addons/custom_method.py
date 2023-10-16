@@ -930,7 +930,7 @@ def coba_benerin_material_request():
 		AND tmr.`material_request`
 		IN
 		("Purchase","Material Transfer")
-		AND doc.blkp_is_not_null == 0
+		AND tmr.`blkp_is_not_null`== 0
 		ORDER BY eul.`creation`
 	""")
 	for row in list_pull_node:
