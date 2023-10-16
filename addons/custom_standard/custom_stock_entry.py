@@ -2333,7 +2333,7 @@ def create_ste_resolve_debug():
 					ste_baru["dari_list_company"] = self.sumber_branch
 					ste_baru["sync_name"] = self.nama_dokumen
 					ste_baru["letter_head"] = ""
-					
+					ste_baru["deleted_items"] = []
 
 					for row in ste_baru["items"]:
 						if self.tipe_ste == "Material Receipt":
