@@ -182,14 +182,10 @@ def patch_doctype():
 @frappe.whitelist()
 def start_repair():
     list_document = frappe.db.sql(""" 
-        SELECT sle.voucher_type,sle.`voucher_no`, pri.`valuation_rate`, sle.actual_qty
+        SELECT sle.voucher_type,sle.`voucher_no`
         FROM `tabStock Ledger Entry` sle
-        JOIN `tabPurchase Receipt Item` pri 
-        ON sle.`voucher_detail_no` = pri.name
-        WHERE incoming_rate = 0
-        AND actual_qty > 0
-        AND pri.`valuation_rate` != 0
-        AND sle.is_cancelled = 0
+       
+        WHERE sle.posting_date = "2022-05-19" and sle.is_cancelled = 0
         GROUP BY sle.`voucher_no` 
         ORDER BY sle.`posting_date`
 
