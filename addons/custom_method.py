@@ -914,10 +914,6 @@ def coba_benerin_material_request():
 	print(str(url))
 	if str(url) == "erp-pusat.gias.co.id":
 		return
-	else:
-		now = datetime.now()+timedelta(hours=3)
-		print(now)
-		return
 	
 	# datetime object containing current date and time
 	
@@ -943,7 +939,7 @@ def coba_benerin_material_request():
 		ORDER BY eul.`creation`
 	""")
 	for row in list_pull_node:
-		now = datetime.now()+timedelta(hours=3)
+		now = datetime.now()+timedelta(hours=7)
 		doc = frappe.get_doc("Event Update Log", row[0])
 		doc.creation = now
 		doc.db_update()
