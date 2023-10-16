@@ -997,9 +997,9 @@ def lakukan_pull_node_debug_pusat():
 	print(str(url))
 	if str(url) != "erp-pusat.gias.co.id":
 		return 
-	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name LIKE "%pwt%" """)
+	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` """)
 	for row in list_event_producer:
-		command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.custom_standard.custom_stock_entry.debug_pusat_custom_pull_from_node --args "{{'{1}'}}" """.format(url,row[0])
+		command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.custom_standard.custom_stock_entry.custom_pull_from_node_pusat --args "{{'{1}'}}" """.format(url,row[0])
 		os.system(command)
 		print(row[0])
 

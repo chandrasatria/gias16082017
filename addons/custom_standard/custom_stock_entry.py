@@ -862,7 +862,16 @@ def custom_pull_from_node_pusat(event_producer):
 						if row["attachment"] != "":
 							if "https" not in row["attachment"] and "Material Request" in row["parenttype"]:
 								row["attachment"] = str(event_producer.name) + str(row["attachment"])
-							
+			
+			if "added" in update.data:
+				if "attachment" in update.data["added"]:
+					for row in update.data["added"] :
+						if "attachment" in row:
+							for row2 in update.data["added"][row]:
+								if row2["attachment"] != "":
+									if "https" not in row2["attachment"] and "Material Request" in row2["parenttype"]:
+										row2["attachment"] = str(event_producer.name) + str(row2["attachment"])
+										print(row2["attachment"])
 
 			# if "changed" in update.data and update.data["doctype"] != "Material Request":
 			# 	if "attachment" in update.data["changed"]:
@@ -1085,6 +1094,16 @@ def debug_pusat_custom_pull_from_node(event_producer, debug=True):
 						if row["attachment"] != "":
 							if "https" not in row["attachment"]:
 								row["attachment"] = str(event_producer.name) + str(row["attachment"])
+
+			if "added" in update.data:
+				if "attachment" in update.data["added"]:
+					for row in update.data["added"] :
+						if "attachment" in row:
+							for row2 in update.data["added"][row]:
+								if row2["attachment"] != "":
+									if "https" not in row2["attachment"] and "Material Request" in row2["parenttype"]:
+										row2["attachment"] = str(event_producer.name) + str(row2["attachment"])
+										print(row2["attachment"])
 							
 
 			# if "changed" in update.data and update.data["doctype"] != "Material Request":
