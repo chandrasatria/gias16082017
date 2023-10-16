@@ -917,7 +917,7 @@ def coba_benerin_material_request():
 	# datetime object containing current date and time
 	
 	list_pull_node = frappe.db.sql("""
-		SELECT name
+		SELECT eul.name
 		FROM `tabEvent Update Log` eul
 		JOIN `tabMaterial Request` tmr
 		ON tmr.name = eul.`docname`
