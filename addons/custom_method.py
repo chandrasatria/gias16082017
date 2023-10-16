@@ -927,10 +927,10 @@ def coba_benerin_material_request():
 		(
 		 "Waiting PA GM Sales","Waiting Product Specialist","Waiting Deputy GM Branch","Waiting Personal Assistant","Waiting Proc Non Inv Staff","Waiting Proc Inv Staff","Waiting Cust. Service Delivery Staff","Waiting Warehouse Staff","Waiting Finance JKT Comision","Waiting GA Admin","Waiting GA Staff"
 		)
-		AND tmr.`material_request`
+		AND tmr.`material_request_type`
 		IN
 		("Purchase","Material Transfer")
-		AND tmr.`blkp_is_not_null`== 0
+		AND tmr.`blkp_is_not_null` = 0
 		ORDER BY eul.`creation`
 	""")
 	for row in list_pull_node:
