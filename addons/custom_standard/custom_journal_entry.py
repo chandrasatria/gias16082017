@@ -29,6 +29,7 @@ def bersihin_from_return_dn(self,method):
 		if dn_doc.docstatus == 2:
 			self.from_return_dn = ""
 			self.db_update()
+			frappe.db.commit()
 
 @frappe.whitelist()
 def cek_jedp(self,method):
