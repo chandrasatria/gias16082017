@@ -926,7 +926,12 @@ def coba_benerin_material_request():
 		(
 		SELECT NAME FROM `db_pusat`.`tabMaterial Request`
 		)
-		AND tmr.name = "MR-TSK-1-23-10-00004"
+		AND tmr.`docstatus` = 0
+		AND tmr.`workflow_state`
+		IN
+		(
+		 "Waiting PA GM Sales","Waiting Product Specialist","Waiting Deputy GM Branch","Waiting Personal Assistant","Waiting Proc Non Inv Staff","Waiting Proc Inv Staff","Waiting Cust. Service Delivery Staff","Waiting Warehouse Staff","Waiting Finance JKT Comision","Waiting GA Admin","Waiting GA Staff"
+		)
 		AND tmr.`material_request_type`
 		IN
 		("Purchase","Material Transfer")
@@ -942,7 +947,7 @@ def coba_benerin_material_request():
 		print(now)
 	frappe.db.commit()
 
-	command = """ cd /home/frappe/frappe-bench/ && bench --site erp-pusat.gias.co.id execute addons.custom_method.lakukan_pull_node """
+	command = """ cd /home/frappe/frappe-bench/ && bench --site erp-pusat.gias.co.id execute addons.custom_method.custom_pull_from_node --args "{'https://erp-bjm.gias.co.id'}" """
 	os.system(command)
 
 			
@@ -951,9 +956,9 @@ def lakukan_pull_node_pusat():
 	url = get_url()
 	print(str(url))
 	# list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name NOT IN ("https://erp-tbpku.gias.co.id","https://erp-tju.gias.co.id","https://erp-tjp.gias.co.id") """)
-	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name  IN ("https://erp-tsk.gias.co.id") """)
+	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name  IN ("https://erp-bjm.gias.co.id") """)
 	for row in list_event_producer:
-		command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.custom_standard.custom_stock_entry.custom_pull_from_node_pusat --args "{{'{1}'}}" """.format(url,row[0])
+		command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.custom_standard.custom_stock_entry.custom_pull_from_node --args "{{'{1}'}}" """.format(url,row[0])
 		os.system(command)
 		print(row[0])
 
@@ -992,7 +997,7 @@ def lakukan_pull_node_debug_pusat():
 	print(str(url))
 	if str(url) != "erp-pusat.gias.co.id":
 		return 
-	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name LIKE "%tsk%" """)
+	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name LIKE "%bjm%" """)
 	for row in list_event_producer:
 		command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.custom_standard.custom_stock_entry.debug_pusat_custom_pull_from_node --args "{{'{1}'}}" """.format(url,row[0])
 		os.system(command)
