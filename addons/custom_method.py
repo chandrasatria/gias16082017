@@ -1109,7 +1109,7 @@ def update_custom_field():
 		doc = frappe.get_doc("DocType","Stock Entry")
 		for row in doc.fields:
 			if row.fieldname in ["to_warehouse","items","target_warehouse_address"]:
-				row.read_only_depends_on = 'eval:doc.sync_name && doc.stock_entry_type == "Material Receipt"'
+				row.read_only_depends_on = ''
 				print(1)
 		doc.save()
 
