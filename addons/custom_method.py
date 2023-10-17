@@ -948,7 +948,7 @@ def coba_benerin_material_request(site):
 		print(now)
 	frappe.db.commit()
 
-	command = """ cd /home/frappe/frappe-bench/ && bench --site erp-pusat.gias.co.id execute addons.custom_standard.custom_stock_entry.custom_pull_from_node --args "{'https://erp-{}.gias.co.id'}" """.format(site)
+	command = """ cd /home/frappe/frappe-bench/ && bench --site erp-pusat.gias.co.id execute addons.custom_standard.custom_stock_entry.custom_pull_from_node --args "{{'https://erp-{}.gias.co.id'}}" """.format(site)
 	os.system(command)
 
 			
