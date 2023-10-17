@@ -1101,9 +1101,16 @@ def update_print_format():
 
 @frappe.whitelist()
 def update_custom_field():
-	
-	item_doc = frappe.get_doc({"__islocal":1,"name":"addons.patch_ste.patch_sle","owner":"Administrator","creation":"2022-03-26 01:02:27.581653","modified":"2023-09-11 10:37:00.904996","modified_by":"Administrator","idx":63,"docstatus":0,"stopped":0,"method":"addons.patch_ste.patch_sle","frequency":"Cron","cron_format":"0/5 * * * *","last_execution":"2023-09-22 12:02:27.705469","create_log":0,"doctype":"Scheduled Job Type","__last_sync_on":"2023-10-09T05:32:53.854Z"})
-	item_doc.save()
+	company_doc = frappe.get_doc("Company", "GIAS")
+	if company_doc.server == "Pusat":
+		return
+	else:
+		doc = frappe.get_doc("DocType","Stock Entry")
+		for row in doc.fields:
+			if row.fieldname in ["to_warehouse","items","target_warehouse_address"]:
+				row.read_only_depends_on = 'eval:doc.sync_name && doc.stock_entry_type == "Material Receipt"'
+				print(1)
+		doc.save()
 
 
 @frappe.whitelist()
