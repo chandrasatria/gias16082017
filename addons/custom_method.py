@@ -926,12 +926,7 @@ def coba_benerin_material_request():
 		(
 		SELECT NAME FROM `db_pusat`.`tabMaterial Request`
 		)
-		AND tmr.`docstatus` = 0
-		AND tmr.`workflow_state`
-		IN
-		(
-		 "Waiting PA GM Sales","Waiting Product Specialist","Waiting Deputy GM Branch","Waiting Personal Assistant","Waiting Proc Non Inv Staff","Waiting Proc Inv Staff","Waiting Cust. Service Delivery Staff","Waiting Warehouse Staff","Waiting Finance JKT Comision","Waiting GA Admin","Waiting GA Staff"
-		)
+		AND tmr.name = "MR-TSK-1-23-10-00004"
 		AND tmr.`material_request_type`
 		IN
 		("Purchase","Material Transfer")
