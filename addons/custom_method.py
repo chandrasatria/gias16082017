@@ -909,7 +909,7 @@ def lakukan_pull_node():
 			frappe.db.commit()
 
 @frappe.whitelist()
-def coba_benerin_material_request():
+def coba_benerin_material_request(site):
 	url = get_url()
 	print(str(url))
 	if str(url) == "erp-pusat.gias.co.id":
@@ -947,7 +947,7 @@ def coba_benerin_material_request():
 		print(now)
 	frappe.db.commit()
 
-	command = """ cd /home/frappe/frappe-bench/ && bench --site erp-pusat.gias.co.id execute addons.custom_standard.custom_stock_entry.custom_pull_from_node --args "{'https://erp-bkl.gias.co.id'}" """
+	command = """ cd /home/frappe/frappe-bench/ && bench --site erp-pusat.gias.co.id execute addons.custom_standard.custom_stock_entry.custom_pull_from_node --args "{'https://erp-{}.gias.co.id'}" """.format(site)
 	os.system(command)
 
 			
