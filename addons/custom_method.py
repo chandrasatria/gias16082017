@@ -911,6 +911,7 @@ def lakukan_pull_node():
 @frappe.whitelist()
 def coba_benerin_material_request(site):
 	url = get_url()
+	print(str(site))
 	print(str(url))
 	if str(url) == "erp-pusat.gias.co.id":
 		return
