@@ -614,6 +614,10 @@ def custom_pull_from_node(event_producer):
 		if not update.update_type == 'Delete':
 			update.data = json.loads(update.data)
 
+			if "blkp_is_not_null" in update.data:
+				if update.data["blkp_is_not_null"] == 1:
+					continue
+
 			if "letter_head" in update.data:
 				if update.data["letter_head"] != "":
 					update.data["letter_head"] = ""
