@@ -368,6 +368,7 @@ def isi_ste_log():
         AND docstatus = 1
         AND ste_log IS NOT NULL
         AND sync_name IS NULL
+        AND transfer_ke_cabang_mana NOT IN ("TRIBUANA BUMIPUSAKA","GIAS TANJUNG UNCANG","GIAS TANJUNG PINANG")
     """)
     for row in list_ste:
         ste = frappe.get_doc("Stock Entry",row[0])
