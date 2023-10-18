@@ -372,7 +372,7 @@ def isi_ste_log():
         ste_log = ste.ste_log
 
         from addons.custom_method import check_list_company_gias
-        event_producer = check_list_company_gias(ste_log.transfer_ke_cabang_mana)
+        event_producer = check_list_company_gias(ste.transfer_ke_cabang_mana)
         nama_db = event_producer.replace("erp-","db_").replace(".gias.co.id","")
         if nama_db == "db_pal":
             nama_db = "db_palu"
