@@ -384,6 +384,7 @@ def isi_ste_log():
         if check_ste:
             if check_ste[0][0]:
                 ste.sync_name = check_ste[0][0]
+                ste.db_update()
                 print(ste.sync_name)
                 frappe.db.commit()
 
