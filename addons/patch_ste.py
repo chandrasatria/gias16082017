@@ -382,7 +382,7 @@ def isi_ste_log():
         if nama_db == "db_pal":
             nama_db = "db_palu"
 
-        check_ste = frappe.db.sql(""" SELECT name FROM `{}`.`tabStock Entry` WHERE ste_log = "{}" and docstatus = 1 and stock_entry_type = "Material Receipt" """.format(nama_db,ste_log),debug=1)
+        check_ste = frappe.db.sql(""" SELECT name FROM `{}`.`tabStock Entry` WHERE ste_log = "{}" and docstatus < 2 and stock_entry_type = "Material Receipt" """.format(nama_db,ste_log),debug=1)
         if check_ste:
             if check_ste[0][0]:
                 ste.sync_name = check_ste[0][0]
