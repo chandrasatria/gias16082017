@@ -368,7 +368,6 @@ def isi_ste_log():
         AND docstatus = 1
         AND ste_log IS NOT NULL
         AND sync_name IS NULL
-        AND name = "STEI-HO-1-23-01-01609"
         AND transfer_ke_cabang_mana NOT IN ("TRIBUANA BUMIPUSAKA","GIAS TANJUNG UNCANG","GIAS TANJUNG PINANG")
     """)
     for row in list_ste:
