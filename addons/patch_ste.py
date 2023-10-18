@@ -359,13 +359,15 @@ def cancel_je_auto_repeat():
 @frappe.whitelist()
 def isi_ste_log():
     list_ste = frappe.db.sql(""" 
-        SELECT NAME,ste_log,old_name FROM `tabStock Entry` 
+        SELECT NAME,ste_log, `transfer_ke_cabang_mana`
+        FROM `tabStock Entry` 
         WHERE purpose = "Material Issue"
         AND sync_name IS NULL
         AND transfer_ke_cabang_pusat =1
         AND transfer_ke_cabang_mana IS NOT NULL
         AND docstatus = 1
-        AND ste_log IS NULL
+        AND ste_log IS NOT NULL
+        AND sync_name IS NULL
     """)
     for row in list_ste:
         ste = frappe.get_doc("Stock Entry",row[0])
