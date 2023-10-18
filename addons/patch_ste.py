@@ -369,11 +369,18 @@ def isi_ste_log():
     """)
     for row in list_ste:
         ste = frappe.get_doc("Stock Entry",row[0])
-        try:
-            nyari_ste_log = frappe.get_doc("STE Log",{'nama_dokumen':row[2]}).name
-            ste.ste_log = nyari_ste_log
-            ste.db_update()
-            frappe.db.commit()
-        except:
-            print("{} no found".format(row[2]))
-        
+        ste_log = ste.ste_log
+
+        from addons.custom_method import check_list_company_gias
+        event_producer = check_list_company_gias(ste_log.transfer_ke_cabang_mana)
+        nama_db = event_producer.replace("erp-","db_").replace(".gias.co.id","")
+        if nama_db == "db_pal":
+            nama_db = "db_palu"
+
+        check_ste = frappe.db.sql(""" SELECT name FROM `{}`.`tabStock Entry` WHERE ste_log = "{}" and docstatus = 1 and stock_entry_type = "Material Receipt" """.format(nama_db,ste_log))
+        if check_ste:
+            if check_ste[0][0]:
+                ste.sync_name = check_ste[0][0]
+                print(ste.sync_name)
+                frappe.db.commit()
+
