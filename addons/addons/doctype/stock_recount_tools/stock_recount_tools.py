@@ -1161,7 +1161,6 @@ def debug_start_stock_recount_stei_by_name(nama_db):
 
 		GROUP BY sted2.parent
 		HAVING ste1.`stock_entry_type` = "Material Receipt"
-		AND DATE(ste2.`posting_date`) > "2022-11-30"
 		ORDER BY ste2.posting_date
 		
 	""".format(nama_db),debug=1)
