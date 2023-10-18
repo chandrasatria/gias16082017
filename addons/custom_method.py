@@ -1343,7 +1343,7 @@ def update_material_request():
 @frappe.whitelist()
 def update_event_producer():
 	company_doc = frappe.get_doc("Company", "GIAS")
-	if company_doc.server != "Pusat":
+	if company_doc.server == "Pusat":
 
 		list_ep = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` """)
 		for row in list_ep:
@@ -1351,7 +1351,7 @@ def update_event_producer():
 			print(row[0])
 			for row_doctype in ep.producer_doctypes:
 				if row_doctype.ref_doctype == "Material Request":
-					row_doctype.condition = row_doctype.condition.replace('doc.workflow_state == "Waiting GM Cabang" or','doc.workflow_state == "Cancelled" or doc.workflow_state == "Waiting GM Cabang" or')
+					row_doctype.condition = row_doctype.condition.replace('doc.blkp_is_not_null == 0','(doc.blkp_is_not_null == 0 or doc.barang_foil == 1)')
 
 			ep.save()
 
