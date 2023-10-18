@@ -637,6 +637,8 @@ def check_list_company_gias(list_company_gias):
 		site = "erp-mnd.gias.co.id"
 	elif list_company_gias == "GIAS PALU":
 		site = "erp-pal.gias.co.id"
+	elif list_company_gias == "GIAS BUNGO":
+		site = "erp-mrb.gias.co.id"
 	elif list_company_gias == "GIAS PEKANBARU":
 		site = "erp-pku.gias.co.id"
 	elif list_company_gias == "GIAS PALEMBANG":
