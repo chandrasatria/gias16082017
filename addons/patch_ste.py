@@ -368,11 +368,13 @@ def isi_ste_log():
         AND docstatus = 1
         AND ste_log IS NOT NULL
         AND sync_name IS NULL
+        AND name = "STEI-HO-1-23-01-01609"
         AND transfer_ke_cabang_mana NOT IN ("TRIBUANA BUMIPUSAKA","GIAS TANJUNG UNCANG","GIAS TANJUNG PINANG")
     """)
     for row in list_ste:
         ste = frappe.get_doc("Stock Entry",row[0])
         ste_log = ste.ste_log
+        print(ste_log)
 
         from addons.custom_method import check_list_company_gias
         event_producer = check_list_company_gias(ste.transfer_ke_cabang_mana)
@@ -380,7 +382,7 @@ def isi_ste_log():
         if nama_db == "db_pal":
             nama_db = "db_palu"
 
-        check_ste = frappe.db.sql(""" SELECT name FROM `{}`.`tabStock Entry` WHERE ste_log = "{}" and docstatus = 1 and stock_entry_type = "Material Receipt" """.format(nama_db,ste_log))
+        check_ste = frappe.db.sql(""" SELECT name FROM `{}`.`tabStock Entry` WHERE ste_log = "{}" and docstatus = 1 and stock_entry_type = "Material Receipt" """.format(nama_db,ste_log),debug=1)
         if check_ste:
             if check_ste[0][0]:
                 ste.sync_name = check_ste[0][0]
