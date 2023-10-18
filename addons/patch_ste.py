@@ -369,5 +369,11 @@ def isi_ste_log():
     """)
     for row in list_ste:
         ste = frappe.get_doc("Stock Entry",row[0])
-        nyari_ste_log = frappe.get_doc("STE Log",{'nama_dokumen':row[0]}).name
-        print(nyari_ste_log)
+        try:
+            nyari_ste_log = frappe.get_doc("STE Log",{'nama_dokumen':row[0]}).name
+            ste.ste_log = nyari_ste_log
+            ste.db_update()
+            frappe.db.commit()
+        except:
+            print("{} no found".format(row[0]))
+        
