@@ -316,6 +316,7 @@ def custom_set_status_onload(self, method):
 
 		self.status = status
 		self.db_update()
+		frappe.db.commit()
 
 def custom_set_status(self, update=False):
 	status = {
