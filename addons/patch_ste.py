@@ -127,9 +127,7 @@ def patch_ste_rk():
     list_ste = frappe.db.sql(""" 
        SELECT NAME,docstatus
         FROM `tabStock Entry`
-        WHERE sync_name IS NOT NULL
-        AND auto_assign_to_rk_account = 0
-        AND docstatus = 1 """)
+        WHERE name = "STER-BJM-1-23-08-00031" """)
 
     for row_list in list_ste:
         # print(row_list[0])
