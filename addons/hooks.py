@@ -137,7 +137,7 @@ doc_events = {
 	},
 	"Sales Invoice": {
 		"onload": "addons.custom_standard.custom_sales_invoice.onload_sales_invoice",
-		"validate": ["addons.custom_standard.custom_global.check_draft_mr","addons.custom_standard.custom_sales_invoice.change_dn_date","addons.custom_standard.custom_global.check_tax_non_tax_by_document","addons.custom_standard.custom_global.calculate_total_prorate","addons.custom_standard.custom_tax_method.check_tax_from_sales_order_inv","addons.custom_standard.custom_sales_invoice.check_branch","addons.custom_standard.custom_global.set_discount_no_tax","addons.custom_standard.custom_sales_invoice.check_dn_date","addons.custom_standard.custom_sales_invoice.override_get_gl_entries","addons.custom_standard.custom_sales_invoice.assuming_customer","addons.custom_standard.custom_sales_invoice.get_auto_account_retur","addons.custom_standard.custom_sales_invoice.apply_hs_code","addons.custom_standard.custom_tax_method.check_tax_sales","addons.custom_standard.custom_sales_invoice.pure_calculate"],
+		"validate": ["addons.custom_standard.custom_sales_order.render_print_data","addons.custom_standard.custom_global.check_draft_mr","addons.custom_standard.custom_sales_invoice.change_dn_date","addons.custom_standard.custom_global.check_tax_non_tax_by_document","addons.custom_standard.custom_global.calculate_total_prorate","addons.custom_standard.custom_tax_method.check_tax_from_sales_order_inv","addons.custom_standard.custom_sales_invoice.check_branch","addons.custom_standard.custom_global.set_discount_no_tax","addons.custom_standard.custom_sales_invoice.check_dn_date","addons.custom_standard.custom_sales_invoice.override_get_gl_entries","addons.custom_standard.custom_sales_invoice.assuming_customer","addons.custom_standard.custom_sales_invoice.get_auto_account_retur","addons.custom_standard.custom_sales_invoice.apply_hs_code","addons.custom_standard.custom_tax_method.check_tax_sales","addons.custom_standard.custom_sales_invoice.pure_calculate"],
 		"before_submit": ["addons.custom_standard.custom_sales_invoice.validate_gl","addons.custom_standard.custom_sales_invoice.override_get_gl_entries","addons.custom_standard.custom_sales_invoice.update_asset","addons.custom_standard.custom_sales_invoice.pure_calculate"],
 		"before_cancel":"addons.custom_standard.custom_sales_invoice.update_asset_cancel",
 		"on_submit": ["addons.custom_standard.custom_sales_invoice.onload_sales_invoice","addons.custom_standard.view_ledger_create.create_view_ledger_sales_invoice"],
@@ -267,7 +267,8 @@ doc_events = {
 		"validate": ["addons.custom_standard.custom_global.check_tax_non_tax_by_document","addons.custom_standard.custom_delivery_note.check_tanggal","addons.custom_standard.custom_tax_method.check_tax_from_sales_order","addons.custom_standard.custom_tax_method.check_tax_sales","addons.custom_standard.custom_global.check_item_terbooking","addons.custom_standard.custom_delivery_note.pusat_check_so"],
 		"before_submit":"addons.custom_standard.custom_delivery_note.auto_je_retur",
 		"before_insert": ["addons.custom_standard.custom_global.check_item_terbooking","addons.custom_standard.custom_global.check_draft_mr"],
-		"autoname": "addons.custom_method.custom_autoname_document_je"
+		"autoname": "addons.custom_method.custom_autoname_document_je",
+		"validate":"addons.custom_standard.custom_sales_order.render_print_data"
 	},
 	"Stock Reconciliation":{
 		"validate": "addons.custom_standard.custom_tax_method.check_tax_sales",
