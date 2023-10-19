@@ -202,6 +202,8 @@ def start_repair():
         print(row[1])
         frappe.db.commit()
 
+    repost_stock()
+
 @frappe.whitelist()
 def repair_gl_entry(doctype,docname):
     docu = frappe.get_doc(doctype, docname) 
