@@ -183,7 +183,7 @@ def start_repair():
         SELECT sle.voucher_type,sle.`voucher_no`
         FROM `tabStock Ledger Entry` sle
        
-        WHERE sle.posting_date = "2023-02-03" and sle.is_cancelled = 0
+        WHERE sle.posting_date = "2023-03-01" and sle.is_cancelled = 0
         GROUP BY sle.`voucher_no` 
         ORDER BY sle.`posting_date`
 
@@ -202,7 +202,7 @@ def start_repair():
         print(row[1])
         frappe.db.commit()
 
-    repost_stock()
+    enqueue_repost_stock()
 
 @frappe.whitelist()
 def repair_gl_entry(doctype,docname):
