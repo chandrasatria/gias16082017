@@ -240,7 +240,7 @@ def repair_gl_entry_untuk_dn_debug():
     list_dn = frappe.db.sql(""" 
 
         SELECT name FROM `tabDelivery Note` 
-        WHERE posting_date = "2022-11-17"
+        WHERE posting_date = "2022-05-13"
         ORDER BY posting_date """)
     for row in list_dn:
         repair_gl_entry_untuk_dn("Delivery Note",row[0])
