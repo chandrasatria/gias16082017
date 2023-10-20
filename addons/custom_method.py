@@ -911,6 +911,10 @@ def lakukan_pull_node():
 			frappe.db.commit()
 
 @frappe.whitelist()
+def coba_benerin_material_request_debug():
+	coba_benerin_material_request("smd")
+
+@frappe.whitelist()
 def coba_benerin_material_request(site):
 	url = get_url()
 	print(str(site))
@@ -925,20 +929,20 @@ def coba_benerin_material_request(site):
 		FROM `tabEvent Update Log` eul
 		JOIN `tabMaterial Request` tmr
 		ON tmr.name = eul.`docname`
-		WHERE tmr.name NOT IN
+		WHERE tmr.name IN
 		(
-		SELECT NAME FROM `db_pusat`.`tabMaterial Request`
+			"MR-SMD-1-23-10-00160",
+			"MR-SMD-1-23-10-00169",
+			"MR-SMD-1-23-10-00165",
+			"MR-SMD-1-23-10-00136",
+			"MR-SMD-1-23-08-00181",
+			"MR-SMD-1-23-08-00180",
+			"MR-SMD-1-23-08-00179",
+			"MR-SMD-1-23-07-00187",
+			"MR-SMD-1-23-07-00186",
+			"MR-SMD-1-23-07-00197" 
 		)
-		AND tmr.`docstatus` = 0
-		AND tmr.`workflow_state`
-		IN
-		(
-		 "Waiting PA GM Sales","Waiting Product Specialist","Waiting Deputy GM Branch","Waiting Personal Assistant","Waiting Proc Non Inv Staff","Waiting Proc Inv Staff","Waiting Cust. Service Delivery Staff","Waiting Warehouse Staff","Waiting Finance JKT Comision","Waiting GA Admin","Waiting GA Staff"
-		)
-		AND tmr.`material_request_type`
-		IN
-		("Purchase","Material Transfer")
-		AND tmr.`blkp_is_not_null` = 0
+		
 		ORDER BY eul.`creation`
 	""")
 	for row in list_pull_node:
