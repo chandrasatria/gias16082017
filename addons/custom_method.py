@@ -963,7 +963,7 @@ def lakukan_pull_node_pusat():
 	url = get_url()
 	print(str(url))
 	# list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name NOT IN ("https://erp-tbpku.gias.co.id","https://erp-tju.gias.co.id","https://erp-tjp.gias.co.id") """)
-	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name  IN ("https://erp-bjm.gias.co.id") """)
+	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name  IN ("https://erp-smd.gias.co.id") """)
 	for row in list_event_producer:
 		command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.custom_standard.custom_stock_entry.custom_pull_from_node --args "{{'{1}'}}" """.format(url,row[0])
 		os.system(command)
