@@ -299,13 +299,7 @@ def repair_gl_entry_untuk_ste_debug_4():
 def repair_gl_entry_untuk_ste_debug():
     list_dn = frappe.db.sql(""" 
 
-       SELECT ste.name,sle.account,sle.debit,sle.credit FROM `tabStock Entry` ste
-        JOIN `tabGL Entry` sle
-        ON sle.voucher_no = ste.`name`
-        WHERE ste.`sync_name` IS NOT NULL
-        AND sle.account LIKE "%biaya lain-lain%"
-        AND ste.docstatus = 1
-        AND (debit > 1 OR credit > 1)
+       SELECT "STER-BDG-1-23-09-00032"
          """)
     for row in list_dn:
         repair_gl_entry_untuk_ste("Stock Entry",row[0])
