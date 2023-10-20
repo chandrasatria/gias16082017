@@ -347,6 +347,12 @@ def repair_gl_entry_untuk_ste(doctype,docname):
 	doc.auto_assign_to_rk_account = 1
 	doc.db_update()
 	company_doc = frappe.get_doc("Company",doc.company)
+
+	custom_distribute_additional_costs(doc)
+	for row in doc.items:
+		row.additional_cost_transfer = row.additional_cost
+		row.valuation_rate_transfer = row.valuation_rate
+		row.db_update()
 		
 	if company_doc.server == "Cabang":
 		if doc.sync_name:
