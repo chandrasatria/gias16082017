@@ -359,16 +359,13 @@ def cancel_je_auto_repeat():
 @frappe.whitelist()
 def isi_ste_log():
     list_ste = frappe.db.sql(""" 
-        SELECT NAME,ste_log, `transfer_ke_cabang_mana`
-        FROM `tabStock Entry` 
-        WHERE purpose = "Material Issue"
-        AND sync_name IS NULL
-        AND transfer_ke_cabang_pusat =1
-        AND transfer_ke_cabang_mana IS NOT NULL
-        AND docstatus = 1
+        SELECT NAME,docstatus,sync_name, transfer_ke_cabang_mana
+        FROM `tabStock Entry`
+        WHERE sync_name IS NOT NULL
+        AND transfer_status="On The Way"
+        AND purpose = "Material Issue"
         AND ste_log IS NOT NULL
-        AND sync_name IS NULL
-        AND transfer_ke_cabang_mana NOT IN ("TRIBUANA BUMIPUSAKA","GIAS TANJUNG UNCANG","GIAS TANJUNG PINANG")
+        AND transfer_ke_cabang_mana NOT IN ("TRIBUANA BUMIPUSAKA","GIAS TANJUNG UNCANG","GIAS TANJUNG PINANG");
     """)
     for row in list_ste:
         ste = frappe.get_doc("Stock Entry",row[0])
@@ -381,11 +378,12 @@ def isi_ste_log():
         if nama_db == "db_pal":
             nama_db = "db_palu"
 
-        check_ste = frappe.db.sql(""" SELECT name FROM `{}`.`tabStock Entry` WHERE ste_log = "{}" and docstatus < 2 and stock_entry_type = "Material Receipt" """.format(nama_db,ste_log),debug=1)
+        check_ste = frappe.db.sql(""" SELECT name,docstatus FROM `{}`.`tabStock Entry` WHERE ste_log = "{}" and docstatus < 2 and stock_entry_type = "Material Receipt" """.format(nama_db,ste_log),debug=1)
         if check_ste:
             if check_ste[0][0]:
-                ste.sync_name = check_ste[0][0]
-                ste.db_update()
-                print(ste.sync_name)
-                frappe.db.commit()
+                if check_ste[0][1] == 0:
+                    ste.sync_name = check_ste[0][0]
+                    ste.db_update()
+                    print(check_ste[0][0])
+                    frappe.db.commit()
 
