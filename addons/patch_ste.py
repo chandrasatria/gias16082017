@@ -261,7 +261,7 @@ def repair_gl_entry_untuk_ste_debug_2():
 
     """)
     for row in list_dn:
-        patch_cost(row)
+        patch_cost(row[0])
     #     repair_gl_entry_untuk_ste("Stock Entry",row[0])
     #     frappe.db.commit()
 
