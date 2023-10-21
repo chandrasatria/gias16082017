@@ -1671,6 +1671,7 @@ def patch_cost(row):
 		row.db_update()
 
 	doc.set_total_incoming_outgoing_value()
+	print(doc.total_incoming_value)
 	doc.db_update()
 
 @frappe.whitelist()
