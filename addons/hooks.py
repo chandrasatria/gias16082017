@@ -133,7 +133,8 @@ doc_events = {
 	# 	"after_insert": "addons.patch_ste.patch_sle"
 	# },
 	"Stock Opname": {
-		"before_submit": "addons.addons.doctype.stock_opname.stock_opname.buat_ste"
+		"before_submit": "addons.addons.doctype.stock_opname.stock_opname.buat_ste",
+		"validate":"addons.custom_standard.custom_tax_method.check_tax_sales"
 	},
 	"Sales Invoice": {
 		"onload": "addons.custom_standard.custom_sales_invoice.onload_sales_invoice",
