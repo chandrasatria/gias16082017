@@ -257,17 +257,7 @@ def repair_gl_entry_untuk_ste_debug_2():
     list_dn = frappe.db.sql(""" 
 
         SELECT 
-        gle.voucher_no, gle.account, gle.debit, gle.credit 
-        FROM `tabGL Entry` gle 
-        JOIN `tabStock Entry` ste ON ste.name = gle.`voucher_no`
-        WHERE 
-        gle.voucher_no LIKE "%ster%"
-        AND ste.sync_name IS NOT NULL
-        AND gle.account LIKE "%biaya lain%"
-        AND (gle.debit > 10 OR gle.credit > 10)
-        AND gle.`is_cancelled` = 0
-        AND ste.`purpose` = "Material Receipt"
-        ORDER BY ste.posting_date
+        "STER-BDG-1-23-09-00032"
 
     """)
     for row in list_dn:
