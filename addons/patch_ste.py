@@ -77,7 +77,7 @@ def patch_bin():
 def patch_repack():
     list_ste = frappe.db.sql(""" 
         SELECT name FROM `tabStock Entry` ste
-        WHERE ste.name IN ("STERE-TBP-1-23-06-00030","STERE-TBP-1-23-06-00028","STERE-TBP-1-23-06-00039") """)
+        WHERE ste.name IN ("STERE-BDG-1-23-03-00001") """)
 
     for row in list_ste:
         ste_doc = frappe.get_doc("Stock Entry", row[0])
