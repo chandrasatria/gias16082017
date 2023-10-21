@@ -1668,8 +1668,10 @@ def patch_cost(row):
 	for row in doc.items:
 		row.additional_cost_transfer = row.additional_cost
 		row.valuation_rate_transfer = row.valuation_rate
+		row.valuation_rate = flt(flt(row.basic_rate) + (flt(row.additional_cost) / flt(row.transfer_qty)))
 		row.db_update()
 
+	doc.calculate_rate_and_amount()
 	doc.set_total_incoming_outgoing_value()
 	print(doc.total_incoming_value)
 	doc.db_update()
