@@ -1670,6 +1670,9 @@ def patch_cost(row):
 		row.valuation_rate_transfer = row.valuation_rate
 		row.db_update()
 
+	doc.set_total_incoming_outgoing_value()
+	doc.db_update()
+
 @frappe.whitelist()
 def patch_cost_stei(row):
 	doc = frappe.get_doc("Stock Entry",row)
