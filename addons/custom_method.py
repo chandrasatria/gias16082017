@@ -931,9 +931,7 @@ def coba_benerin_material_request(site):
 		ON tmr.name = eul.`docname`
 		WHERE tmr.name IN
 		(
-			"MR-TGL-1-23-10-00016",
-			"MR-SMD-1-23-10-00155",
-			"MR-SMD-1-23-10-00159"
+			"MR-SMD-1-23-10-00185"
 		)
 		
 		ORDER BY eul.`creation`
