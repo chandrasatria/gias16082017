@@ -931,16 +931,9 @@ def coba_benerin_material_request(site):
 		ON tmr.name = eul.`docname`
 		WHERE tmr.name IN
 		(
-			"MR-SMD-1-23-10-00160",
-			"MR-SMD-1-23-10-00169",
-			"MR-SMD-1-23-10-00165",
-			"MR-SMD-1-23-10-00136",
-			"MR-SMD-1-23-08-00181",
-			"MR-SMD-1-23-08-00180",
-			"MR-SMD-1-23-08-00179",
-			"MR-SMD-1-23-07-00187",
-			"MR-SMD-1-23-07-00186",
-			"MR-SMD-1-23-07-00197" 
+			"MR-TGL-1-23-10-00016",
+			"MR-SMD-1-23-10-00155",
+			"MR-SMD-1-23-10-00159"
 		)
 		
 		ORDER BY eul.`creation`
@@ -963,7 +956,7 @@ def lakukan_pull_node_pusat():
 	url = get_url()
 	print(str(url))
 	# list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name NOT IN ("https://erp-tbpku.gias.co.id","https://erp-tju.gias.co.id","https://erp-tjp.gias.co.id") """)
-	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name  IN ("https://erp-smd.gias.co.id") """)
+	list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name  IN ("https://erp-bjm.gias.co.id") """)
 	for row in list_event_producer:
 		command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.custom_standard.custom_stock_entry.custom_pull_from_node --args "{{'{1}'}}" """.format(url,row[0])
 		os.system(command)
