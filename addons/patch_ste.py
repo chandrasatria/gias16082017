@@ -312,7 +312,11 @@ def repair_gl_entry_untuk_pr_debug():
     list_dn = frappe.db.sql(""" 
 
         SELECT name FROM `tabPurchase Receipt` 
-        WHERE name = "PRI-HO-1-23-09-02551" """)
+        WHERE name IN 
+        ("PRI-HO-1-23-09-02547",
+        "PRI-HO-1-23-09-02548",
+        "PRI-HO-1-23-09-02550",
+        "PRI-HO-1-23-09-02551" """)
     for row in list_dn:
         repair_gl_entry_untuk_pr("Purchase Receipt",row[0])
         frappe.db.commit()
