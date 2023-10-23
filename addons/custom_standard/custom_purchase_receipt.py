@@ -146,6 +146,7 @@ def custom_get_gl_entries(self, warehouse_account=None):
 
 	custom_make_item_gl_entries(self, gl_entries, warehouse_account=warehouse_account)
 
+	frappe.throw(str(gl_entries))
 	self.make_tax_gl_entries(gl_entries)
 	self.get_asset_gl_entry(gl_entries)
 
