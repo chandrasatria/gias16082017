@@ -69,7 +69,7 @@ def get_prec(prec):
 	
 	query_item = frappe.db.sql(""" 
 		SELECT item_code,item_name,qty,stock_uom FROM `tabPurchase Receipt Item` 
-		WHERE parent = "{}" """.format(prec),as_dict=1)
+		WHERE parent = "{}" ORDER BY idx """.format(prec),as_dict=1)
 	
 	return query_item
 
