@@ -900,7 +900,8 @@ def lakukan_pull_node():
 	url = get_url()
 	print(str(url))
 	if str(url) != "erp-pusat.gias.co.id":
-		lakukan_pull_node_debug()
+		# lakukan_pull_node_debug()
+		lakukan_pull_node_debug_pusat_2()
 	else:
 		list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name NOT IN ("https://erp-tbpku.gias.co.id","https://erp-tju.gias.co.id","https://erp-tjp.gias.co.id") """)
 		# list_event_producer = frappe.db.sql(""" SELECT name FROM `tabEvent Producer` WHERE name  IN ("https://erp-pku.gias.co.id") """)
