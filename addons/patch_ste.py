@@ -129,8 +129,7 @@ def patch_repack_2():
         WHERE ste.`stock_entry_type`  = "Repack"
         AND gl.`account` LIKE "%HARGA POKOK%"
         AND gl.`is_cancelled` = 0 
-        AND ste.name = "STERE-BLI-22-03-00001"
-        """)
+    """)
 
     for row in list_ste:
         ste_doc = frappe.get_doc("Stock Entry", row[0])
@@ -173,6 +172,8 @@ def patch_repack_2():
     
         print(ste_doc.value_difference)
         repair_gl_entry_untuk_ste("Stock Entry",ste_doc.name)
+
+    repost_stock()
 
 @frappe.whitelist()
 def patch_ste_rk():
