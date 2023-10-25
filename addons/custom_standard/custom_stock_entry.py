@@ -1763,7 +1763,6 @@ def custom_distribute_additional_costs(self):
 				for d in self.get("items"):
 					if (self.purpose in ("Repack", "Manufacture") and d.is_finished_item) or d.t_warehouse:
 						d.additional_cost = (flt(d.basic_amount) / incoming_items_cost) * self.total_additional_costs
-						print(d.additional_cost)
 					else:
 						d.additional_cost = 0
 
