@@ -308,7 +308,7 @@ def repair_gl_entry_untuk_ste_debug_4():
 def repair_gl_entry_untuk_ste_debug():
     list_dn = frappe.db.sql(""" 
 
-       SELECT "STER-BLI-1-23-09-00010"
+       SELECT "STEI-HO-22-08-01616"
          """)
     for row in list_dn:
         repair_gl_entry_untuk_ste("Stock Entry",row[0])
