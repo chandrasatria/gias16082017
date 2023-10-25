@@ -4,7 +4,7 @@ import time
 import os
 from frappe.utils import flt, add_months, cint, nowdate, getdate, today, date_diff, month_diff, add_days, get_last_day, get_datetime
 from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
-from addons.custom_standard.custom_stock_entry import custom_distribute_additional_costs,repair_gl_entry_tanpa_sl,repair_gl_entry_untuk_ste,custom_distribute_additional_costs
+from addons.custom_standard.custom_stock_entry import custom_distribute_additional_costs,repair_gl_entry_tanpa_sl,repair_gl_entry_untuk_ste,patch_cost
 from addons.custom_standard.custom_purchase_receipt import repair_gl_entry_untuk_pr
 from erpnext.selling.doctype.customer.customer import get_credit_limit, get_customer_outstanding
 from erpnext.controllers.accounts_controller import get_taxes_and_charges
@@ -311,11 +311,11 @@ def repair_gl_entry_untuk_ste_debug():
        SELECT "STER-BJM-22-08-00047"
          """)
     for row in list_dn:
-        custom_distribute_additional_costs(frappe.get_doc("Stock Entry",row[0]))
-        # repair_gl_entry_untuk_ste("Stock Entry",row[0])
-        # frappe.db.commit()
+        patch_cost(row[0])
+        repair_gl_entry_untuk_ste("Stock Entry",row[0])
+        frappe.db.commit()
 
-    # repost_stock()
+    repost_stock()
 
 @frappe.whitelist()
 def repair_gl_entry_untuk_pr_debug():
