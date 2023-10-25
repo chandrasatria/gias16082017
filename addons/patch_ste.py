@@ -364,8 +364,9 @@ def repair_gl_entry_untuk_ste_debug():
        SELECT name from `tabStock Entry`
        WHERE name IN 
         (
-            "STER-BLI-1-23-09-00028",
-            "STER-BLI-1-23-09-00039"
+            "STER-BJM-22-08-00045",
+            "STER-BJM-1-23-03-00009",
+            "STER-BJM-1-23-04-00023"
 
         )
          """)
