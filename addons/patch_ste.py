@@ -250,7 +250,16 @@ def repair_gl_entry_untuk_dn_debug():
 
     repost_stock()
 
+@frappe.whitelist()
+def repair_gl_entry_untuk_dn_debug_2():
+    list_dn = frappe.db.sql(""" 
 
+        SELECT "DO-1-23-10-00237" """)
+    for row in list_dn:
+        repair_gl_entry_untuk_dn("Delivery Note",row[0])
+        frappe.db.commit()
+
+    repost_stock()
 
 @frappe.whitelist()
 def repair_gl_entry_untuk_ste_debug_2():
