@@ -221,7 +221,7 @@ def check_draft_mr(self,method):
 					JOIN `tab{} Item` doc_sumber ON doc_sumber.name = doc_patokan.{}
 					JOIN `tab{}` doc_parent ON doc_parent.name = doc_patokan.parent
 					WHERE doc_patokan.{} = "{}"
-					AND doc_patokan.`docstatus` < 2 and (doc_parent.{} != "Rejected" or doc_parent.{} IS NULL) """.format(doctype,pas_doctype,field_name,doctype,field_name,row.get(field_name),ws_field,ws_field))
+					AND doc_patokan.`docstatus` < 2 and (doc_parent.{} != "Rejected" or doc_parent.{} IS NULL) """.format(doctype,pas_doctype,field_name,doctype,field_name,row.get(field_name),ws_field,ws_field),debug=1)
 
 				if len(sisa) > 0:
 					terpakai = frappe.utils.flt(sisa[0][0])
