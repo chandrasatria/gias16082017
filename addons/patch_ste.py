@@ -121,6 +121,58 @@ def patch_repack():
         print(ste_doc.value_difference)
         repair_gl_entry_untuk_ste("Stock Entry",ste_doc.name)
 
+@frappe.whitelist()
+def patch_repack_2():
+    list_ste = frappe.db.sql(""" 
+        SELECT ste.name FROM `tabGL Entry` gl
+        JOIN `tabStock Entry` ste ON ste.name=gl.`voucher_no`
+        WHERE ste.`stock_entry_type`  = "Repack"
+        AND gl.`account` LIKE "%HARGA POKOK%"
+        AND gl.`is_cancelled` = 0 
+        AND ste.name = "STERE-BLI-22-03-00001"
+        """)
+
+    for row in list_ste:
+        ste_doc = frappe.get_doc("Stock Entry", row[0])
+        amount = 0
+        total_qty = 0
+        for item in ste_doc.items:
+            if item.s_warehouse:
+                if amount == 0:
+                    amount += item.amount
+
+            elif item.t_warehouse and amount != 0:
+               
+                item.set_basic_rate_manually = 1
+                item.basic_rate = amount / item.qty
+                rate = item.basic_rate
+                item.basic_amount = rate * item.qty
+                item.amount = rate * item.qty
+                item.db_update()
+
+                amount = 0
+        
+        ste_doc.update_valuation_rate()
+        for item in ste_doc.items:
+            item.db_update()
+        ste_doc.db_update()
+        frappe.db.commit()
+
+        ste_doc = frappe.get_doc("Stock Entry", row[0])
+        ste_doc.total_incoming_value = ste_doc.total_outgoing_value = 0.0
+        for d in ste_doc.get("items"):
+            if d.t_warehouse:
+                ste_doc.total_incoming_value += flt(d.amount)
+            if d.s_warehouse:
+                ste_doc.total_outgoing_value += flt(d.amount)
+
+        ste_doc.value_difference = ste_doc.total_incoming_value - ste_doc.total_outgoing_value
+        ste_doc.set_total_amount()
+        ste_doc.db_update()
+        frappe.db.commit()
+    
+        print(ste_doc.value_difference)
+        repair_gl_entry_untuk_ste("Stock Entry",ste_doc.name)
 
 @frappe.whitelist()
 def patch_ste_rk():
