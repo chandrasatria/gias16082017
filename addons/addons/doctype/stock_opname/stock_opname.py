@@ -119,8 +119,7 @@ def buat_ste(self,method):
 					"basic_rate" : row.valuation_rate,
 					"transfer_qty": row.qty,
 					"action": row.action,
-					"user_remark": row.description,
-					"allow_zero_valuation_rate": zero_rate
+					"user_remark": row.description
 				}
 			)
 
@@ -138,8 +137,7 @@ def buat_ste(self,method):
 					"basic_rate" : row.valuation_rate,
 					"transfer_qty": row.qty,
 					"action": row.action,
-					"user_remark": row.description,
-					"allow_zero_valuation_rate": zero_rate
+					"user_remark": row.description
 
 				}
 			)
