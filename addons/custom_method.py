@@ -2407,6 +2407,7 @@ def install_server_baru(nama_server):
 	doc_company.save()
 
 	ganti_default(nama_server.replace("GIAS ",""))
+	hapus_faktur_pajak()
 
 @frappe.whitelist()
 def ganti_default(site_singkatan):
@@ -2414,3 +2415,11 @@ def ganti_default(site_singkatan):
 		UPDATE `tabCustom Field` SET `default` = REPLACE(`default`,"BALI","{}")
 		SELECT NAME,`default` FROM `tabCustom Field` WHERE `default` LIKE "%BALI%" """.format(site_singkatan)
 		)
+@frappe.whitelist()
+def hapus_faktur_pajak():
+	frappe.db.sql(""" DELETE FROM `tabFaktur Pajak` """)
+	frappe.db.sql(""" DELETE FROM `tabEvent Consumer` """)
+	frappe.db.sql(""" DELETE FROM `tabEvent Consumer Document Type` """)
+	frappe.db.sql(""" DELETE FROM `tabEvent Producer` """)
+	frappe.db.sql(""" DELETE FROM `tabEvent Producer Document Type` """)
+	frappe.db.sql(""" DELETE FROM `tabEvent Producer Last Update` """)
