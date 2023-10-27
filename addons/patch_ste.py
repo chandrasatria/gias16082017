@@ -307,7 +307,7 @@ def repair_gl_entry_untuk_dn_debug():
 def repair_gl_entry_untuk_dn_debug_2():
     list_dn = frappe.db.sql(""" 
 
-        SELECT "DO-1-23-10-00237" """)
+        SELECT "DO-1-23-10-00473" """)
     for row in list_dn:
         repair_gl_entry_untuk_dn("Delivery Note",row[0])
         frappe.db.commit()
