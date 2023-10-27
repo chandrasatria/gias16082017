@@ -2403,7 +2403,7 @@ def add_event_sync_and_update_log_archive():
 @frappe.whitelist()
 def install_server_baru(nama_server):
 	doc_company = frappe.get_doc("Company","GIAS")
-	doc_company.nama_server = nama_server
+	doc_company.nama_cabang = nama_server
 	doc_company.save()
 
 	ganti_default(nama_server.replace("GIAS ",""))
