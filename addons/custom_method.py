@@ -2414,7 +2414,7 @@ def ganti_default(site_singkatan):
 	list_ganti = frappe.db.sql(""" 
 		UPDATE `tabCustom Field` SET `default` = REPLACE(`default`,"BALI","{}")
 		WHERE name IN (
-		SELECT NAME,`default` FROM `tabCustom Field` WHERE `default` LIKE "%BALI%"
+		SELECT NAME FROM `tabCustom Field` WHERE `default` LIKE "%BALI%"
 		) """.format(site_singkatan)
 		)
 @frappe.whitelist()
