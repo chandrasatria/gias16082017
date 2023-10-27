@@ -2425,3 +2425,17 @@ def hapus_faktur_pajak():
 	frappe.db.sql(""" DELETE FROM `tabEvent Producer` """)
 	frappe.db.sql(""" DELETE FROM `tabEvent Producer Document Type` """)
 	frappe.db.sql(""" DELETE FROM `tabEvent Producer Last Update` """)
+	frappe.db.sql(""" DELETE FROM `tabCustomer` """)
+	frappe.db.sql(""" DELETE FROM `tabSupplier` """)
+	frappe.db.sql(""" DELETE FROM `tabAddress` """)
+	frappe.db.sql(""" DELETE FROM `tabContact` """)
+	frappe.db.sql(""" DELETE FROM `tabParty Account` """)
+	frappe.db.sql(""" DELETE FROM `tabCustomer Credit Limit` """)
+	frappe.db.sql(""" DELETE FROM `tabSales Team` """)
+
+@frappe.whitelist()
+def buat_list_company_baru():
+	doc_baru = frappe.new_doc("List Company GIAS")
+	doc_baru.singkatan_cabang = "KPG"
+	doc_baru.accounting_dimension = "KUPANG"
+	doc_baru.nama_company = "GIAS KUPANG"
