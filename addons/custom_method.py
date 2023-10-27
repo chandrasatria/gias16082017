@@ -2399,3 +2399,18 @@ def add_event_sync_and_update_log_archive():
 		DELETE FROM `tabEvent Update Log`
 		WHERE DATE(creation) BETWEEN DATE_SUB(NOW(), INTERVAL %s MONTH) AND NOW() """,(berapabulan))
 # End Event Sync & Update Log Archive
+
+@frappe.whitelist()
+def install_server_baru(nama_server):
+	doc_company = frappe.get_doc("Company","GIAS")
+	doc_company.nama_server = nama_server
+	doc_company.save()
+
+	ganti_default(nama_server.replace("GIAS ",""))
+
+@frappe.whitelist()
+def ganti_default(site_singkatan):
+	list_ganti = frappe.db.sql(""" 
+		UPDATE `tabCustom Field` SET `default` = REPLACE(`default`,"BALI","{}")
+		SELECT NAME,`default` FROM `tabCustom Field` WHERE `default` LIKE "%BALI%" """.format(site_singkatan)
+		)
