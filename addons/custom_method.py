@@ -2413,7 +2413,9 @@ def install_server_baru(nama_server):
 def ganti_default(site_singkatan):
 	list_ganti = frappe.db.sql(""" 
 		UPDATE `tabCustom Field` SET `default` = REPLACE(`default`,"BALI","{}")
-		SELECT NAME,`default` FROM `tabCustom Field` WHERE `default` LIKE "%BALI%" """.format(site_singkatan)
+		WHERE name IN (
+		SELECT NAME,`default` FROM `tabCustom Field` WHERE `default` LIKE "%BALI%"
+		) """.format(site_singkatan)
 		)
 @frappe.whitelist()
 def hapus_faktur_pajak():
