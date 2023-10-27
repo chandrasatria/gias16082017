@@ -2439,3 +2439,16 @@ def buat_list_company_baru():
 	doc_baru.singkatan_cabang = "KPG"
 	doc_baru.accounting_dimension = "KUPANG"
 	doc_baru.nama_company = "GIAS KUPANG"
+	doc_baru.save()
+
+	doc_baru = frappe.new_doc("List Company GIAS")
+	doc_baru.singkatan_cabang = "JAKTIM"
+	doc_baru.accounting_dimension = "JAKARTA TIMUR"
+	doc_baru.nama_company = "GIAS JAKARTA TIMUR"
+	doc_baru.save()
+
+	doc_baru = frappe.new_doc("List Company GIAS")
+	doc_baru.singkatan_cabang = "JAKBAR"
+	doc_baru.accounting_dimension = "JAKARTA BARAT"
+	doc_baru.nama_company = "GIAS JAKARTA BARAT"
+	doc_baru.save()
