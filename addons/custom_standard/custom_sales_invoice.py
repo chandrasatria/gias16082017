@@ -280,7 +280,10 @@ def patch_onload_sales_invoice():
 @frappe.whitelist()
 def onload_sales_invoice(soi,method):
 	soi.outstanding_amount = get_outstanding_amount(soi.doctype, soi.name, soi.debit_to, soi.customer, "Customer")
+
 	outstanding_amount = soi.outstanding_amount 
+	if outstanding_amount < 0.00001:
+		outstanding_amount = 0
 
 	status = None
 	total = get_total_in_party_account_currency(soi)
