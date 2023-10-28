@@ -2395,7 +2395,7 @@ def create_ste_resolve(self,method):
 	if self.company:
 		company_doc = frappe.get_doc("Company",self.company)
 		
-		if company_doc.server == "Pusat" and self.buat_ste_di == "Pusat" and self.tipe_ste == "Material Receipt":
+		if ((company_doc.server == "Pusat" and self.buat_ste_di == "Pusat") or company_doc.nama_cabang == self.cabang ) and self.tipe_ste == "Material Receipt":
 			if self.apakan_ste == "Buat STE":
 				cabang_doc = frappe.get_doc("List Company GIAS",company_doc.nama_cabang)
 				self.stat = "Terbuat di Pusat - Resolve"
