@@ -2000,7 +2000,7 @@ def buat_ste_log(self,method):
 	for row in self.items:
 		row.valuation_rate_transfer = flt(flt(row.basic_rate) + flt(row.additional_cost_transfer))
 
-	if company_doc.server == "Cabang" and self.transfer_ke_cabang_pusat == 1 and self.cabang_atau_pusat == "Pusat" and self.purpose == "Material Issue":
+	if company_doc.server == "Cabang" and self.transfer_ke_cabang_pusat == 1 and (self.cabang_atau_pusat == "Pusat" or (self.cabang_atau_pusat == "Cabang" and self.transfer_ke_cabang_mana == "GIAS SPRINGHILL") ) and self.purpose == "Material Issue":
 		ste_log = frappe.new_doc("STE Log")
 		ste_log.nama_dokumen = self.name
 		ste_log.transfer_ke = "Pusat"
@@ -2395,7 +2395,7 @@ def create_ste_resolve(self,method):
 	if self.company:
 		company_doc = frappe.get_doc("Company",self.company)
 		
-		if ((company_doc.server == "Pusat" and self.buat_ste_di == "Pusat") or company_doc.nama_cabang == self.cabang ) and self.tipe_ste == "Material Receipt":
+		if ((company_doc.server == "Pusat" and self.buat_ste_di == "Pusat") or (company_doc.server == "Pusat" and company_doc.nama_cabang) == self.cabang ) and self.tipe_ste == "Material Receipt":
 			if self.apakan_ste == "Buat STE":
 				cabang_doc = frappe.get_doc("List Company GIAS",company_doc.nama_cabang)
 				self.stat = "Terbuat di Pusat - Resolve"
