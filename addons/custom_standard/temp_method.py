@@ -45,13 +45,20 @@ def preparing_backup():
 
 	try:
 		connect_to_tax_server(directory,backup)
-		print(""" UPDATE `tabSingles` SET value = "Success at {}" WHERE doctype = "Sync to Tax Server" AND field = "last_status" """.format(frappe.utils.now()))
-		frappe.db.sql(""" UPDATE `tabSingles` SET value = "Success at {}" WHERE doctype = "Sync to Tax Server" AND field = "last_status" """.format(frappe.utils.now()))
-		frappe.db.commit()
+		frappe.enqueue(method="addons.custom_standard.temp_method.success_message",timeout=2400, queue='default')
+		success_message()
+		
 	except:
 		frappe.db.sql(""" UPDATE `tabSingles` SET value = "Failed at {}" WHERE doctype = "Sync to Tax Server" AND field = "last_status" """.format(frappe.utils.now()))
 		frappe.db.commit()
 	
+
+@frappe.whitelist()
+def success_message()
+	print(""" UPDATE `tabSingles` SET value = "Success at {}" WHERE doctype = "Sync to Tax Server" AND field = "last_status" """.format(frappe.utils.now()))
+	frappe.db.sql(""" UPDATE `tabSingles` SET value = "Success at {}" WHERE doctype = "Sync to Tax Server" AND field = "last_status" """.format(frappe.utils.now()))
+	frappe.db.commit()
+
 
 @frappe.whitelist()
 def connect_to_tax_server(directory,backup):
