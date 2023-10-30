@@ -1522,6 +1522,7 @@ def debug_custom_pull_from_node_2(event_producer, debug=True):
 			FROM `tabEvent Update Log_copy` 
 			WHERE
 			creation >= "{}"
+			AND `data` NOT LIKE "%ps_approver%"
 			GROUP BY docname, `data`
 			
 			
