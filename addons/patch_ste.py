@@ -346,7 +346,7 @@ def recount_ste_tools():
 @frappe.whitelist()
 def repair_gl_entry_untuk_ste_debug_3():
     from addons.addons.doctype.stock_recount_tools.stock_recount_tools import debug_start_stock_recount_stei_by_name
-    debug_start_stock_recount_stei_by_name("db_bpp")
+    debug_start_stock_recount_stei_by_name("db_bru")
 
 @frappe.whitelist()
 def enqueue_repair_gl_entry_untuk_ste_debug_3():
