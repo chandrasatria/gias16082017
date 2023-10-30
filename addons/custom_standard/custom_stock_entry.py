@@ -1294,6 +1294,7 @@ def debug_custom_pull_from_node(event_producer, debug=True):
 			FROM `db_pusat`.`tabEvent Update Log`  
 			WHERE
 			creation >= "{}"
+			AND `data` NOT LIKE "%ps_approver%"
 			GROUP BY docname, `data`
 			
 			
