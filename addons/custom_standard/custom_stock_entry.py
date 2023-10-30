@@ -1498,6 +1498,233 @@ def debug_custom_pull_from_node(event_producer, debug=True):
 
 		sync(update, producer_site, event_producer)
 
+@frappe.whitelist()
+def debug_custom_pull_from_node_2(event_producer, debug=True):
+	"""pull all updates after the last update timestamp from event producer site"""
+	# custom chandra
+	# requires for ssl
+	if frappe.get_doc("Company", "GIAS").server != "Cabang":
+		return
+
+	event_producer = event_producer.replace("http://","https://")
+
+	event_producer = frappe.get_doc('Event Producer', event_producer)
+	producer_site = get_producer_site(event_producer.producer_url)
+	last_update = event_producer.get_last_update()
+	
+	(doctypes, mapping_config, naming_config) = get_config(event_producer.producer_doctypes)
+	
+	frappe.flags.debug=True
+	updates =  frappe.db.sql(""" SELECT 
+			`update_type`, 
+			`ref_doctype`,
+			`docname`, `data`, `name`, `creation` 
+			FROM `tabEvent Update Log_copy` 
+			WHERE
+			creation >= "{}"
+			GROUP BY docname, `data`
+			
+			
+			ORDER BY creation ASC
+	""".format(last_update), as_dict=1,debug=1)
+
+	result = []
+	to_update_history = []
+	nama_cabang = frappe.get_doc("Company","GIAS").nama_cabang
+	singkatan_cabang = frappe.get_doc("List Company GIAS",nama_cabang).singkatan_cabang
+	
+	for update in updates:
+		if update.ref_doctype == "Berita Acara Komplain":
+			if not singkatan_cabang in update.docname:
+				continue
+
+		if update.ref_doctype == "Material Request":
+			if not singkatan_cabang in update.docname:
+				continue
+
+		if update.ref_doctype == "STE Log":
+			
+			if "cabang" in str(update.data):
+				if not '"cabang": "{}"'.format(nama_cabang) in update.data:
+					continue
+		print(update.docname)
+		update.use_same_name = naming_config.get(update.ref_doctype)
+		mapping = mapping_config.get(update.ref_doctype)
+		if mapping:
+			update.mapping = mapping
+			update = get_mapped_update(update, producer_site)
+		if not update.update_type == 'Delete':
+			update.data = json.loads(update.data)
+
+			if "letter_head" in update.data:
+				if update.data["letter_head"] != "":
+					update.data["letter_head"] = ""
+
+			if "docstatus" in update.data:
+				if update.data["docstatus"] == "0":
+					update.data["docstatus"] = 0
+
+			if "additional_costs" in update.data:
+				if update.data["additional_costs"] == "[]":
+					update.data["additional_costs"] = []	
+
+			if "attachment_test" in update.data:
+				if update.data["attachment_test"] != "" and update.data["doctype"] == "Item":
+					if "https" not in update.data["attachment_test"]:
+						update.data["attachment_test"] = str(event_producer.name) + str(update.data["attachment_test"])
+
+			if "attachment" in update.data and update.data["doctype"] == "Material Request":
+				for row in update.data["attachment"] :
+					if "attachment" in row:
+						if row["attachment"] != "":
+							if "https" not in row["attachment"]:
+								row["attachment"] = str(event_producer.name) + str(row["attachment"])
+							
+
+			# if "changed" in update.data and update.data["doctype"] != "Material Request":
+			# 	if "attachment" in update.data["changed"]:
+			# 		if update.data["changed"]["attachment"] != "":
+			# 			if "https" not in update.data["changed"]["attachment"]:
+			# 				update.data["changed"]["attachment"] = str(event_producer.name) + str(update.data["changed"]["attachment"])
+
+			if "amended_from" in update.data:
+				if update.data["doctype"] == "Stock Entry":
+					update.data["amended_from"] = ""
+			
+			if "workflow_state" in update.data:
+				if update.data["doctype"] == "Stock Entry" and update.data["workflow_state"] == "Draft":
+					update.data["workflow_state"] = "Pending"
+					
+			if "items" in update.data and update.data["doctype"] == "Stock Entry":
+				for row in update.data["items"] :
+					if "basic_rate" in row:
+						if row["basic_rate"] == 0:
+							row["allow_zero_valuation_rate"] = 1
+						else:
+							row["allow_zero_valuation_rate"] = 0
+				
+			if "stat" in update.data and update.data["doctype"] == "STE Log":
+				if update.data["stat"] == "Terbuat di Pusat" and update.data["transfer_ke"] == "Pusat":
+					update.data["docstatus"] = 0
+
+			
+			if "doctype" in update.data:
+				if update.data["doctype"] == "Berita Acara Komplain":
+					if "attachment" in update.data:
+						if update.data["attachment"] != "":
+							update.data["attachment"] = str(event_producer.name) + str(update.data["attachment"])
+					if "no_stock_entry" in update.data:
+						if update.data["no_stock_entry"] != "":
+							update.data["no_stock_entry"] = ""
+
+					# if "no_surat_jalan" in update.data:
+					# 	if update.data["no_surat_jalan"] != "":
+					# 		update.data["no_surat_jalan"] = ""
+
+					if "no_purchase_receipt" in update.data:
+						if update.data["no_purchase_receipt"] != "":
+							update.data["no_purchase_receipt"] = ""
+
+
+			if update.ref_doctype == "Material Request":
+				
+				if "set_from_warehouse" in update.data:
+					update.data["set_from_warehouse"] = ""
+				if "set_warehouse" in update.data:
+					update.data["set_warehouse"] = ""
+
+	
+				if "items" in update.data:
+					for row in update.data["items"]:
+						if "from_warehouse" in row:
+							row["from_warehouse"] = ""
+						if "warehouse" in row:
+							company_doc = frappe.get_doc("Company", "GIAS")
+							if company_doc.server == "Pusat":
+								lcg = frappe.get_doc("List Company GIAS",company_doc.nama_cabang).warehouse_penerimaan_dari_pusat
+								row["warehouse"] = lcg
+
+						if "cost_center" in row:
+							company_doc = frappe.get_doc("Company", "GIAS")
+							row["cost_center"] = company_doc.cost_center
+
+				if "changed" in update.data:
+
+					if "set_from_warehouse" in update.data["changed"]:
+						update.data["changed"]["set_from_warehouse"] = ""
+					if "set_warehouse" in update.data["changed"]:
+						update.data["changed"]["set_warehouse"] = ""
+
+					if "items" in update.data["changed"]:
+						for row in update.data["changed"]["items"]:
+							if "from_warehouse" in row:
+								row["from_warehouse"] = ""
+							if "warehouse" in row:
+								company_doc = frappe.get_doc("Company", "GIAS")
+								if company_doc.server == "Pusat":
+									lcg = frappe.get_doc("List Company GIAS",company_doc.nama_cabang).warehouse_penerimaan_dari_pusat
+									row["warehouse"] = lcg
+
+							## if "cost_center" in row:
+								## company_doc = frappe.get_doc("Company", "GIAS")
+								## row["cost_center"] = company_doc.cost_center
+
+				if "added" in update.data:
+					if "set_from_warehouse" in update.data["added"]:
+						update.data["added"]["set_from_warehouse"] = ""
+					if "set_warehouse" in update.data["added"]:
+						update.data["added"]["set_warehouse"] = ""
+
+					if "items" in update.data["added"]:
+						for row in update.data["added"]["items"]:
+							if "from_warehouse" in row:
+								row["from_warehouse"] = ""
+							if "warehouse" in row:
+								company_doc = frappe.get_doc("Company", "GIAS")
+								if company_doc.server == "Pusat":
+									lcg = frappe.get_doc("List Company GIAS",company_doc.nama_cabang).warehouse_penerimaan_dari_pusat
+									row["warehouse"] = lcg
+
+							## if "cost_center" in row:
+								## company_doc = frappe.get_doc("Company", "GIAS")
+								## row["cost_center"] = company_doc.cost_center
+
+				if "row_changed" in update.data:
+
+					if "set_from_warehouse" in update.data["row_changed"]:
+						update.data["row_changed"]["set_from_warehouse"] = ""
+					if "set_warehouse" in update.data["row_changed"]:
+						update.data["row_changed"]["set_warehouse"] = ""
+
+					if "items" in update.data["row_changed"]:
+						for row in update.data["row_changed"]["items"]:
+							if "from_warehouse" in row:
+								row["from_warehouse"] = ""
+							if "warehouse" in row:
+								company_doc = frappe.get_doc("Company", "GIAS")
+								if company_doc.server == "Pusat":
+									lcg = frappe.get_doc("List Company GIAS",company_doc.nama_cabang).warehouse_penerimaan_dari_pusat
+									row["warehouse"] = lcg
+
+							## if "cost_center" in row:
+								## company_doc = frappe.get_doc("Company", "GIAS")
+								## row["cost_center"] = company_doc.cost_center
+			# if "doctype" in update.data:
+			# 	if update.data["doctype"] == "Material Request":
+			# 		ambil_4 = str(update.data["name"])[:-4]
+			# 		nomor = frappe.db.sql("""
+			# 			SELECT LPAD(SUBSTRING(NAME, -4) + 1,4,0) AS nomor_sekarang 
+			# 			FROM `tabMaterial Request`
+			# 			WHERE NAME LIKE "%{}%"
+			# 			ORDER BY SUBSTRING(NAME, -4) DESC
+			# 			LIMIT 1 """.format(ambil_4), as_dict=1)
+
+			# 		if len(nomor) < 1:
+			# 			update.data["name"] = ambil_4 + "0001"
+			# 		else:
+			# 			update.data["name"] = ambil_4 + nomor[0].nomor_sekarang
+
+		sync(update, producer_site, event_producer)
 	
 @frappe.whitelist()
 def custom_new_event_notification(producer_url):
