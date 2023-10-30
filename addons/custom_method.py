@@ -3020,7 +3020,7 @@ def update_item():
 		"E-TRIM-P-000008")
 	 """)
 
-cek = frappe.db.sql(""" UPDATE `tabItem` SET ps_approver = "ECHA"
+	cek = frappe.db.sql(""" UPDATE `tabItem` SET ps_approver = "TONY S"
 		WHERE name IN ("D-BBCP-N-000001"
 "D-BBCP-N-000002",
 "D-BBCP-N-000003",
