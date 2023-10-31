@@ -1083,3 +1083,22 @@ erpnext.selling.SalesOrderController = erpnext.selling.SellingController.extend(
 	}
 });
 $.extend(cur_frm.cscript, new erpnext.selling.SalesOrderController({frm: cur_frm}));
+
+frappe.ui.form.on("Delivery Note", {
+	onload: function(frm) {
+			
+		frm.set_query("account_head", "taxes", function() {
+			return {
+				filters: {
+					"is_group": 0,
+					"disabled": 0
+				}
+			}
+		});
+		cur_frm.set_df_property("items","read_only",1);
+		if(frappe.user_roles.indexOf("SPV ACC Cabang") > -1){
+			cur_frm.set_df_property("items","read_only",0);
+			cur_frm.refresh_fields()
+		}
+	},
+});
