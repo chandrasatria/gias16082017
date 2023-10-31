@@ -231,15 +231,20 @@ frappe.ui.form.on('Sales Order', {
 	refresh: function(frm) {
 		if(frm.doc.docstatus === 1 && frm.doc.status !== 'Closed'
 			&& flt(frm.doc.per_delivered, 6) < 100 && flt(frm.doc.per_billed, 6) < 100) {
-			frm.add_custom_button(__('Update Items'), () => {
-				erpnext.utils.update_child_items({
-					frm: frm,
-					child_docname: "items",
-					child_doctype: "Sales Order Detail",
-					cannot_add_row: false,
-				})
-			});
+			frm.remove_custom_button('Update Items')
+			if(frappe.user_roles.indexOf("SPV ACC Cabang") > -1){
+				frm.add_custom_button(__('Update Items'), () => {
+					erpnext.utils.update_child_items({
+						frm: frm,
+						child_docname: "items",
+						child_doctype: "Sales Order Detail",
+						cannot_add_row: false,
+					})
+				});
+			}
 		}
+
+
 		if(frm.doc.__islocal){
 			if(frm.doc.tax_or_non_tax == "Tax"){
 				frappe.call({
@@ -1095,10 +1100,5 @@ frappe.ui.form.on("Delivery Note", {
 				}
 			}
 		});
-		cur_frm.set_df_property("items","read_only",1);
-		if(frappe.user_roles.indexOf("SPV ACC Cabang") > -1){
-			cur_frm.set_df_property("items","read_only",0);
-			cur_frm.refresh_fields()
-		}
 	},
 });
