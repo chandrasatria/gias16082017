@@ -412,65 +412,7 @@ def create_je_hpp(fromdate,todate, difference_account, total_difference_account)
 def debug_start_stock_recount_pr_by_name():
 	list_pr = frappe.db.sql(""" 
 		SELECT parent FROM `tabPurchase Receipt Item`
-		WHERE parent IN ("PRI-HO-1-23-04-01649",
-"PRI-HO-1-23-04-01648",
-"PRI-HO-1-23-04-00729",
-"PRI-HO-1-23-04-00733",
-"PRI-HO-1-23-04-00734",
-"PRI-HO-1-23-04-01652",
-"PRI-HO-1-23-04-01653",
-"PRI-HO-1-23-04-01656",
-"PRI-HO-1-23-04-01659",
-"PRI-HO-1-23-04-01642",
-"PRI-HO-1-23-04-01638",
-"PRI-HO-1-23-04-01383",
-"PRI-HO-1-23-04-01382",
-"PRI-HO-1-23-04-01396",
-"PRI-HO-1-23-04-01395",
-"PRI-HO-1-23-04-01392",
-"PRI-HO-1-23-04-01390",
-"PRI-HO-1-23-04-01384",
-"PRI-HO-1-23-04-01394",
-"PRI-HO-1-23-04-01393",
-"PRI-HO-1-23-04-01386",
-"PRI-HO-1-23-04-01385",
-"PRI-HO-1-23-04-01447",
-"PRI-HO-1-23-04-01450",
-"PRI-HO-1-23-04-01387",
-"PRI-HO-1-23-04-01381",
-"PRI-HO-1-23-04-01302",
-"PRI-HO-1-23-04-01303",
-"PRI-HO-1-23-04-01211",
-"PRI-HO-1-23-04-01212",
-"PRI-HO-1-23-04-01210",
-"PRI-HO-1-23-04-01216",
-"PRI-HO-1-23-04-01214",
-"PRI-HO-1-23-04-01227",
-"PRI-HO-1-23-04-01219",
-"PRI-HO-1-23-04-01225",
-"PRI-HO-1-23-04-01222",
-"PRI-HO-1-23-04-01223",
-"PRI-HO-1-23-04-01224",
-"PRI-HO-1-23-04-01228",
-"PRI-HO-1-23-04-01229",
-"PRI-HO-1-23-04-01221",
-"PRI-HO-1-23-04-01220",
-"PRI-HO-1-23-04-01217",
-"PRI-HO-1-23-04-01218",
-"PRI-HO-1-23-04-01016",
-"PRI-HO-1-23-04-01014",
-"PRI-HO-1-23-04-01015",
-"PRI-HO-1-23-04-01013",
-"PRI-HO-1-23-04-00857",
-"PRI-HO-1-23-04-00856",
-"PRI-HO-1-23-04-00860",
-"PRI-HO-1-23-04-00861",
-"PRI-HO-1-23-04-00858",
-"PRI-HO-1-23-04-00859",
-"PRI-HO-1-23-04-00543",
-"PRI-HO-1-23-04-00731",
-"PRI-HO-1-23-04-00732",
-"PRI-HO-1-23-04-01209")
+		WHERE parent IN ("PRI-HO-1-23-10-00421")
 		AND parent NOT IN (SELECT NAME FROM `tabStock Recount History PR` WHERE TIMESTAMP(last_update)>="2023-05-12")
 		GROUP BY parent """)
 
@@ -546,32 +488,18 @@ def start_stock_recount_pr_by_name(name):
 			cek_status_dan_repost_purchase_receipt(row)
 
 		for row in kotak_pr:
-			check_pr = frappe.db.sql(""" SELECT name FROM `tabStock Recount History PR` WHERE name = "{}" """.format(row))
-			if len(check_pr) == 0:
-				baris_baru = frappe.new_doc("Stock Recount History PR")
-				baris_baru.purchase_receipt = row
-				baris_baru.posting_date = frappe.get_doc("Purchase Receipt", row).posting_date
-				baris_baru.last_update = frappe.utils.now()
-				baris_baru.status = "Completed"
-				baris_baru.save()
-			else:
-				baris_baru = frappe.get_doc("Stock Recount History PR",row)
-				baris_baru.last_update = frappe.utils.now()
-				baris_baru.status = "Completed"
-				baris_baru.save()
+			print("ini {}".format(row))
+			frappe.enqueue(method="addons.addons.doctype.stock_recount_tools.stock_recount_tools.history_prec_complete",timeout=2400, queue='default',**{'pr': row} )
 
 		for row in list_pr:
 			print("stesync-{}".format(row[2]))
 			lakukan_recount_ke_ste_sync(row[2],row[3])
 			
-		frappe.db.sql(""" UPDATE `tabSingles` SET VALUE = 0 WHERE `field` = "bypass" """)
-
-		frappe.db.sql(""" UPDATE `tabSingles` SET `value` = "Completed" WHERE doctype = "Stock Recount Tools" AND `field` = "status" """)
-		frappe.db.commit()
+		frappe.enqueue(method="addons.addons.doctype.stock_recount_tools.stock_recount_tools.recount_complete",timeout=2400, queue='default')
 	except:
-		frappe.db.sql(""" UPDATE `tabSingles` SET VALUE = 0 WHERE `field` = "bypass" """)
-		frappe.db.sql(""" UPDATE `tabSingles` SET `value` = "Failed" WHERE doctype = "Stock Recount Tools" AND `field` = "status" """)
-		frappe.db.commit()
+		frappe.enqueue(method="addons.addons.doctype.stock_recount_tools.stock_recount_tools.recount_failed",timeout=2400, queue='default')
+		
+
 @frappe.whitelist()
 def start_stock_recount(fromdate,todate, diff):
 	try:
@@ -729,23 +657,7 @@ def lakukan_recount_ke_ste_sync(no_prec, item_code):
 		os.system(command)
 		recount_ste(row[0],row[1])
 
-		check_pr = frappe.db.sql(""" SELECT name FROM `tabStock Recount History STE` WHERE name = "{}" """.format(row[0]))
-		if len(check_pr) == 0:
-			baris_baru = frappe.new_doc("Stock Recount History STE")
-			baris_baru.stock_entry = row[0]
-			baris_baru.ste_type = frappe.get_doc("Stock Entry", row[0]).stock_entry_type
-			baris_baru.posting_date = frappe.get_doc("Stock Entry", row[0]).posting_date
-			baris_baru.last_update = frappe.utils.now()
-			baris_baru.status = "Completed"
-			baris_baru.save()
-		else:
-			baris_baru = frappe.get_doc("Stock Recount History STE",row[0])
-			baris_baru.last_update = frappe.utils.now()
-			baris_baru.status = "Completed"
-			baris_baru.save()
-
-
-
+		frappe.enqueue(method="addons.addons.doctype.stock_recount_tools.stock_recount_tools.history_pr_complete",timeout=2400, queue='default',**{'ste': row[0]} )
 
 @frappe.whitelist()
 def compare_to_pusat(name, item_code, rate,tujuan_ste, qty):
@@ -1021,7 +933,7 @@ def start_stock_recount_pr_mtr(fromdate,todate, diff, total_diff):
 		for row in list_pr:
 			check_pr = frappe.db.sql(""" SELECT name FROM `tabStock Recount History PR` WHERE name = "{}" """.format(row[2]))
 			if len(check_pr) == 0:
-				baris_baru = frappe.new_doc("Stock Recount History STE")
+				baris_baru = frappe.new_doc("Stock Recount History PR")
 				baris_baru.stock_entry = row[0]
 				baris_baru.ste_type = frappe.get_doc("Stock Entry", row[0]).stock_entry_type
 				baris_baru.posting_date = frappe.get_doc("Stock Entry", row[0]).posting_date
@@ -1050,7 +962,7 @@ def start_stock_recount_pr_mtr(fromdate,todate, diff, total_diff):
 				baris_baru.status = "Completed"
 				baris_baru.save()
 			else:
-				baris_baru = frappe.get_doc("Stock Recount History PR",row[0])
+				baris_baru = frappe.get_doc("Stock Recount History STE",row[0])
 				baris_baru.last_update = frappe.utils.now()
 				baris_baru.status = "Completed"
 				baris_baru.save()
@@ -1133,7 +1045,7 @@ def start_stock_recount_stei(fromdate,todate):
 			baris_baru.status = "Completed"
 			baris_baru.save()
 		else:
-			baris_baru = frappe.get_doc("Stock Recount History PR",row[0])
+			baris_baru = frappe.get_doc("Stock Recount History STE",row[0])
 			baris_baru.last_update = frappe.utils.now()
 			baris_baru.status = "Completed"
 			baris_baru.save()
@@ -1237,6 +1149,42 @@ def history_pr_complete(ste):
 		baris_baru = frappe.get_doc("Stock Recount History STE",ste)
 		baris_baru.last_update = frappe.utils.now()
 		baris_baru.status = "Completed"
+		print("2")
+		baris_baru.save()
+
+@frappe.whitelist()
+def history_prec_complete(pr):
+	check_pr = frappe.db.sql(""" SELECT name FROM `tabStock Recount History PR` WHERE purchase_receipt = "{}" """.format(pr))
+	if len(check_pr) == 0:
+		baris_baru = frappe.new_doc("Stock Recount History PR")
+		baris_baru.purchase_receipt = pr
+		baris_baru.posting_date = frappe.get_doc("Purchase Receipt", pr).posting_date
+		baris_baru.last_update = frappe.utils.now()
+		baris_baru.status = "Completed"
+		print("1")
+		baris_baru.save()
+	else:
+		baris_baru = frappe.get_doc("Stock Recount History PR",ste)
+		baris_baru.last_update = frappe.utils.now()
+		baris_baru.status = "Completed"
+		print("2")
+		baris_baru.save()
+
+@frappe.whitelist()
+def history_prec_failed(pr):
+	check_pr = frappe.db.sql(""" SELECT name FROM `tabStock Recount History PR` WHERE purchase_receipt = "{}" """.format(pr))
+	if len(check_pr) == 0:
+		baris_baru = frappe.new_doc("Stock Recount History PR")
+		baris_baru.stock_entry = pr
+		baris_baru.posting_date = frappe.get_doc("Purchase Receipt", pr).posting_date
+		baris_baru.last_update = frappe.utils.now()
+		baris_baru.status = "Failed"
+		print("1")
+		baris_baru.save()
+	else:
+		baris_baru = frappe.get_doc("Stock Recount History PR",ste)
+		baris_baru.last_update = frappe.utils.now()
+		baris_baru.status = "Failed"
 		print("2")
 		baris_baru.save()
 
