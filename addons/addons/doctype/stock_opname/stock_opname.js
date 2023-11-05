@@ -1,7 +1,24 @@
 // Copyright (c) 2023, das and contributors
 // For license information, please see license.txt
 
+function add_filter_item(frm) {
+	cur_frm.set_query("item_code", "items", function() {
+	    return {
+	        filters: {
+	            "is_stock_item": 1,
+	            "tax_or_non_tax": frm.doc.tax_or_non_tax
+	        }    
+	    };
+	}),
+	cur_frm.refresh_fields();
+}
+
 frappe.ui.form.on('Stock Opname', {
+	
+	tax_or_non_tax: function(frm){
+		add_filter_item()
+	},	
+
 	onload: function(frm) {
 		if(!frm.doc.posting_time){
 			cur_frm.set_value('posting_time', frappe.datetime.now_time());	
@@ -10,14 +27,8 @@ frappe.ui.form.on('Stock Opname', {
 		frm.add_fetch("item_code", "item_name", "item_name");
 
 		// end of life
-		frm.set_query("item_code", "items", function(doc, cdt, cdn) {
-			return {
-				query: "erpnext.controllers.queries.item_query",
-				filters:{
-					"is_stock_item": 1
-				}
-			}
-		});
+		add_filter_item()
+
 		frm.set_query("batch_no", "items", function(doc, cdt, cdn) {
 			var item = locals[cdt][cdn];
 			return {
