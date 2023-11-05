@@ -293,6 +293,104 @@ def create_gl_custom_purchase_invoice():
         frappe.db.commit()
 
 @frappe.whitelist()
+def create_gl_custom_expense_claim_by_name(name):
+    doc_list = frappe.db.sql(""" SELECT voucher_no FROM `tabGL Entry` WHERE is_cancelled = 0
+    and voucher_type = "Expense Claim" 
+    and voucher_no = "{}"
+    GROUP BY voucher_no """.format(name))
+    for nomor_doc in doc_list:
+        self = frappe.get_doc("Expense Claim", nomor_doc[0])
+        frappe.db.sql(""" DELETE FROM `tabGL Entry Custom` WHERE no_voucher = "{}" """.format(self.name))
+        gl_list = frappe.db.sql(""" 
+                SELECT posting_date,
+                 account,
+                 debit,
+                 credit,
+                 party_type,
+                 party,
+                 TRIM(SUBSTRING_INDEX(remarks, 'Note:', 1)),
+                 voucher_type,
+                 voucher_no,
+                 TRIM(SUBSTRING_INDEX(remarks, 'Note:', -1)),
+                 branch,
+                 cost_center,
+                 name 
+                 FROM `tabGL Entry` WHERE voucher_no = "{}" 
+                 GROUP BY account
+                 """.format(self.name))
+
+        list_item = []
+        for baris_query in gl_list:
+            if frappe.utils.flt(baris_query[2]) > 0:
+                nyari = 0
+                for row_expense in self.expenses:
+                    exp_typ = frappe.get_doc("Expense Claim Type",row_expense.expense_type)
+                    account = exp_typ.accounts[0].default_account
+                    if account == baris_query[1] and row_expense.name not in list_item:
+                        nyari = 1
+                        sle_new = frappe.new_doc("GL Entry Custom")
+                        sle_new.update({
+                            "posting_date": baris_query[0],
+                            "account": baris_query[1],
+                            "debit": row_expense.sanctioned_amount,
+                            "credit": baris_query[3],
+                            "party_type": baris_query[4],
+                            "party": baris_query[5],
+                            "remarks": str(row_expense.get("description")) + "|" + str(row_expense.get("user_remark")) ,
+                            "doc_remarks": self.remark,
+                            "voucher_type":baris_query[7],
+                            "no_voucher":baris_query[8],
+                            "branch": row_expense.branch,
+                            "cost_center": row_expense.cost_center,
+                            "tax_or_non_tax": frappe.get_doc(baris_query[7], baris_query[8]).tax_or_non_tax,
+                            "voucher_detail_no": row_expense.name
+                        })  
+                        if row_expense.name not in list_item:
+                            list_item.append(row_expense.name)
+
+                        sle_new.save(ignore_permissions=True)
+
+                if nyari == 0:
+                    sle_new = frappe.new_doc("GL Entry Custom")
+                    sle_new.update({
+                        "posting_date": baris_query[0],
+                        "account": baris_query[1],
+                        "debit": baris_query[2],
+                        "credit": baris_query[3],
+                        "party_type": baris_query[4],
+                        "party": baris_query[5],
+                        "remarks": baris_query[6],
+                        "doc_remarks": self.remark,
+                        "voucher_type":baris_query[7],
+                        "no_voucher":baris_query[8],
+                        "branch": baris_query[10],
+                        "cost_center": baris_query[11],
+                        "tax_or_non_tax": frappe.get_doc(baris_query[7], baris_query[8]).tax_or_non_tax
+                    })  
+                    sle_new.save(ignore_permissions=True)
+            else:
+                sle_new = frappe.new_doc("GL Entry Custom")
+                sle_new.update({
+                    "posting_date": baris_query[0],
+                    "account": baris_query[1],
+                    "debit": baris_query[2],
+                    "credit": baris_query[3],
+                    "party_type": baris_query[4],
+                    "party": baris_query[5],
+                    "remarks": baris_query[6],
+                    "doc_remarks": self.remark,
+                    "voucher_type":baris_query[7],
+                    "no_voucher":baris_query[8],
+                    "branch": baris_query[10],
+                    "cost_center": baris_query[11],
+                    "tax_or_non_tax": frappe.get_doc(baris_query[7], baris_query[8]).tax_or_non_tax
+                })  
+                sle_new.save(ignore_permissions=True)
+
+        print(nomor_doc[0])
+        frappe.db.commit()
+
+@frappe.whitelist()
 def create_gl_custom_purchase_invoice_by_name(self,method):
 
     doc_list = frappe.db.sql(""" SELECT voucher_no FROM `tabGL Entry` WHERE is_cancelled = 0

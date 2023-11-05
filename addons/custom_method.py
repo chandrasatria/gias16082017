@@ -2046,19 +2046,15 @@ def operasi_stock_ledger():
 @frappe.whitelist()
 def operasi_accounting_ledger():
 	list_voucher = frappe.db.sql(""" 
-		SELECT "Journal Entry", je.name
-		FROM `tabJournal Entry` je 
-		LEFT JOIN `tabGL Entry` tgl ON tgl.voucher_no = je.name
-		WHERE je.`docstatus` = 1
-		AND tgl.name IS NULL """)
+		SELECT "Expense Claim","EXC-GIAS-LMP-1-23-11-00006" """)
 
 	for row in list_voucher:
 		repair_gl_entry_tanpa_sl(row[0],row[1])
 		print("{}={}".format(row[0],row[1]))
 		frappe.db.commit()
 		docname = row[1]
-		from addons.custom_standard.view_ledger_create import create_gl_custom_journal_entry_by_name
-		create_gl_custom_journal_entry_by_name(docname)
+		from addons.custom_standard.view_ledger_create import create_gl_custom_expense_claim_by_name
+		create_gl_custom_expense_claim_by_name(docname)
 
 
 @frappe.whitelist()
