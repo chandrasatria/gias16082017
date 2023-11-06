@@ -74,6 +74,23 @@ def patch_bin():
             frappe.db.sql(""" DELETE FROM `tabBin` WHERE name = "{}" """.format(list_satuan[0][0]))
 
 @frappe.whitelist()
+def patch_incoming():
+    list_ste = frappe.db.sql(""" SELECT name FROM `tabStock Entry` """)
+    for row in list_ste:
+        ste_doc = frappe.get_doc("Stock Entry",row[0])
+        ste_doc.total_incoming_value = ste_doc.total_outgoing_value = 0.0
+        for d in ste_doc.get("items"):
+            if d.t_warehouse:
+                ste_doc.total_incoming_value += flt(d.amount)
+            if d.s_warehouse:
+                ste_doc.total_outgoing_value += flt(d.amount)
+
+        ste_doc.value_difference = ste_doc.total_incoming_value - ste_doc.total_outgoing_value
+        ste_doc.set_total_amount()
+        print(row[0])
+        ste_doc.db_update()
+
+@frappe.whitelist()
 def patch_repack():
     list_ste = frappe.db.sql(""" 
         SELECT name FROM `tabStock Entry` ste
