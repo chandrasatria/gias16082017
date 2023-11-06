@@ -75,7 +75,7 @@ def patch_bin():
 
 @frappe.whitelist()
 def patch_incoming():
-    list_ste = frappe.db.sql(""" SELECT name FROM `tabStock Entry` """)
+    list_ste = frappe.db.sql(""" SELECT name FROM `tabStock Entry` WHERE name = "STER-BLI-22-03-00001" """)
     for row in list_ste:
         ste_doc = frappe.get_doc("Stock Entry",row[0])
         ste_doc.total_incoming_value = ste_doc.total_outgoing_value = 0.0
@@ -86,7 +86,7 @@ def patch_incoming():
                 ste_doc.total_outgoing_value += flt(d.amount)
 
         ste_doc.value_difference = ste_doc.total_incoming_value - ste_doc.total_outgoing_value
-        ste_doc.set_total_amount()
+        print(ste_doc.value_difference)
         print(row[0])
         ste_doc.db_update()
 
