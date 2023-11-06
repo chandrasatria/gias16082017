@@ -16,7 +16,7 @@ function add_filter_item(frm) {
 frappe.ui.form.on('Stock Opname', {
 	
 	tax_or_non_tax: function(frm){
-		add_filter_item()
+		add_filter_item(frm)
 	},	
 
 	onload: function(frm) {
@@ -27,7 +27,7 @@ frappe.ui.form.on('Stock Opname', {
 		frm.add_fetch("item_code", "item_name", "item_name");
 
 		// end of life
-		add_filter_item()
+		add_filter_item(frm)
 
 		frm.set_query("batch_no", "items", function(doc, cdt, cdn) {
 			var item = locals[cdt][cdn];
