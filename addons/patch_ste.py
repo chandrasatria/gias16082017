@@ -382,10 +382,7 @@ def repair_gl_entry_untuk_ste_debug():
        WHERE name IN 
         (
             "STEI-HO-1-23-01-02763",
-            "STER-CRB-1-23-01-00030",
-            "STER-CRB-1-23-02-00039",
-            "STER-CRB-1-23-06-00035",
-            "STER-CRB-1-23-08-00042"
+            "STER-CRB-1-23-01-00030"
 
         )
          """)
