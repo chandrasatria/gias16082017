@@ -376,6 +376,18 @@ def repair_gl_entry_untuk_ste(doctype,docname):
 			print(doc.rk_value)
 			doc.db_update()
 
+	doc.total_incoming_value = doc.total_outgoing_value = 0.0
+	for d in doc.get("items"):
+		if d.t_warehouse:
+			doc.total_incoming_value += flt(d.amount)
+		if d.s_warehouse:
+			doc.total_outgoing_value += flt(d.amount)
+
+	doc.value_difference = doc.total_incoming_value - doc.total_outgoing_value
+	print(doc.value_difference)
+	doc.db_update()
+
+
 
 	if doc.stock_entry_type == "Material Receipt" and frappe.utils.flt(doc.rk_value) > 0 :
 		StockController.make_gl_entries = custom_make_gl_entries2

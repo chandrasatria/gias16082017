@@ -363,7 +363,7 @@ def recount_ste_tools():
 @frappe.whitelist()
 def repair_gl_entry_untuk_ste_debug_3():
     from addons.addons.doctype.stock_recount_tools.stock_recount_tools import debug_start_stock_recount_stei_by_name
-    debug_start_stock_recount_stei_by_name("db_crb")
+    debug_start_stock_recount_stei_by_name("db_gto")
 
 @frappe.whitelist()
 def enqueue_repair_gl_entry_untuk_ste_debug_3():
@@ -381,7 +381,12 @@ def repair_gl_entry_untuk_ste_debug():
        SELECT name from `tabStock Entry`
        WHERE name IN 
         (
-            "STER-PKU-1-23-10-00603"
+            "STEI-HO-1-23-06-02298",
+            "STER-BRU-1-23-06-00021",
+            "STER-CRB-1-23-01-00030",
+            "STER-CRB-1-23-02-00039",
+            "STER-CRB-1-23-06-00035",
+            "STER-CRB-1-23-08-00042"
 
         )
          """)
