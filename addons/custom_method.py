@@ -2438,17 +2438,17 @@ def coba_benerin_material_request(site):
 	# datetime object containing current date and time
 	
 	list_pull_node = frappe.db.sql("""
-		SELECT eul.name
-		FROM `tabEvent Update Log` eul
-		JOIN `tabMaterial Request` tmr
-		ON tmr.name = eul.`docname`
-		WHERE tmr.name IN
-		(
-			"MR-SMD-1-23-10-00282",
-			"MR-SMD-1-23-11-00019",
-			"MR-SMD-1-23-11-00020",
-			"MR-SMD-1-23-11-00036"
-		)
+		SELECT eul.name FROM 
+		`tabEvent Update Log` eul
+		JOIN `tabMaterial Request` tmr ON eul.docname = tmr.name
+		WHERE eul.ref_doctype = "Material Request"
+		AND 
+		tmr.workflow_state = "Waiting Product Specialist"
+		AND
+		tmr.blkp_is_not_null = 0
+		AND
+		eul.docname NOT IN (
+		SELECT NAME FROM `db_pusat`.`tabMaterial Request` ) 
 		
 		ORDER BY eul.`creation`
 	""")
