@@ -470,3 +470,34 @@ def isi_ste_log():
                     print(check_ste[0][0])
                     frappe.db.commit()
 
+
+@frappe.whitelist()
+def nyari_buat_balance_sheet():
+    company_doc = frappe.get_doc("Company", "GIAS")
+   
+    list_dn = frappe.db.sql(""" 
+        SELECT sle.voucher_type,sle.voucher_no , 
+        gle.credit AS satu,SUM(sle.stock_value_difference * -1) AS dua,
+        gle.credit - SUM(sle.stock_value_difference * -1) AS tiga
+
+         FROM `tabStock Ledger Entry` sle 
+        LEFT JOIN `tabGL Entry` gle ON sle.voucher_no = gle.voucher_no
+
+        WHERE 
+        (gle.voucher_type = "Stock Entry" OR gle.voucher_type = "Delivery Note")
+        AND (gle.account LIKE "%persediaan%" OR gle.account LIKE "%perlengkapan -%" )
+        AND gle.credit > 0 
+        AND gle.is_cancelled = 0
+        GROUP BY gle.voucher_no
+        HAVING satu - dua > 1 OR satu - dua < -1
+
+    """)
+
+    for row in list_dn:
+        if row[0] == "Stock Entry":
+            repair_gl_entry_untuk_ste(row[0],row[1])
+        else:
+            repair_gl_entry_untuk_dn(row[0],row[1])
+        print(row[0])
+        frappe.db.commit()
+    repost_stock()
