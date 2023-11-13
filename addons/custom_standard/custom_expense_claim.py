@@ -37,7 +37,7 @@ def repai_all():
 
 @frappe.whitelist()
 def repai():
-	repair_gl_entry("Expense Claim","EXC-GIAS-HO-22-11-00008")
+	repair_gl_entry("Expense Claim","EXC-GIAS-LMP-1-23-11-00006")
 
 @frappe.whitelist()
 def repair_gl_entry(doctype,docname):
