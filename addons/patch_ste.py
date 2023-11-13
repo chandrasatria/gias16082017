@@ -438,8 +438,7 @@ def cancel_je_auto_repeat():
         AND DATEDIFF(tje.`posting_date`, tar.end_date) > 1 
     """)
     for row in list_je:
-        doc = frappe.get_doc("Journal Entry", row[0])
-        doc.cancel()
+        print(row[0])
 
 @frappe.whitelist()
 def isi_ste_log():
