@@ -2445,7 +2445,7 @@ def coba_benerin_material_request(site):
 		AND 
 		tmr.workflow_state = "Waiting Product Specialist"
 		AND
-		tmr.blkp_is_not_null = 0
+		(tmr.blkp_is_not_null = 0 OR tmr.barang_foil = 1)
 		AND
 		eul.docname NOT IN (
 		SELECT NAME FROM `db_pusat`.`tabMaterial Request` ) 
