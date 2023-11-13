@@ -229,11 +229,13 @@ def custom_calculate_taxes(self):
 		if jasa.nilai_jasa:
 			total_jasa += flt(jasa.nilai_jasa)
 
+	total_sanctioned_amount = flt(self.total_sanctioned_amount)
 	for tax in self.taxes:
 		if tax.rate:
 			tax.tax_amount = flt(total_jasa) * flt(tax.rate/100)
 
-		tax.total = flt(tax.tax_amount) + flt(self.total_sanctioned_amount)
+		tax.total = flt(tax.tax_amount) + total_sanctioned_amount
+		total_sanctioned_amount += flt(tax.tax_amount)
 		self.total_taxes_and_charges += flt(tax.tax_amount)
 
 	self.grand_total = flt(self.total_sanctioned_amount) + flt(self.total_taxes_and_charges) - flt(self.total_advance_amount)
