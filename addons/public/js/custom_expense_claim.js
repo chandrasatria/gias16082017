@@ -377,7 +377,7 @@ frappe.ui.form.on("Expense Claim", {
 		}
 
 		
-		if (frm.doc.docstatus===1 && ( (cint(frm.doc.total_amount_reimbursed)-cint(frm.doc.total_sanctioned_amount)-cint(frm.doc.total_advance_amount)<=0) || cint(frm.doc.total_amount_reimbursed == 0) ) {
+		if (frm.doc.docstatus===1 && ( (cint(frm.doc.total_amount_reimbursed)-cint(frm.doc.total_sanctioned_amount)-cint(frm.doc.total_advance_amount)<=0) || cint(frm.doc.total_amount_reimbursed == 0) )) {
 			frm.add_custom_button(__('Payment '),
 				function() { frm.events.make_payment_entry(frm); }, __('Create'));
 		}
