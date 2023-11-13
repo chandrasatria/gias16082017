@@ -37,6 +37,7 @@ def repai_all():
 
 @frappe.whitelist()
 def repai():
+	frappe.flags.repost_gl == "True"
 	expense_claim = frappe.db.sql(""" SELECT name from `tabExpense Claim` WHERE docstatus = 1 """)
 	for row in expense_claim:
 		repair_gl_entry("Expense Claim",row[0])
@@ -45,7 +46,7 @@ def repai():
 
 @frappe.whitelist()
 def repair_gl_entry(doctype,docname):
-	frappe.flags.repost_gl == True
+	
 	docu = frappe.get_doc(doctype, docname)	
 	# for row in docu.expenses:
 	# 	typee = row.expense_type
