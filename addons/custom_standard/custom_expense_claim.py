@@ -37,20 +37,24 @@ def repai_all():
 
 @frappe.whitelist()
 def repai():
-	repair_gl_entry("Expense Claim","EXC-GIAS-LMP-1-23-11-00006")
+	expense_claim = frappe.db.sql(""" SELECT name from `tabExpense Claim` WHERE docstatus = 1 """)
+	for row in expense_claim:
+		repair_gl_entry("Expense Claim",row[0])
+		print(row[0])
+		frappe.db.commit()
 
 @frappe.whitelist()
 def repair_gl_entry(doctype,docname):
 	frappe.flags.repost_gl == True
 	docu = frappe.get_doc(doctype, docname)	
-	for row in docu.expenses:
-		typee = row.expense_type
-		typee_doc = frappe.get_doc("Expense Claim Type", typee)
-		account = typee_doc.accounts[0].default_account
+	# for row in docu.expenses:
+	# 	typee = row.expense_type
+	# 	typee_doc = frappe.get_doc("Expense Claim Type", typee)
+	# 	account = typee_doc.accounts[0].default_account
 
-		if account != row.default_account:
-			row.default_account = account
-			row.db_update()
+	# 	if account != row.default_account:
+	# 		row.default_account = account
+	# 		row.db_update()
 
 	ExpenseClaim.get_gl_entries = custom_get_gl_entries
 	
