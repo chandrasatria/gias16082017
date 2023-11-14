@@ -378,14 +378,7 @@ def repair_gl_entry_untuk_ste_debug_4():
 def repair_gl_entry_untuk_ste_debug():
     list_dn = frappe.db.sql(""" 
 
-       SELECT ste.name
-        FROM `tabStock Entry` ste 
-        JOIN `tabGL Entry` gle ON gle.account LIKE "%HARGA POKOK%"
-        AND gle.`voucher_no` = ste.name
-        WHERE ste.purpose = "Material Issue"
-        AND ste.docstatus = 1
-        AND ste.`auto_assign_to_rk_account` = 1
-        AND ste.`transfer_ke_cabang_mana` IS NOT NULL
+        SELECT "STER-GRN-1-23-10-00028"
 
          """)
     for row in list_dn:
