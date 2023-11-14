@@ -378,7 +378,8 @@ def repair_gl_entry_untuk_ste_debug_4():
 def repair_gl_entry_untuk_ste_debug():
     list_dn = frappe.db.sql(""" 
 
-        SELECT "STER-GRN-1-23-10-00028"
+        SELECT name FROM `tabStock Entry` WHERE name IN ("STER-GRN-1-23-10-00028",
+        "STEI-HO-1-23-10-02382")
 
          """)
     for row in list_dn:
