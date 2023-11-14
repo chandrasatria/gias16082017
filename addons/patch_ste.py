@@ -378,18 +378,18 @@ def repair_gl_entry_untuk_ste_debug_4():
 def repair_gl_entry_untuk_ste_debug():
     list_dn = frappe.db.sql(""" 
 
-       SELECT name from `tabStock Entry`
-       WHERE name IN 
-        (
-            "STEI-HO-1-23-09-01661",
-            "STEI-HO-1-23-09-02810",
-            "STER-GRN-1-23-09-00008",
-            "STER-JBI-1-23-09-00030"
+       SELECT ste.name
+        FROM `tabStock Entry` ste 
+        JOIN `tabGL Entry` gle ON gle.account LIKE "%HARGA POKOK%"
+        AND gle.`voucher_no` = ste.name
+        WHERE ste.purpose = "Material Issue"
+        AND ste.docstatus = 1
+        AND ste.`auto_assign_to_rk_account` = 1
+        AND ste.`transfer_ke_cabang_mana` IS NOT NULL
 
-        )
          """)
     for row in list_dn:
-        patch_cost(row[0])
+        # patch_cost(row[0])
         repair_gl_entry_untuk_ste("Stock Entry",row[0])
         frappe.db.commit()
 
