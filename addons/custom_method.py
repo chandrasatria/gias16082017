@@ -2104,32 +2104,11 @@ def repair_gl_entry(doctype,docname):
 @frappe.whitelist()
 def patch_je():
 	liste = invoice_list = frappe.db.sql("""
-		SELECT gle.voucher_no, gle.voucher_type, gle.nilai_gle, sle.nilai_sle,gle.nilai_gle - sle.nilai_sle
-
-		FROM
-		(
-		SELECT gle.voucher_no, gle.voucher_type,
-		SUM(gle.`debit`-gle.credit) AS nilai_gle
-		FROM `tabGL Entry` gle
-		WHERE gle.account = "1142 - PERSEDIAAN BARANG JADI - G"
-		AND gle.posting_date <= "2022-03-31"
-		AND gle.posting_date >= "2022-03-01"
-		AND gle.`is_cancelled` = 0
-		GROUP BY gle.`voucher_no`
-		) gle
-
-		JOIN (
-		SELECT sle.voucher_no, sle.voucher_type,
-		SUM(sle.stock_value_difference) AS nilai_sle
-		FROM `tabStock Ledger Entry` sle
-		WHERE sle.posting_date <= "2022-03-31"
-		AND sle.posting_date >= "2022-03-01"
-		AND sle.is_cancelled = 0
-		GROUP BY sle.`voucher_no`
-		) sle
-
-		ON gle.voucher_no = sle.voucher_no AND sle.voucher_type = gle.voucher_type
-		HAVING ABS(gle.nilai_gle - sle.nilai_sle) > 1
+		SELECT tje.name,"Journal Entry"
+		FROM 
+		`tabJournal Entry` tje 
+		LEFT JOIN `tabGL Entry` gl ON gl.voucher_no = tje.name
+		WHERE gl.name IS NULL AND tje.docstatus = 1
 	""")
 
 	for row in liste:
