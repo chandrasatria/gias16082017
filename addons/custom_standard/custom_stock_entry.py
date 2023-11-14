@@ -353,9 +353,16 @@ def repair_gl_entry_untuk_ste(doctype,docname):
 		row.expense_account = "5001 - HARGA POKOK PENJUALAN - G"
 		row.db_update()
 		if row.expense_account != "3131 - SALDO AWAL STOCK - G":
-			if doc.stock_entry_type == "Material Receipt":
+			if doc.stock_entry_type == "Material Receipt" or doc.stock_entry_type == "Material Issue":
 				if row.t_warehouse:
 					wh_doc = frappe.get_doc("Warehouse", row.t_warehouse)
+					if wh_doc.rk_stock_account_1:
+						if row.expense_account != wh_doc.rk_stock_account_1:
+							row.expense_account = wh_doc.rk_stock_account_1 
+							check = 1
+							row.db_update()
+				elif row.s_warehouse:
+					wh_doc = frappe.get_doc("Warehouse", row.s_warehouse)
 					if wh_doc.rk_stock_account_1:
 						if row.expense_account != wh_doc.rk_stock_account_1:
 							row.expense_account = wh_doc.rk_stock_account_1 
