@@ -2422,7 +2422,7 @@ def coba_benerin_material_request(site):
 		JOIN `tabMaterial Request` tmr ON eul.docname = tmr.name
 		WHERE eul.ref_doctype = "Material Request"
 		AND 
-		tmr.workflow_state = "Waiting Product Specialist"
+		(tmr.workflow_state = "Waiting Product Specialist" or tmr.workflow_state = "Waiting PA GM Sales")
 		AND
 		(tmr.blkp_is_not_null = 0 OR tmr.barang_foil = 1)
 		AND
