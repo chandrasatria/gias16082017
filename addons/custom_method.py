@@ -2104,17 +2104,20 @@ def repair_gl_entry(doctype,docname):
 @frappe.whitelist()
 def patch_je():
 	liste = invoice_list = frappe.db.sql("""
-		SELECT tje.name,"Journal Entry"
+		SELECT tje.name,"Purchase Invoice"
 		FROM 
-		`tabJournal Entry` tje 
-		LEFT JOIN `tabGL Entry` gl ON gl.voucher_no = tje.name
-		WHERE gl.name IS NULL AND tje.docstatus = 1
+		`tabPurchase Invoice` tje 
+		
+		WHERE tje.name IN ("PI-1-23-11-00572","PI-1-23-10-02125")
 	""")
 
 	for row in liste:
 		je_doc = frappe.get_doc(row[1],row[0])
 		repair_gl_entry_tanpa_sl(row[1], row[0])
 		print(row[0])
+		if row[1] == "Purchase Invoice":
+			from addons.custom_standard.view_ledger_create import create_gl_custom_purchase_invoice_by_name
+			create_gl_custom_purchase_invoice_by_name(row[0])
 
 @frappe.whitelist()
 def repair_gl_entry_tanpa_sl(doctype,docname):
