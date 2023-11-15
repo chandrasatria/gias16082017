@@ -2117,7 +2117,7 @@ def patch_je():
 		print(row[0])
 		if row[1] == "Purchase Invoice":
 			from addons.custom_standard.view_ledger_create import create_gl_custom_purchase_invoice_by_name
-			create_gl_custom_purchase_invoice_by_name(row[0])
+			create_gl_custom_purchase_invoice_by_name(row[0],"validate")
 
 @frappe.whitelist()
 def repair_gl_entry_tanpa_sl(doctype,docname):
