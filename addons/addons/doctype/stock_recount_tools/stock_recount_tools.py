@@ -43,7 +43,7 @@ def patch_ste(no_ste):
 		if row[1] == 1:
 			frappe.db.commit()
 			repair_gl_entry_untuk_ste("Stock Entry", row[0])
-			
+
 class StockRecountTools(Document):
 	def onload(self):
 		check = 0
@@ -877,8 +877,13 @@ def check_list_company_gias(list_company_gias):
 		site = "erp-tgl.gias.co.id"
 	elif list_company_gias == "GIAS TASIK":
 		site = "erp-tsk.gias.co.id"
-	elif list_company_gias == "GIAS YOGYAKARTA":
-		site = "erp-ygy.gias.co.id"
+	elif list_company_gias == "GIAS JAKARTA BARAT":
+		site = "erp-jakbar.gias.co.id"
+	elif list_company_gias == "GIAS JAKARTA TIMUR":
+		site = "erp-jaktim.gias.co.id"
+	elif list_company_gias == "GIAS KUPANG":
+		site = "erp-kpg.gias.co.id"
+
 
 	return site
 
