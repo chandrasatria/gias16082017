@@ -392,6 +392,7 @@ def create_gl_custom_expense_claim_by_name(name):
 
 @frappe.whitelist()
 def create_gl_custom_purchase_invoice_by_name(self):
+    self = frappe.get_doc("Purchase Invoice",self)
 
     doc_list = frappe.db.sql(""" SELECT voucher_no FROM `tabGL Entry` WHERE is_cancelled = 0
     and voucher_type = "Purchase Invoice" 
