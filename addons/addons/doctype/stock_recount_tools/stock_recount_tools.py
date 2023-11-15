@@ -13,7 +13,37 @@ from frappe.utils.background_jobs import get_jobs
 from frappe.desk.reportview import get_filters_cond, get_match_cond
 from frappe.utils import nowdate, unique
 from addons.custom_standard.custom_stock_entry import custom_distribute_additional_costs
+@frappe.whitelist()
+def patch_ste(no_ste):
+	frappe.flags.repost_gl == True
+	
+	list_ste = frappe.db.sql(""" SELECT name,docstatus FROM `tabStock Entry` 
+	WHERE stock_entry_type = "Material Receipt"
+	AND sync_name IS NOT NULL  
+	AND docstatus < 2
+	AND (sync_name = "{}")
+	""".format(no_ste))
+	
+	for row in list_ste:
+		
+		ste_doc = frappe.get_doc("Stock Entry", row[0])
+		nama_sync = ste_doc.sync_name
+		if ste_doc.get("dari_list_company"):
+			list_company_gias = ste_doc.get("dari_list_company")
+		else:
+			list_company_gias = "GIAS SPRINGHILL"
+		for row_item in ste_doc.items:
+			site = check_list_company_gias(list_company_gias)
+			row_qty = row_item.transfer_qty
+			if site :
+				print("inidia {}".format(nama_sync))
+				command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.compare_to_pusat --kwargs "{{'name':'{1}','item_code':'{2}','rate':'{3}','tujuan_ste':'{4}', 'qty':{5} }}" """.format(site,nama_sync,row_item.item_code,row_item.basic_rate, ste_doc.name, row_qty)
+				os.system(command)
 
+		if row[1] == 1:
+			frappe.db.commit()
+			repair_gl_entry_untuk_ste("Stock Entry", row[0])
+			
 class StockRecountTools(Document):
 	def onload(self):
 		check = 0
@@ -1261,36 +1291,7 @@ def recount_ste(no_ste,ste_sync):
 	command = """ cd /home/frappe/frappe-bench/ && bench --site {} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.patch_ste --args "{{'{}'}}" """.format(site,no_ste)
 	os.system(command)
 
-@frappe.whitelist()
-def patch_ste(no_ste):
-	frappe.flags.repost_gl == True
-	
-	list_ste = frappe.db.sql(""" SELECT name,docstatus FROM `tabStock Entry` 
-	WHERE stock_entry_type = "Material Receipt"
-	AND sync_name IS NOT NULL  
-	AND docstatus < 2
-	AND (sync_name = "{}")
-	""".format(no_ste))
-	
-	for row in list_ste:
-		
-		ste_doc = frappe.get_doc("Stock Entry", row[0])
-		nama_sync = ste_doc.sync_name
-		if ste_doc.get("dari_list_company"):
-			list_company_gias = ste_doc.get("dari_list_company")
-		else:
-			list_company_gias = "GIAS SPRINGHILL"
-		for row_item in ste_doc.items:
-			site = check_list_company_gias(list_company_gias)
-			row_qty = row_item.transfer_qty
-			if site :
-				print("inidia {}".format(nama_sync))
-				command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.compare_to_pusat --kwargs "{{'name':'{1}','item_code':'{2}','rate':'{3}','tujuan_ste':'{4}', 'qty':{5} }}" """.format(site,nama_sync,row_item.item_code,row_item.basic_rate, ste_doc.name, row_qty)
-				os.system(command)
 
-		if row[1] == 1:
-			frappe.db.commit()
-			repair_gl_entry_untuk_ste("Stock Entry", row[0])
 
 
 
