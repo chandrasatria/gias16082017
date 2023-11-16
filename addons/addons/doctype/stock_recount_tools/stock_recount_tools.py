@@ -1100,7 +1100,7 @@ def debug_start_stock_recount_stei_by_name_2():
 		SELECT 
 		name
 		FROM `tabStock Entry` 
-		WHERE name IN ("STEI-HO-1-23-10-00163")
+		WHERE name IN ("STEI-HO-1-23-09-01661")
 		
 	""".format(),debug=1)
 
