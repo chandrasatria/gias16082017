@@ -716,7 +716,7 @@ def patch_ste_dong(name, item_code, rate, qty,idx):
 		ste_doc = frappe.get_doc("Stock Entry", rows[0])
 
 		for row in ste_doc.items:
-			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty) and str(idx) == row.idx:
+			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty) and str(idx) == str(row.idx):
 				print('yok')
 				row.pusat_valuation_rate = flt(rate,9)
 				row.basic_rate = flt(row.pusat_valuation_rate,9)
@@ -740,7 +740,7 @@ def patch_ste_dong(name, item_code, rate, qty,idx):
 			row.additional_cost_transfer = row.additional_cost
 			row.valuation_rate_transfer = row.valuation_rate
 
-			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty) and str(idx) == row.idx:
+			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty) and str(idx) == str(row.idx):
 				print('yok')
 				row.pusat_valuation_rate = flt(rate,9)
 				row.basic_rate = flt(row.pusat_valuation_rate,9)
