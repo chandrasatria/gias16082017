@@ -17,6 +17,7 @@ def pusat_check_so(self,method):
 def check_tanggal(self,method):
 	company_doc = frappe.get_doc("Company", self.company)
 	if "Input Backdate Delivery Note" not in frappe.get_roles():
+		frappe.throw("5")
 		if self.get("__islocal") != 1:
 			frappe.throw("4")
 			if getdate(str(self.posting_date)) < getdate(str(self.creation)):
