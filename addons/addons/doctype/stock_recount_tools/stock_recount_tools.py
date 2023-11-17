@@ -731,9 +731,9 @@ def patch_ste_dong(name, item_code, rate, qty):
 
 		# ste_doc.calculate_rate_and_amount()
 		ste_doc.distribute_additional_costs()
-		ste_doc.update_valuation_rate()
+		# ste_doc.update_valuation_rate()
 		ste_doc.set_total_incoming_outgoing_value()
-		ste_doc.set_total_amount()
+		# ste_doc.set_total_amount()
 
 		custom_distribute_additional_costs(ste_doc)
 
