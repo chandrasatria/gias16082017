@@ -359,6 +359,7 @@ def repair_gl_entry_untuk_ste_debug_2():
 def recount_ste_tools():
     from addons.addons.doctype.stock_recount_tools.stock_recount_tools import start_stock_recount_stei_by_name
     start_stock_recount_stei_by_name("STEI-HO-22-03-03298")
+    repost_stock()
 
 @frappe.whitelist()
 def repair_gl_entry_untuk_ste_debug_3():
