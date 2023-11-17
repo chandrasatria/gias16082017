@@ -682,9 +682,12 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty, idx):
 
 	
 	list_ste = frappe.db.sql(""" 
-		SELECT voucher_detail_no FROM `tabStock Ledger Entry` 
-		WHERE voucher_no = "{}" and item_code = "{}" 
-		and actual_qty = {} """.format(name, item_code, frappe.utils.flt(qty*-1)))
+		SELECT sle.voucher_detail_no 
+		FROM `tabStock Ledger Entry` sle
+		JOIN `tabStock Entry Detail` sed ON sed.name = sle.voucher_detail_no
+		WHERE sle.voucher_no = "{}" and sle.item_code = "{}" 
+		AND sed.idx = "{}"
+		and sle.actual_qty = {} """.format(name, item_code, idx, frappe.utils.flt(qty*-1)))
 
 	if len(list_ste) > 0:
 
