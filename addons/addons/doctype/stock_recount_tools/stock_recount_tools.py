@@ -1301,6 +1301,8 @@ def patch_ste(no_ste):
 			frappe.db.commit()
 			repair_gl_entry_untuk_ste("Stock Entry", row[0])
 
+	command = """ cd /home/frappe/frappe-bench/ && bench --site {} execute addons.patch_ste.repost_stock """.format(check_list_company_gias(list_company_gias))
+	os.system(command)
 
 
 # searches for active employees
