@@ -703,12 +703,12 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty, idx):
 				site = check_list_company_gias(list_company_gias)
 				print("patching {}-{}-{}".format(tujuan_ste, rate_baru, item_code))
 				if site:
-					command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.patch_ste_dong --kwargs "{{'name':'{1}','item_code':'{2}','rate':'{3}','qty':'{4}'}}" """.format(site,tujuan_ste,item_code,rate_baru,qty)
+					command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.patch_ste_dong --kwargs "{{'name':'{1}','item_code':'{2}','rate':'{3}','qty':'{4}'}},'idx':'{5}' " """.format(site,tujuan_ste,item_code,rate_baru,qty,idx)
 					os.system(command)
 
 
 @frappe.whitelist()
-def patch_ste_dong(name, item_code, rate, qty):
+def patch_ste_dong(name, item_code, rate, qty,idx):
 	list_ste = frappe.db.sql(""" SELECT name, docstatus FROM `tabStock Entry` WHERE name = "{}" """.format(name))
 
 	frappe.flags.repost_gl = True
@@ -717,7 +717,7 @@ def patch_ste_dong(name, item_code, rate, qty):
 
 		for row in ste_doc.items:
 
-			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty):
+			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty) and str(idx) == row.idx:
 				print('yok')
 				row.pusat_valuation_rate = flt(rate,9)
 				row.basic_rate = flt(row.pusat_valuation_rate,9)
@@ -731,9 +731,9 @@ def patch_ste_dong(name, item_code, rate, qty):
 
 		# ste_doc.calculate_rate_and_amount()
 		ste_doc.distribute_additional_costs()
-		# ste_doc.update_valuation_rate()
+		ste_doc.update_valuation_rate()
 		ste_doc.set_total_incoming_outgoing_value()
-		# ste_doc.set_total_amount()
+		ste_doc.set_total_amount()
 
 		custom_distribute_additional_costs(ste_doc)
 
