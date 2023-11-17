@@ -265,11 +265,10 @@ doc_events = {
 		"onload": ["addons.custom_standard.custom_customer.get_max_credit_limit","addons.custom_standard.custom_sales_order.calculate_credit_limit_available"]
 	},
 	"Delivery Note":{
-		"validate": ["addons.custom_standard.custom_global.check_tax_non_tax_by_document","addons.custom_standard.custom_delivery_note.check_tanggal","addons.custom_standard.custom_tax_method.check_tax_from_sales_order","addons.custom_standard.custom_tax_method.check_tax_sales","addons.custom_standard.custom_global.check_item_terbooking","addons.custom_standard.custom_delivery_note.pusat_check_so"],
+		"validate": ["addons.custom_standard.custom_sales_order.render_print_data","addons.custom_standard.custom_global.check_tax_non_tax_by_document","addons.custom_standard.custom_delivery_note.check_tanggal","addons.custom_standard.custom_tax_method.check_tax_from_sales_order","addons.custom_standard.custom_tax_method.check_tax_sales","addons.custom_standard.custom_global.check_item_terbooking","addons.custom_standard.custom_delivery_note.pusat_check_so"],
 		"before_submit":"addons.custom_standard.custom_delivery_note.auto_je_retur",
 		"before_insert": ["addons.custom_standard.custom_global.check_item_terbooking","addons.custom_standard.custom_global.check_draft_mr"],
-		"autoname": "addons.custom_method.custom_autoname_document_je",
-		"validate":"addons.custom_standard.custom_sales_order.render_print_data"
+		"autoname": "addons.custom_method.custom_autoname_document_je"
 	},
 	"Stock Reconciliation":{
 		"validate": "addons.custom_standard.custom_tax_method.check_tax_sales",
