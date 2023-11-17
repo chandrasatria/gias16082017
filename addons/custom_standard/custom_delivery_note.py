@@ -17,17 +17,12 @@ def pusat_check_so(self,method):
 def check_tanggal(self,method):
 	company_doc = frappe.get_doc("Company", self.company)
 	if "Input Backdate Delivery Note" not in frappe.get_roles():
-		frappe.throw("5")
 		if self.get("__islocal") != 1:
-			frappe.throw("4")
 			if getdate(str(self.posting_date)) < getdate(str(self.creation)):
 				frappe.throw("Posting Date for Delivery Note are not allowed backdate from creation. Please check the posting date again.")
 		else:
-			frappe.throw("3")
 			if getdate(str(self.posting_date)) < getdate(str(frappe.utils.today())):
 				frappe.throw("Posting Date for Delivery Note are not allowed backdate. Please check the posting date again.")
-	else:
-		frappe.throw("2")
 
 	for row in self.items:
 		if row.against_sales_order:
@@ -36,7 +31,10 @@ def check_tanggal(self,method):
 			if getdate(str(self.posting_date)) < getdate(str(so_date)):
 				frappe.throw("Posting Date for Delivery Note are not allowed backdate from Sales Order {}. Please check the posting date again.".format(so_doc.name))
 
-
+@frappe.whitelist()
+def check_tanggal_2(self,method):
+	company_doc = frappe.get_doc("Company", self.company)
+	frappe.throw("2")
 
 
 @frappe.whitelist()
