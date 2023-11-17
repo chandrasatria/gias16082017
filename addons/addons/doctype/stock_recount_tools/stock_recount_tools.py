@@ -680,7 +680,7 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty, idx):
 		command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.pasang_rk --kwargs "{{'sync_name':'{1}','rk_value':'{2}'}}" """.format(site,sync_name,rk_value)
 		os.system(command)
 
-	
+	print("idx di {}".format(idx))
 	list_ste = frappe.db.sql(""" 
 		SELECT sle.voucher_detail_no 
 		FROM `tabStock Ledger Entry` sle
@@ -694,7 +694,7 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty, idx):
 		get_sted = frappe.get_doc("Stock Entry Detail", list_ste[0][0])
 
 		print("idx={},rate={},list_ste={}".format(idx,rate,get_sted.basic_rate))
-		if flt(rate,9) != flt(get_sted.basic_rate,9):
+		if flt(rate,9) != flt(get_sted.basic_rate,9) and get_sted.idx == idx:
 			print(flt(get_sted.basic_rate,9))
 			if flt(get_sted.basic_rate,9) > 0:
 				rate_baru = flt(get_sted.basic_rate,9)
