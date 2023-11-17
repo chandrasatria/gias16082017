@@ -680,7 +680,7 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty, idx):
 		command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.pasang_rk --kwargs "{{'sync_name':'{1}','rk_value':'{2}'}}" """.format(site,sync_name,rk_value)
 		os.system(command)
 
-	print("idx di {}".format(idx))
+	
 	list_ste = frappe.db.sql(""" 
 		SELECT sle.voucher_detail_no 
 		FROM `tabStock Ledger Entry` sle
@@ -716,7 +716,6 @@ def patch_ste_dong(name, item_code, rate, qty,idx):
 		ste_doc = frappe.get_doc("Stock Entry", rows[0])
 
 		for row in ste_doc.items:
-
 			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty) and str(idx) == row.idx:
 				print('yok')
 				row.pusat_valuation_rate = flt(rate,9)
@@ -741,7 +740,7 @@ def patch_ste_dong(name, item_code, rate, qty,idx):
 			row.additional_cost_transfer = row.additional_cost
 			row.valuation_rate_transfer = row.valuation_rate
 
-			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty):
+			if row.item_code == item_code and frappe.utils.flt(row.transfer_qty) == frappe.utils.flt(qty) and str(idx) == row.idx:
 				print('yok')
 				row.pusat_valuation_rate = flt(rate,9)
 				row.basic_rate = flt(row.pusat_valuation_rate,9)
