@@ -484,7 +484,7 @@ def nyari_buat_balance_sheet():
         AND gle.credit > 0 
         AND gle.is_cancelled = 0
         GROUP BY gle.voucher_no
-        HAVING satu - dua > 1 OR satu - dua < -1
+        HAVING satu - dua > 0.01 OR satu - dua < -0.01
 
     """)
 
