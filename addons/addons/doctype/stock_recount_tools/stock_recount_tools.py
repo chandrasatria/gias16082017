@@ -703,7 +703,7 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty, idx):
 				site = check_list_company_gias(list_company_gias)
 				print("patching {}-{}-{}".format(tujuan_ste, rate_baru, item_code))
 				if site:
-					command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.patch_ste_dong --kwargs "{{'name':'{1}','item_code':'{2}','rate':'{3}','qty':'{4}'}},'idx':'{5}' " """.format(site,tujuan_ste,item_code,rate_baru,qty,idx)
+					command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.patch_ste_dong --kwargs "{{'name':'{1}','item_code':'{2}','rate':'{3}','qty':'{4}','idx':'{5}'}} " """.format(site,tujuan_ste,item_code,rate_baru,qty,idx)
 					os.system(command)
 
 
