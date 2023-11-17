@@ -660,7 +660,7 @@ def lakukan_recount_ke_ste_sync(no_prec, item_code):
 		frappe.enqueue(method="addons.addons.doctype.stock_recount_tools.stock_recount_tools.history_pr_complete",timeout=2400, queue='default',**{'ste': row[0]} )
 
 @frappe.whitelist()
-def compare_to_pusat(name, item_code, rate,tujuan_ste, qty):
+def compare_to_pusat(name, item_code, rate,tujuan_ste, qty, idx):
 
 	ste_doc = frappe.get_doc("Stock Entry",name)
 	rk_value = frappe.db.sql(""" SELECT SUM(debit) FROM `tabGL Entry` WHERE account = 
@@ -690,8 +690,8 @@ def compare_to_pusat(name, item_code, rate,tujuan_ste, qty):
 
 		get_sted = frappe.get_doc("Stock Entry Detail", list_ste[0][0])
 
-		print("rate={},list_ste={}".format(rate,get_sted.basic_rate))
-		if flt(rate,9) != flt(get_sted.basic_rate,9):
+		print("idx={},rate={},list_ste={}".format(idx,rate,get_sted.basic_rate))
+		if flt(rate,9) != flt(get_sted.basic_rate,9) and idx == get_sted.idx:
 			print(flt(get_sted.basic_rate,9))
 			if flt(get_sted.basic_rate,9) > 0:
 				rate_baru = flt(get_sted.basic_rate,9)
@@ -1291,7 +1291,7 @@ def patch_ste(no_ste):
 			row_qty = row_item.transfer_qty
 			if site :
 				print("inidia {}".format(nama_sync))
-				command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.compare_to_pusat --kwargs "{{'name':'{1}','item_code':'{2}','rate':'{3}','tujuan_ste':'{4}', 'qty':{5} }}" """.format(site,nama_sync,row_item.item_code,row_item.basic_rate, ste_doc.name, row_qty)
+				command = """ cd /home/frappe/frappe-bench/ && bench --site {0} execute addons.addons.doctype.stock_recount_tools.stock_recount_tools.compare_to_pusat --kwargs "{{'idx':'{6}','name':'{1}','item_code':'{2}','rate':'{3}','tujuan_ste':'{4}', 'qty':{5} }}" """.format(site,nama_sync,row_item.item_code,row_item.basic_rate, ste_doc.name, row_qty, row_item.idx)
 				os.system(command)
 
 		if row[1] == 1:
