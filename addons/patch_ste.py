@@ -371,22 +371,22 @@ def recount_ste_tools():
 @frappe.whitelist()
 def repair_gl_entry_untuk_ste_debug_3():
     from addons.addons.doctype.stock_recount_tools.stock_recount_tools import debug_start_stock_recount_stei_by_name
-    debug_start_stock_recount_stei_by_name("db_jbr")
+    debug_start_stock_recount_stei_by_name("db_pku")
 
 @frappe.whitelist()
 def repair_gl_entry_untuk_ste_debug_per_site():
     from addons.addons.doctype.stock_recount_tools.stock_recount_tools import debug_start_stock_recount_stei_by_name
-    debug_start_stock_recount_stei_by_name("db_pku")
+    debug_start_stock_recount_stei_by_name("db_kdi")
 
 @frappe.whitelist()
 def repair_gl_entry_untuk_ste_debug_per_site2():
     from addons.addons.doctype.stock_recount_tools.stock_recount_tools import debug_start_stock_recount_stei_by_name
-    debug_start_stock_recount_stei_by_name("db_pku")
+    debug_start_stock_recount_stei_by_name("db_kdi")
 
 @frappe.whitelist()
 def repair_gl_entry_untuk_ste_debug_per_site3():
     from addons.addons.doctype.stock_recount_tools.stock_recount_tools import debug_start_stock_recount_stei_by_name
-    debug_start_stock_recount_stei_by_name("db_pku")
+    debug_start_stock_recount_stei_by_name("db_kdi")
 
 @frappe.whitelist()
 def enqueue_repair_gl_entry_untuk_ste_debug_3():
