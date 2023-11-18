@@ -307,6 +307,8 @@ def lakukan_testing_1():
         repair_gl_entry_untuk_dn("Delivery Note",row[0])
         frappe.db.commit()
 
+    repost_stock()
+
 @frappe.whitelist()
 def repair_gl_entry_untuk_dn_debug():
     list_dn = frappe.db.sql(""" 
